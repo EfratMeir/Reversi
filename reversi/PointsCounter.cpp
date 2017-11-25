@@ -1,0 +1,45 @@
+/*
+ * PointsCounter.cpp
+ *
+ *  Created on: Nov 9, 2017
+ *      Author: Efrat Meir
+ *      user name: meirefr
+ *      ID: 201543253
+ */
+
+#include "PointsCounter.h"
+
+PointsCounter::PointsCounter() {
+	black_count = 2;
+	white_count = 2;
+}
+
+void PointsCounter::add_one(char sign) {
+	if (sign == 'X') {
+		black_count++;
+	}
+	if (sign == 'O') {
+		white_count++;
+	}
+}
+
+void PointsCounter::minus_one(char sign) {
+	if (sign == 'X') {
+		black_count--;
+	}
+	if (sign == 'O') {
+		white_count--;
+	}
+}
+
+void PointsCounter::add(int how_much, char sign) {
+	for (int i = 0; i < how_much; i++) {
+		add_one(sign);
+	}
+}
+
+void PointsCounter::minus(int how_much, char sign) {
+	for (int i = 0; i < how_much; i++) {
+		minus_one(sign);
+	}
+}

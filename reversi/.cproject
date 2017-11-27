@@ -64,8 +64,8 @@
 							<outputType id="org.eclipse.cdt.managedbuilder.ui.rcbs.outputtype.410550293" name="Resource Custom Build Step Output Type" outputNames=""/>
 						</tool>
 					</fileInfo>
-					<fileInfo id="cdt.managedbuild.config.gnu.cross.exe.debug.1388120259.5610908" name="main.cpp" rcbsApplicability="disable" resourcePath="src/main.cpp" toolsToInvoke="cdt.managedbuild.tool.gnu.cross.cpp.compiler.151293231.234472352">
-						<tool id="cdt.managedbuild.tool.gnu.cross.cpp.compiler.151293231.234472352" name="Cross G++ Compiler" superClass="cdt.managedbuild.tool.gnu.cross.cpp.compiler.151293231"/>
+					<fileInfo id="cdt.managedbuild.config.gnu.cross.exe.debug.1388120259.274131201" name="main.cpp" rcbsApplicability="disable" resourcePath="src/main.cpp" toolsToInvoke="cdt.managedbuild.tool.gnu.cross.cpp.compiler.151293231.745113064">
+						<tool id="cdt.managedbuild.tool.gnu.cross.cpp.compiler.151293231.745113064" name="Cross G++ Compiler" superClass="cdt.managedbuild.tool.gnu.cross.cpp.compiler.151293231"/>
 					</fileInfo>
 					<folderInfo id="cdt.managedbuild.config.gnu.cross.exe.debug.1388120259.1362881269" name="/" resourcePath="gtest_src">
 						<toolChain id="cdt.managedbuild.toolchain.gnu.cross.exe.debug.274807444" name="Cross GCC" superClass="cdt.managedbuild.toolchain.gnu.cross.exe.debug" unusedChildren="">
@@ -86,7 +86,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="test/gtets_main.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="src/main.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>

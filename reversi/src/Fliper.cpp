@@ -34,7 +34,6 @@ int Fliper::flip(Board& board, Point chosen_point, char flip_to) {
 	}
 
 	int num_fliped = this->points_to_flip.size();
-	board.getCounter().add(num_fliped, flip_to);
 	board.getCounter().minus(num_fliped, FindOpponentSign(flip_to));
 	cout << "black counter:" << board.getCounter().getBlackCount() << endl <<
 			"white counter:" << board.getCounter().getWhiteCount() << endl;

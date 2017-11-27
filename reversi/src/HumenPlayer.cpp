@@ -101,7 +101,6 @@ char HumenPlayer::get_sign() {
 
 void HumenPlayer::play_next_step(Board& board, Point chosen_step) {
 	board.setPoint(chosen_step);
-	board.getCounter().add_one(chosen_step.get_sign());
 }
 
 HumenPlayer::~HumenPlayer() {

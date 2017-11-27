@@ -36,7 +36,7 @@ public:
 	virtual Point play_one_turn(Board& board);
 
 	// getters and setters:
-	char get_sign();
+	virtual char get_sign();
 
 	/**
 	 * destructor

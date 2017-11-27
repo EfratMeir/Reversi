@@ -14,8 +14,6 @@ Fliper::Fliper() {
 	int i = 0;
 
 }
-
-
 int Fliper::flip(Board& board, Point chosen_point, char flip_to) {
 	vector<Point> to_flip;
 	vector<Point> temp;

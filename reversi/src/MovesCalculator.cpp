@@ -17,10 +17,27 @@ using namespace std;
 MovesCalculator::MovesCalculator() {
 //	int i = 0;
 }
+/**
+ * //check if the move is inside the list of the possible moves.
+ */
+bool MovesCalculator::allreadyInList(int row, int col) {
 
+	vector<Point>::iterator it;
+	//check if the move is inside the list of the possible moves.
+	for (it = options_list.begin(); it != options_list.end(); ++it ) {
+		Point point = *it;
+		if (row == point.get_row()  && col == point.get_col()) {
+			return true;
+		}
+	}
+	return false;
+}
 
 vector<Point> MovesCalculator::calc_moves(Board board, char this_player_sign) {
-	vector<Point> options_list;
+//	vector<Point> options_list;
+	//initialize the list, erase all the last options
+	this->options_list.erase(this->options_list.begin(),
+				this->options_list.end());
 	for (int i = 0; i < board.getNumCols(); i++) {
 		for (int j = 0; j < board.getNumRows(); j++) {
 			Point p = board.parr[i][j];
@@ -42,18 +59,23 @@ vector<Point> MovesCalculator::calc_moves(Board board, char this_player_sign) {
 
 void MovesCalculator::checkRight(Board board, Point current_point,
 		char this_playr_sign, vector<Point>& options) {
-	if (current_point.get_sign() != this_playr_sign && current_point.get_sign() != board.blank) {
+	if (current_point.get_sign() != this_playr_sign && current_point.get_sign()
+			!= board.blank) {
 			int row = current_point.get_row();
 			int col = current_point.get_col();
 			int i = 1;
-			//if the LEFT point from this current point is this player sign - continue to check RIGHT
+			//if the LEFT point from this current point is this player sign -
+			//continue to check RIGHT
 			if (col - 1 >= 0 && board.parr[row][col - 1].get_sign() == this_playr_sign) {
 				//keep moving RIGHT as long as its the opponent sign || board borders
 				while (col + i <= board.getNumCols() && board.parr[row][col + i].get_sign() == current_point.get_sign()) {
 					i++;
 				}
 				if (board.parr[row][col + i].get_sign() == board.blank) {
-					options.push_back(board.parr[row][col + i]);
+					if (!allreadyInList(row, col + i)){
+						options.push_back(board.parr[row][col + i]);
+					}
+
 				}
 			}
 		}
@@ -73,7 +95,11 @@ void MovesCalculator::checkLeft(Board board, Point current_point,
 				i++;
 			}
 			if (board.parr[row][col - i].get_sign() == board.blank) {
-				options.push_back(board.parr[row][col - i]);
+				if (!allreadyInList(row, col - i)){
+					options.push_back(board.parr[row][col - i]);
+				}
+
+
 			}
 		}
 	}
@@ -92,7 +118,9 @@ void MovesCalculator::checkDown(Board board, Point current_point,
 				i++;
 			}
 			if (board.parr[row + i][col].get_sign() == board.blank) {
-				options.push_back(board.parr[row + i][col]);
+				if (!allreadyInList(row + i, col)){
+					options.push_back(board.parr[row + i][col]);
+				}
 			}
 		}
 	}
@@ -112,7 +140,9 @@ void MovesCalculator::checkUp(Board board, Point current_point,
 				i++;
 			}
 			if (board.parr[row - i][col].get_sign() == board.blank) {
-				options.push_back(board.parr[row - i][col]);
+				if (!allreadyInList(row - i, col)){
+					options.push_back(board.parr[row - i][col]);
+				}
 			}
 		}
 	}
@@ -132,7 +162,10 @@ void MovesCalculator::checkUpRightDiagonal(Board board, Point current_point,
 				i++;
 			}
 			if (board.parr[row - i][col + i].get_sign() == board.blank) {
-				options.push_back(board.parr[row - i][col + i]);
+				if (!allreadyInList(row - i, col + i)){
+					options.push_back(board.parr[row - i][col + i]);
+				}
+
 			}
 		}
 	}
@@ -153,7 +186,10 @@ void MovesCalculator::checkUpLeftDiagonal(Board board, Point current_point,
 				i++;
 			}
 			if (board.parr[row - i][col - i].get_sign() == board.blank) {
-				options.push_back(board.parr[row - i][col - i]);
+				if (!allreadyInList(row - i, col - i)){
+					options.push_back(board.parr[row - i][col - i]);
+				}
+
 			}
 		}
 	}
@@ -173,7 +209,9 @@ void MovesCalculator::checkDownRightDiagonal(Board board, Point current_point,
 				i++;
 			}
 			if (board.parr[row + i][col + i].get_sign() == board.blank) {
-				options.push_back(board.parr[row + i][col + i]);
+				if (!allreadyInList(row + i, col + i)){
+					options.push_back(board.parr[row + i][col + i]);
+				}
 			}
 		}
 	}
@@ -195,7 +233,10 @@ void MovesCalculator::checkDownLeftDiagonal(Board board, Point current_point,
 				i++;
 			}
 			if (board.parr[row + i][col - i].get_sign() == board.blank) {
-				options.push_back(board.parr[row + i][col - i]);
+				if (allreadyInList(row + i, col - i)){
+					options.push_back(board.parr[row + i][col - i]);
+				}
+
 			}
 		}
 	}

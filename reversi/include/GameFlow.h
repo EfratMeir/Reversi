@@ -35,6 +35,7 @@ public:
 	 * initialize a board, players and turn base
 	 */
 	void initialize();
+
 	/*
 	 * destructor
 	 */
@@ -42,6 +43,7 @@ public:
 
 private:
 	TurnBase turn_base;
+//	Player *playerss[2];
 	/*
 	 * checks the winner of the game.
 	 * @return - the sign of the win player.

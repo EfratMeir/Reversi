@@ -15,8 +15,6 @@ Fliper::Fliper() {
 //	this->points_to_flip;
 
 }
-
-
 int Fliper::flip(Board& board, Point chosen_point, char flip_to) {
 
 	this->points_to_flip.erase(this->points_to_flip.begin(), this->points_to_flip.end());

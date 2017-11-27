@@ -30,7 +30,8 @@ public:
 	 * @return - vector of points - options of moves
 	 */
 	vector<Point> calc_moves(Board board, char this_player_sign);
-
+	bool allreadyInList(int row, int col);
+	vector<Point> options_list;
 
 /**
  * for all the check_direction functions - assume they get the opponent point as current point, and check around it for possible moves.

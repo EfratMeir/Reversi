@@ -32,7 +32,8 @@ public:
 	/**
 	 * constructor
 	 */
-	TurnBase(Board& board, vector<HumenPlayer> players);
+//	TurnBase(Board& board, vector<HumenPlayer> players);
+	TurnBase(Board& board, Player** players);
 
 	/**
 	 * runs the game, connecting between players, board and fliper
@@ -44,6 +45,9 @@ public:
 			return board;
 		}
 
+	Player** get_players(){
+		return players;
+	}
 	/**
 	 * destructor
 	 */
@@ -52,7 +56,7 @@ public:
 private:
 	//class members
 	Board board;
-	vector<HumenPlayer> players;
+	Player* players[2];
 	Fliper fliper;
 };
 

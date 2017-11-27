@@ -83,8 +83,6 @@ void Board::setPoint(Point p) {
 
 bool Board::isFull() {
 	int capacity = num_cols * num_rows;
-	if (counter.getBlackCount() + counter.getWhiteCount() >= capacity) {
-		return true;
-	}
-	return false;
+	return counter.getBlackCount() + counter.getWhiteCount() >= capacity;
+
 }

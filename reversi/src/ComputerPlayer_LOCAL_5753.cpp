@@ -18,7 +18,6 @@
 //}
 //
 //Point ComputerPlayer::play_one_turn(Board& board) {
-
 //}
 //
 //ComputerPlayer::~ComputerPlayer() {
@@ -27,11 +26,12 @@
 //
 //vector<Point> ComputerPlayer::get_possible_moves(Board& board,
 //		MovesCalculator moves_calculator, char this_player_sign) {
-
 //}
 //
 //Point ComputerPlayer::choose_best_move(vector<Point> options_list) {
 //}
-
+//
+//
+//
 //void ComputerPlayer::play_next_step(Board& board, Point chosen_step) {
 //}

@@ -25,14 +25,15 @@ using namespace std;
 class Player {
 public:
 
-	char sign;
+	static const char sign = 'N';
 	MovesCalculator moves_calculator;
 	/**
 	* board - an initialized board reference
 	* this function checks for options, chooses and adds the new move to the board
 	*/
 	virtual Point play_one_turn(Board& board) = 0;
-
+	virtual char get_sign() = 0;
+	static const bool no_moves = false;
 	/*
 	 * destructor
 	 */
@@ -62,6 +63,7 @@ private:
 	* @param chosen_step - the point that shows the chosen step
 	*/
 	virtual void play_next_step(Board& board, Point chosen_step) = 0;
+
 };
 
 #endif /* PLAYER_H_ */

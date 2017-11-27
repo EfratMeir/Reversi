@@ -7,7 +7,7 @@
  *      ID: 201543253
  */
 
-#include "GameFlow.h"
+#include <GameFlow.h>
 
 #define SIZE 8
 GameFlow::GameFlow() {
@@ -17,6 +17,17 @@ GameFlow::GameFlow() {
 void GameFlow::initialize() {
 	//PointsCounter counter = PointsCounter();
 	Board b = Board(8,8);
+
+	//indexes are -1 becauses the array start from 0
+		b.parr[4 - 1][4 - 1].set_sign(b.white_player);
+		b.parr[5 - 1][5 - 1].set_sign(b.white_player);
+		b.parr[4 - 1][5 - 1].set_sign(b.black_player);
+		b.parr[5 - 1][4 - 1].set_sign(b.black_player);
+
+		b.getCounter().add(2, 'X');
+		b.getCounter().add(2, 'O');
+
+
 //	Player *playerss[2];
 //	playerss[0] = new HumenPlayer(b, 'X');
 //	playerss[1] = new HumenPlayer(b, 'O');

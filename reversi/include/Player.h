@@ -10,10 +10,11 @@
 #ifndef PLAYER_H_
 #define PLAYER_H_
 #include <iostream>
-#include "Point.h"
-#include "Player.h"
-#include "Board.h"
-#include "MovesCalculator.h"
+#include <Board.h>
+#include <MovesCalculator.h>
+#include <Player.h>
+#include <Point.h>
+
 #include <vector>
 //blalalalal
 using namespace std;

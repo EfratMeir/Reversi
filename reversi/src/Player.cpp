@@ -7,8 +7,8 @@
  *      ID: 201543253
  */
 
-#include "Player.h"
-#include "Board.h"
+#include <Board.h>
+#include <Player.h>
 #include <iostream>
 #include<vector>
 using namespace std;

@@ -7,9 +7,9 @@
  *      ID 201543253
  */
 
-#include "Board.h"
+#include <Board.h>
+#include <Point.h>
 #include <iostream>
-#include "Point.h"
 using namespace std;
 #define SIZE 8
 #include <vector>
@@ -28,11 +28,6 @@ Board::Board() {
 		}
 	}
 
-	//indexes are -1 becauses the array start from 0
-		parr[4 - 1][4 - 1].set_sign(white_player);
-		parr[5 - 1][5 - 1].set_sign(white_player);
-		parr[4 - 1][5 - 1].set_sign(black_player);
-		parr[5 - 1][4 - 1].set_sign(black_player);
 
 }
 Board::Board(int rows, int cols) {
@@ -50,11 +45,6 @@ Board::Board(int rows, int cols) {
 		}
 	}
 
-	//indexes are -1 becauses the array start from 0
-		parr[4 - 1][4 - 1].set_sign(white_player);
-		parr[5 - 1][5 - 1].set_sign(white_player);
-		parr[4 - 1][5 - 1].set_sign(black_player);
-		parr[5 - 1][4 - 1].set_sign(black_player);
 
 }
 

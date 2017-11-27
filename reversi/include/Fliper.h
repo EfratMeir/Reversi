@@ -10,9 +10,9 @@
 #ifndef FLIPER_H_
 #define FLIPER_H_
 
+#include <Board.h>
+#include <Point.h>
 #include <iostream>
-#include "Board.h"
-#include "Point.h"
 #include <vector>
 using namespace std;
 
@@ -29,18 +29,18 @@ public:
 	int flip(Board& board, Point chosen_point, char flip_to);
 	// helper functions
 	/**
-	 * gets the board and he chosen point, and each function checks
+	 * gets the board and the chosen point, and each function checks
 	 * the direction it responsible of.
 	 * @return - vector of points need to be flipped.
 	 */
-	vector<Point> checkUp(Point chosen_point, Board board);
-	vector<Point> checkDown(Point chosen_point, Board board);
-	vector<Point> checkRight(Point chosen_point, Board board);
-	vector<Point> checkLeft(Point chosen_point, Board board);
-	vector<Point> checkUpRight(Point chosen_point, Board board);
-	vector<Point> checkUpLeft(Point chosen_point, Board board);
-	vector<Point> checkDownRight(Point chosen_point, Board board);
-	vector<Point> checkDownLeft(Point chosen_point, Board board);
+	void checkAndUpdateUp(Point chosen_point, Board board);
+	void checkAndUpdateDown(Point chosen_point, Board board);
+	void checkAndUpdateRight(Point chosen_point, Board board);
+	void checkAndUpdateLeft(Point chosen_point, Board board);
+	void checkAndUpdateUpRight(Point chosen_point, Board board);
+	void checkAndUpdateUpLeft(Point chosen_point, Board board);
+	void checkAndUpdateDownRight(Point chosen_point, Board board);
+	void checkAndUpdateDownLeft(Point chosen_point, Board board);
 
 	/**
 	 * adds all the points from the "from" vector to "to" vector
@@ -54,6 +54,7 @@ public:
 
 
 private:
+	vector<Point> points_to_flip;
 	/*
 	 * gets a player sign and returns the opponent sign
 	 */

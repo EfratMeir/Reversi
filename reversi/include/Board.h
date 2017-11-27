@@ -9,9 +9,9 @@
 
 #ifndef BOARD_H_
 #define BOARD_H_
+#include <Point.h>
+#include <PointsCounter.h>
 #include <iostream>
-#include "Point.h"
-#include "PointsCounter.h"
 #define SIZE 8
 using namespace std;
 

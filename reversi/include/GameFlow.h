@@ -9,11 +9,12 @@
 
 #ifndef GAMEFLOW_H_
 #define GAMEFLOW_H_
-#include "Board.h"
-#include "Player.h"
+#include <Board.h>
+#include <HumenPlayer.h>
+#include <Player.h>
+#include <TurnBase.h>
+
 #include <vector>
-#include "HumenPlayer.h"
-#include "TurnBase.h"
 
 /*
  * initializes the game and mannage it from outside.

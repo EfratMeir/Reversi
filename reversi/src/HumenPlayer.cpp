@@ -7,7 +7,7 @@
  *      ID: 201543253
  */
 
-#include "HumenPlayer.h"
+#include <HumenPlayer.h>
 
 HumenPlayer::HumenPlayer(Board& board, char sign) {
 	this->sign = sign;

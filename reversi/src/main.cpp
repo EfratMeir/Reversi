@@ -10,25 +10,21 @@
  * 					 the implementation of this files was made by my self.
  */
 
+#include <Board.h>
+#include <GameFlow.h>
+#include <HumenPlayer.h>
+#include <MovesCalculator.h>
+#include <Player.h>
+#include <Point.h>
+#include <TurnBase.h>
 #include <iostream>
-#include "Board.h"
-#include "Player.h"
-#include "Point.h"
-#include "MovesCalculator.h"
-#include "HumenPlayer.h"
 #include <list>
-#include "TurnBase.h"
 #include <vector>
-#include "GameFlow.h"
 using namespace std;
 
 int main() {
 	GameFlow game = GameFlow();
 	game.initialize();
 	game.run();
-
-
-
-
 
 }

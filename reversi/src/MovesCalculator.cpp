@@ -7,10 +7,9 @@
  *      ID: 201543253
  */
 
-#include "MovesCalculator.h"
+#include <Board.h>
+#include <MovesCalculator.h>
 #include <iostream>
-#include "Board.h"
-//#include "Player.h"
 #include <vector>
 
 using namespace std;

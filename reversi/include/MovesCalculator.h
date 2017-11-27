@@ -9,9 +9,8 @@
 
 #ifndef MOVESCALCULATOR_H_
 #define MOVESCALCULATOR_H_
+#include <Board.h>
 #include <iostream>
-#include "Board.h"
-//#include "Player.h"
 #include <vector>
 #include <list>
 using namespace std;

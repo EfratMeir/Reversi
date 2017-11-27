@@ -9,13 +9,13 @@
 
 #ifndef TURNBASE_H_
 #define TURNBASE_H_
+#include <Board.h>
+#include <ComputerPlayer.h>
+#include <Fliper.h>
+#include <HumenPlayer.h>
+#include <PointsCounter.h>
 #include <iostream>
-#include "HumenPlayer.h"
-#include "ComputerPlayer.h"
-#include "Fliper.h"
 #include <vector>
-#include "Board.h"
-#include "PointsCounter.h"
 using namespace std;
 
 /**

@@ -7,7 +7,7 @@
  *      ID: 201543253
  */
 
-#include "Point.h"
+#include <Point.h>
 #include <iostream>
 using namespace std;
 

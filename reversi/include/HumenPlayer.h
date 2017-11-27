@@ -10,7 +10,7 @@
 #ifndef HUMENPLAYER_H_
 #define HUMENPLAYER_H_
 
-#include "Player.h"
+#include <Player.h>
 #include <iostream>
 using namespace std;
 
@@ -36,12 +36,12 @@ public:
 	virtual Point play_one_turn(Board& board);
 
 	// getters and setters:
-	char get_sign();
+	virtual char get_sign();
 
 	/**
 	 * destructor
 	 */
-	~HumenPlayer();
+	virtual ~HumenPlayer();
 
 
 

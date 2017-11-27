@@ -7,11 +7,11 @@
  *      ID: 201543253
  */
 
-#include "PointsCounter.h"
+#include <PointsCounter.h>
 
 PointsCounter::PointsCounter() {
-	black_count = 2;
-	white_count = 2;
+	black_count = 0;
+	white_count = 0;
 }
 
 void PointsCounter::add_one(char sign) {

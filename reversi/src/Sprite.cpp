@@ -5,7 +5,7 @@
  *      Author: efrat
  */
 
-#include "Sprite.h"
+#include <Sprite.h>
 #include <iostream>
 using namespace std;
 

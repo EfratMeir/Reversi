@@ -23,20 +23,21 @@ public:
 	/**
 	 * constructor:
 	 */
-	HumenPlayer(Board& board, char sign);
+	HumenPlayer( char sign);
+
 	//class members:
-	bool no_moves;
+	bool get_no_moves();
 	char sign;
 	MovesCalculator moves_calculator;
-
+	virtual char get_sign();
 	/**
 	 * board - an initialized board reference
 	 * this function checks for options, chooses and adds the new move to the board
 	 */
-	virtual Point play_one_turn(Board& board);
+//	virtual Point play_one_turn(Board& board);
 
 	// getters and setters:
-	virtual char get_sign();
+//	virtual char get_sign();
 
 	/**
 	 * destructor
@@ -46,6 +47,8 @@ public:
 
 
 private:
+	bool no_moves;
+
 	/**
 	 * checks for all the possible moves.
 	 * @param board - board reference
@@ -60,7 +63,7 @@ private:
 	 * @param options_list - a vector of all the options
 	 * @return - the chosen point
 	 */
-	virtual Point choose_best_move(vector<Point> options_list);
+	virtual Point choose_best_move(vector<Point> options_list, Fliper flip, Board& board);
 
 	/**
 	 * puts the chosen point on the board.
@@ -68,7 +71,7 @@ private:
 	 * @param board - board reference
 	 * @param chosen_step - the point that shows the chosen step
 	 */
-	virtual void play_next_step(Board& board, Point chosen_step);
+//	virtual void play_next_step(Board& board, Point chosen_step);
 
 	/**
 	 * checks if a point chosen is a valid option

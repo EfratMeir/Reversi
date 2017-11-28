@@ -33,14 +33,14 @@ public:
 	 * the direction it responsible of.
 	 * @return - vector of points need to be flipped.
 	 */
-	void checkAndUpdateUp(Point chosen_point, Board board);
-	void checkAndUpdateDown(Point chosen_point, Board board);
-	void checkAndUpdateRight(Point chosen_point, Board board);
-	void checkAndUpdateLeft(Point chosen_point, Board board);
-	void checkAndUpdateUpRight(Point chosen_point, Board board);
-	void checkAndUpdateUpLeft(Point chosen_point, Board board);
-	void checkAndUpdateDownRight(Point chosen_point, Board board);
-	void checkAndUpdateDownLeft(Point chosen_point, Board board);
+	void checkAndUpdateUp(Point chosen_point, Board board, char flip_to);
+	void checkAndUpdateDown(Point chosen_point, Board board, char flip_to);
+	void checkAndUpdateRight(Point chosen_point, Board board, char flip_to);
+	void checkAndUpdateLeft(Point chosen_point, Board board, char flip_to);
+	void checkAndUpdateUpRight(Point chosen_point, Board board, char flip_to);
+	void checkAndUpdateUpLeft(Point chosen_point, Board board, char flip_to);
+	void checkAndUpdateDownRight(Point chosen_point, Board board, char flip_to);
+	void checkAndUpdateDownLeft(Point chosen_point, Board board, char flip_to);
 
 	/**
 	 * adds all the points from the "from" vector to "to" vector

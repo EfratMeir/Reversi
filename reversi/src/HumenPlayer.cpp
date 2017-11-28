@@ -9,10 +9,11 @@
 
 #include <HumenPlayer.h>
 
-HumenPlayer::HumenPlayer(Board& board, char sign) {
+HumenPlayer::HumenPlayer(char sign) {
 	this->sign = sign;
 	this->moves_calculator = MovesCalculator();
 	this->no_moves = false;
+
 
 }
 
@@ -21,21 +22,10 @@ HumenPlayer::HumenPlayer() {
 	this->moves_calculator = MovesCalculator();
 	this->no_moves = false;
 }
+bool HumenPlayer::get_no_moves(){
 
-
-
-Point HumenPlayer::play_one_turn(Board& board) {
-	vector<Point> options = get_possible_moves(board, this->moves_calculator, this->sign);
-	if (options.size() == 0) {
-		return Point(-1,-1, 'Y'); //no point
-	}
-	Point chosen_point = choose_best_move(options);
-	play_next_step(board, chosen_point);
-	return chosen_point;
+	return this->no_moves;
 }
-
-
-
 vector<Point> HumenPlayer::get_possible_moves(Board& board,
 		MovesCalculator moves_calculator, char this_player_sign) {
 	this->no_moves = false;
@@ -55,7 +45,7 @@ vector<Point> HumenPlayer::get_possible_moves(Board& board,
 
 }
 
-Point HumenPlayer::choose_best_move(vector<Point> options_list) {
+Point HumenPlayer::choose_best_move(vector<Point> options_list, Fliper flip, Board& board) {
 	cout << "please choose your next step (row,column)";
 	char dummy;
 	int x;
@@ -70,7 +60,7 @@ Point HumenPlayer::choose_best_move(vector<Point> options_list) {
 	if (cin.fail()) {
 		cin.clear();
 		cin.ignore(256, '\n');
-		cout << "you have entered an inValid point. please enter one of your options." << endl;
+		cout << "you have entered an inValid point." << endl << "please enter one of your options." << endl;
 			cout << sign <<", your possible moves are:" << endl;
 			for (i = 0; i < options_list.size(); i++) {
 				options_list[i].printValuesPlusOne();
@@ -95,19 +85,13 @@ Point HumenPlayer::choose_best_move(vector<Point> options_list) {
 	}
 }
 
-char HumenPlayer::get_sign() {
-	return this->sign;
-}
-
-void HumenPlayer::play_next_step(Board& board, Point chosen_step) {
-	board.setPoint(chosen_step);
-	board.getCounter().add_one(chosen_step.get_sign());
-}
 
 HumenPlayer::~HumenPlayer() {
 	// TODO Auto-generated destructor stub
 }
-
+char HumenPlayer::get_sign() {
+	return this->sign;
+}
 bool HumenPlayer::isAnOption(Point p, vector<Point> options) {
 	for (unsigned int i = 0; i < options.size(); i++) {
 		if (p.get_row() == options[i].get_row()

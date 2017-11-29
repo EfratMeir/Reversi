@@ -57,14 +57,14 @@ vector<Point> ComputerPlayer::get_possible_moves(Board& board,
 		this->no_moves = true;
 		return options;
 	}
-
 	return options;
 }
 
 Point ComputerPlayer::choose_best_move(vector<Point> options_list, Fliper fliper, Board& board) {
 	vector<Point>::iterator it;
 	cout << "its O's turn"<< endl;
-	int low_score_human = 1000;
+	//the best score the rival(human) can get is 64
+	int low_score_human = 64;
 	Point best_move_comp = Point(0, 0, this->sign);
 	for (it = options_list.begin(); it != options_list.end(); ++it ) {
 		Point point = *it;
@@ -76,6 +76,7 @@ Point ComputerPlayer::choose_best_move(vector<Point> options_list, Fliper fliper
 		}
 	}
 	best_move_comp = Point(best_move_comp.get_row(),best_move_comp.get_col(), this->sign);
+	cout << "O' chose to play " << "(" << best_move_comp.get_row() + 1<< "," << best_move_comp.get_col() + 1 << "): " << endl;
 	return best_move_comp;
 }
 int ComputerPlayer::rate_move(Point point, Fliper fliper, Board& board){
@@ -83,21 +84,20 @@ int ComputerPlayer::rate_move(Point point, Fliper fliper, Board& board){
 	temp_b = board;
 	point.set_sign(this->sign);
 	play_next_step(temp_b, point);
-
-	//temp_b.setPoint(point);
 	fliper.flip(temp_b, point, this->sign);
-	//temp_b.pPrint();
-
 	//now its the rival turn
 	rival_turn = true;
 	this->sign = this->rival_sign;
 	//check the option moves of the rival player (the human player)
 	vector<Point> rival_options = get_possible_moves(temp_b, this->moves_calculator, this->rival_sign);
 	vector<Point>::iterator it;
-	int best_score = 0;
+	//the lowest score the rival(human) can get is 64
+	int best_score = -64;
+	if (rival_options.size() == 0){
+		best_score = temp_b.getCounter().getBlackCount() - temp_b.getCounter().getWhiteCount();
+	}
 	// for every rival's move, calculate the points he can get.
 	//and check which move have the best score
-
 	for (it = rival_options.begin(); it != rival_options.end(); ++it ) {
 		Board initial_b = temp_b;
 		Point p = *it;

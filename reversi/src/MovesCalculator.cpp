@@ -66,6 +66,10 @@ void MovesCalculator::checkRight(Board board, Point current_point,
 				while (col + i <= board.getNumCols() && board.parr[row][col + i].get_sign() == current_point.get_sign()) {
 					i++;
 				}
+				//if this point is outside the boards, return
+				if (!(col + i <= board.getNumCols())){
+					return;
+				}
 				if (board.parr[row][col + i].get_sign() == board.blank) {
 					if (!allreadyInList(row, col + i)){
 						options.push_back(board.parr[row][col + i]);
@@ -88,6 +92,10 @@ void MovesCalculator::checkLeft(Board board, Point current_point,
 			//keep moving LEFT as long as its the opponent sign || board borders
 			while (col - i >= 0 && board.parr[row][col - i].get_sign() == current_point.get_sign()) {
 				i++;
+			}
+			//if this point is outside the boards, return
+			if (!(col - i >= 0 )){
+				return;
 			}
 			if (board.parr[row][col - i].get_sign() == board.blank) {
 				if (!allreadyInList(row, col - i)){
@@ -112,6 +120,10 @@ void MovesCalculator::checkDown(Board board, Point current_point,
 			while (row + i <= board.getNumRows() && board.parr[row + i][col].get_sign() == current_point.get_sign()) {
 				i++;
 			}
+			//if this point is outside the boards, return
+			if (!(row + i <= board.getNumRows())){
+				return;
+			}
 			if (board.parr[row + i][col].get_sign() == board.blank) {
 				if (!allreadyInList(row + i, col)){
 					options.push_back(board.parr[row + i][col]);
@@ -134,6 +146,10 @@ void MovesCalculator::checkUp(Board board, Point current_point,
 			while (row - i >= 0 && board.parr[row - i][col].get_sign() == current_point.get_sign()) {
 				i++;
 			}
+			//if this point is outside the boards, return
+			if (!(row - i >= 0)){
+				return;
+			}
 			if (board.parr[row - i][col].get_sign() == board.blank) {
 				if (!allreadyInList(row - i, col)){
 					options.push_back(board.parr[row - i][col]);
@@ -155,6 +171,10 @@ void MovesCalculator::checkUpRightDiagonal(Board board, Point current_point,
 			//keep moving UP-RIGHT as long as its the opponent sign || board borders
 			while (row - i >= 0 && col + i <= board.getNumCols() && board.parr[row - i][col + i].get_sign() == current_point.get_sign()) {
 				i++;
+			}
+			//if this point is outside the boards, return
+			if (!(row - i >= 0 && col + i <= board.getNumCols())){
+				return;
 			}
 			if (board.parr[row - i][col + i].get_sign() == board.blank) {
 				if (!allreadyInList(row - i, col + i)){
@@ -180,6 +200,10 @@ void MovesCalculator::checkUpLeftDiagonal(Board board, Point current_point,
 			while (row - i >= 0 && col - i >= 0 && board.parr[row - i][col - i].get_sign() == current_point.get_sign()) {
 				i++;
 			}
+			//if this point is outside the boards, return
+			if (!(row - i >= 0 && col - i >= 0)){
+				return;
+			}
 			if (board.parr[row - i][col - i].get_sign() == board.blank) {
 				if (!allreadyInList(row - i, col - i)){
 					options.push_back(board.parr[row - i][col - i]);
@@ -202,6 +226,10 @@ void MovesCalculator::checkDownRightDiagonal(Board board, Point current_point,
 			//keep moving DOWN-RIGHT as long as its the opponent sign || board borders
 			while (row + i <= board.getNumRows() && col + i <= board.getNumCols() && board.parr[row + i][col + i].get_sign() == current_point.get_sign()) {
 				i++;
+			}
+			//if this point is outside the boards, return
+			if (!(row + i <= board.getNumRows() && col + i <= board.getNumCols() )){
+				return;
 			}
 			if (board.parr[row + i][col + i].get_sign() == board.blank) {
 				if (!allreadyInList(row + i, col + i)){
@@ -227,8 +255,12 @@ void MovesCalculator::checkDownLeftDiagonal(Board board, Point current_point,
 			while (row + i <= board.getNumRows() && col - i >= 0 && board.parr[row + i][col - i].get_sign() == current_point.get_sign()) {
 				i++;
 			}
+			//if this point is outside the boards, return
+			if (!(row + i <= board.getNumRows() && col - i >= 0)){
+				return;
+			}
 			if (board.parr[row + i][col - i].get_sign() == board.blank) {
-				if (allreadyInList(row + i, col - i)){
+				if (!allreadyInList(row + i, col - i)){
 					options.push_back(board.parr[row + i][col - i]);
 				}
 

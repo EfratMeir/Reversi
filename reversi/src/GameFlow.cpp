@@ -40,7 +40,8 @@ char GameFlow::choose_players(){
 	cin >> chosen;
 	if (!(chosen == 'c' || chosen == 'C' || chosen == 'h' || chosen == 'H')){
 		cout << "you entered an invalid char." <<endl;
-		choose_players();
+		chosen = choose_players();
+		return chosen;
 	}
 	return chosen;
 }

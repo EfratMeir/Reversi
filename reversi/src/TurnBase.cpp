@@ -18,7 +18,7 @@ void TurnBase::play_game() {
 	cout << "Hello  " << this->players[0]->get_sign() << endl << "Hello  " << players[1]->get_sign() << endl;
 	this->board.pPrint();
 
-	//while(!board.isFull() && (!players[0]->get_no_moves() && !players[1]->get_no_moves())) {
+
 	while(!board.isFull() && (!(players[0]->get_no_moves() && players[1]->get_no_moves()))) {
 		Point chosen_point = players[i]->play_one_turn(board, fliper);
 		if (board.getCounter().getBlackCount() == 0 || board.getCounter().getWhiteCount() == 0){

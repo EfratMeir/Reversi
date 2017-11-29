@@ -20,7 +20,6 @@ void GameFlow::initialize() {
 	b.setPoint(Point(4 - 1, 5 - 1, b.black_player));
 	b.setPoint(Point(5 - 1, 4 - 1, b.black_player));
 
-
 	Player* players[2];
 	players[0] = new HumenPlayer('X');
 	char chosen_player = choose_players();
@@ -39,13 +38,12 @@ char GameFlow::choose_players(){
 	char chosen;
 	cin >> chosen;
 	if (!(chosen == 'c' || chosen == 'C' || chosen == 'h' || chosen == 'H')){
-			cout << "you entered an invalid char." <<endl;
-			chosen = choose_players();
-			return chosen;
-		}
+		cout << "you have entered an invalid char." <<endl;
+		chosen = choose_players();
+		return chosen;
+	}
 	return chosen;
 }
-
 void GameFlow::run() {
 	turn_base.play_game();
 	cout << "GAME IS OVER!" << endl << "THE WINNER IS: ";

@@ -68,14 +68,18 @@ Point ComputerPlayer::choose_best_move(vector<Point> options_list, Fliper fliper
 	Point best_move_comp = Point(0, 0, this->sign);
 	for (it = options_list.begin(); it != options_list.end(); ++it ) {
 		Point point = *it;
-		int score = rate_move(point, fliper, board);
-		//if the human got less points in this move, make this move to be the best move for the computer
-		if (score < low_score_human){
-			low_score_human = score;
+		int best_score_humen = rate_move(point, fliper, board);
+		//if the human player got less points in this move, make this move to be the best move for the computer:
+		if (best_score_humen < low_score_human){
+			low_score_human = best_score_humen;
 			best_move_comp = point;
 		}
 	}
 	best_move_comp = Point(best_move_comp.get_row(),best_move_comp.get_col(), this->sign);
+	cout << " O chose to play: ";
+	//<< "(" << best_move_comp.get_row() << "," << best_move_comp.get_col() << "): " << endl;
+	best_move_comp.printValuesPlusOne();
+	cout << endl;
 	return best_move_comp;
 }
 int ComputerPlayer::rate_move(Point point, Fliper fliper, Board& board){
@@ -88,15 +92,15 @@ int ComputerPlayer::rate_move(Point point, Fliper fliper, Board& board){
 	fliper.flip(temp_b, point, this->sign);
 	//temp_b.pPrint();
 
-	//now its the rival turn
+	//its the rival turn:
 	rival_turn = true;
 	this->sign = this->rival_sign;
-	//check the option moves of the rival player (the human player)
+	//check possible moves for the rival player (the human player):
 	vector<Point> rival_options = get_possible_moves(temp_b, this->moves_calculator, this->rival_sign);
 	vector<Point>::iterator it;
-	int best_score = 0;
-	// for every rival's move, calculate the points he can get.
-	//and check which move have the best score
+	int best_score_humen = 0;
+	//calculate the points of each rival's possible move,
+	//and take the max-point-move as the best human-player move:
 
 	for (it = rival_options.begin(); it != rival_options.end(); ++it ) {
 		Board initial_b = temp_b;
@@ -106,13 +110,13 @@ int ComputerPlayer::rate_move(Point point, Fliper fliper, Board& board){
 		fliper.flip(initial_b, p, p.get_sign());
 		//initial_b.pPrint();
 		int score = initial_b.getCounter().getBlackCount() - initial_b.getCounter().getWhiteCount();
-		if (score > best_score){
-			best_score = score;
+		if (score > best_score_humen) {
+			best_score_humen = score;
 		}
 	}
 	this->sign = this->computer_sign;
 	this->rival_turn = false;
-	return best_score;
+	return best_score_humen;
 
 }
 

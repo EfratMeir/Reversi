@@ -184,7 +184,6 @@ void MovesCalculator::checkUpLeftDiagonal(Board board, Point current_point,
 				if (!allreadyInList(row - i, col - i)){
 					options.push_back(board.parr[row - i][col - i]);
 				}
-
 			}
 		}
 	}
@@ -228,7 +227,7 @@ void MovesCalculator::checkDownLeftDiagonal(Board board, Point current_point,
 				i++;
 			}
 			if (board.parr[row + i][col - i].get_sign() == board.blank) {
-				if (allreadyInList(row + i, col - i)){
+				if (!allreadyInList(row + i, col - i)){
 					options.push_back(board.parr[row + i][col - i]);
 				}
 
@@ -239,6 +238,7 @@ void MovesCalculator::checkDownLeftDiagonal(Board board, Point current_point,
 }
 
 MovesCalculator::~MovesCalculator() {
+
 }
 
 

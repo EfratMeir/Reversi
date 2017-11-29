@@ -29,7 +29,8 @@ public:
 	vector<Point> options_list;
 
 /**
- * for all the check_direction functions - assume they get the opponent point as current point, and check around it for possible moves.
+ * for all the check_direction functions - assume they get the opponent point as current point,
+ *  and check around it for possible moves.
  * adds the moves found to 'options'
  * @board - the game board
  * @current point - the opponent point to check around.

@@ -1,4 +1,3 @@
-#keren levy
 
 a.out: compileAll
 	g++ *.o

@@ -15,7 +15,7 @@
 using namespace std;
 
 MovesCalculator::MovesCalculator() {
-//	int i = 0;
+
 }
 /**
  * //check if the move is inside the list of the possible moves.

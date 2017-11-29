@@ -64,7 +64,7 @@ char GameFlow::findWinner(TurnBase turn_base) {
 		return 'X';
 	}
 	if (turn_base.getBoard().getCounter().getBlackCount() < turn_base.getBoard().getCounter().getWhiteCount()) {
-		return 'Y';
+		return 'O';
 	}
 
 	return 'T';

@@ -34,6 +34,7 @@ int Fliper::flip(Board& board, Point chosen_point, char flip_to) {
 	}
 
 	int num_fliped = this->points_to_flip.size();
+	//the board.setPoint added to the counter everything needed, but fliper needs to distract from the sign-flipped counter:
 	board.getCounter().minus(num_fliped, FindOpponentSign(flip_to));
 	cout << "black counter:" << board.getCounter().getBlackCount() << endl <<
 			"white counter:" << board.getCounter().getWhiteCount() << endl;
@@ -230,14 +231,12 @@ void Fliper::checkAndUpdateDownLeft(Point chosen_point, Board board) {
 			addVecToVec(temp, this->points_to_flip);
 		}
 	}
-
 }
 
 void Fliper::addVecToVec(vector<Point> from, vector<Point> &to) {
 	for (int i = 0; i < from.size(); i++) {
 		to.push_back(from[i]);
 	}
-
 }
 
 Fliper::~Fliper() {

@@ -1,10 +1,6 @@
 /*
  * ComputerPlayer.cpp
- *
- *  Created on: Nov 3, 2017
- *      Author: Efrat Meir
- *      user name: meirefr
- *      ID: 201543253 */
+ */
 
 #include "ComputerPlayer.h"
 #include "Player.h"
@@ -36,7 +32,9 @@ bool ComputerPlayer::get_no_moves(){
 char ComputerPlayer::get_sign() {
 	return this->sign;
 }
-
+void ComputerPlayer::play_next_step(Board& board, Point chosen_step) {
+	board.setPoint(chosen_step);
+}
 char ComputerPlayer::get_opp_sign(char sign){
 	char opp_sign;
 		if (this->sign == 'X') {

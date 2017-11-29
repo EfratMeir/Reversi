@@ -1,8 +1,5 @@
 /*
  * PointsCounter.h
- *
- *  Created on: Nov 9, 2017
- *      Author: efrat
  */
 
 #ifndef POINTSCOUNTER_H_

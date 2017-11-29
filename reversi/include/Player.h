@@ -1,10 +1,5 @@
 /*
  * Player.h
- *
- *  Created on: Nov 3, 2017
- *      Author: Efrat Meir
- *      user name: meirefr
- *      ID: 201543253
  */
 
 #ifndef PLAYER_H_
@@ -42,7 +37,7 @@ public:
 		* @param board - board reference
 		* @param chosen_step - the point that shows the chosen step
 		*/
-		virtual void play_next_step(Board& board, Point chosen_step);
+		virtual void play_next_step(Board& board, Point chosen_step) = 0;
 	/*
 	 * destructor
 	 */

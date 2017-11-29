@@ -1,10 +1,5 @@
 /*
  * Point.h
- *
- *  Created on: Nov 3, 2017
- *      Author: Efrat Meir
- *      user name: meirefr
- *      ID: 201543253
  */
 
 #ifndef POINT_H_

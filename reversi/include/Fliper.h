@@ -1,10 +1,5 @@
 /*
  * Fliper.h
- *
- *  Created on: Nov 6, 2017
- *      Author: Efrat Meir
- *      user name: meirefr
- *      ID: 201543253
  */
 
 #ifndef FLIPER_H_

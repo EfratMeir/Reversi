@@ -1,10 +1,5 @@
 /*
  * Fliper.cpp
- *
- *  Created on: Nov 6, 2017
- *      Author: Efrat Meir
- *      user name: meirefr
- *      ID: 201543253
  */
 
 #include <Fliper.h>
@@ -18,8 +13,6 @@ Fliper::Fliper() {
 int Fliper::flip(Board& board, Point chosen_point, char flip_to) {
 
 	this->points_to_flip.erase(this->points_to_flip.begin(), this->points_to_flip.end());
-	//points_to_flip.push_back(chosen_point);
-
 	vector<Point> temp;
 	checkAndUpdateDown(chosen_point, board, flip_to);
 	checkAndUpdateUp(chosen_point, board, flip_to);
@@ -36,7 +29,6 @@ int Fliper::flip(Board& board, Point chosen_point, char flip_to) {
 	}
 
 	int num_fliped = this->points_to_flip.size();
-	board.getCounter().add(num_fliped, flip_to);
 	board.getCounter().minus(num_fliped, FindOpponentSign(flip_to));
 //	cout << "black counter:" << board.getCounter().getBlackCount() << endl <<
 //			"white counter:" << board.getCounter().getWhiteCount() << endl;

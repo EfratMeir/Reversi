@@ -1,33 +1,53 @@
 /*
  * ComputerPlayer.h
- *
  *  Created on: Nov 3, 2017
- *      Author: Efrat Meir
- *      user name: meirefr
- *      ID: 201543253
  */
 
 #ifndef COMPUTERPLAYER_H_
 #define COMPUTERPLAYER_H_
 #include "Player.h"
-#include "HumenPlayer.h"
 #include <iostream>
 
 
 class ComputerPlayer: public Player {
 public:
+	/**
+	* default constructor
+	*/
 	ComputerPlayer();
-
-	bool get_no_moves();
-	char get_opp_sign(char sign);
-	virtual char get_sign();
-	HumenPlayer* rival;
+	/**
+	 * constructor
+	 */
 	ComputerPlayer(char sign);
+	/**
+	 * get the bool 'no_moves' - true if the player have no moves.
+	 */
+	bool get_no_moves();
+	/**
+	 * get the sign of the rival player.
+	 */
+	char get_opp_sign(char sign);
+	/**
+	 * get the sign of the player.
+	 */
+	virtual char get_sign();
+
+	/**
+	* calculates the possible moves.
+	*/
 	MovesCalculator moves_calculator;
-//	virtual Point play_one_turn(Board& board);
-//	virtual char get_sign();
-	~ComputerPlayer();
+	/**
+	 * rate the possible moves of the rival.
+	 * @param point
+	 * @param fliper
+	 * @param board
+	 * @return the best score the rival can get
+	 */
 	int rate_move(Point point, Fliper fliper, Board& board);
+	/**
+	 * destructor
+	 */
+	~ComputerPlayer();
 
 
 
@@ -37,10 +57,27 @@ private:
 	char computer_sign;
 	char rival_sign;
 	bool rival_turn;
+	/**
+	 * puts the chosen point on the board.
+	 * (updating the counter will be from fliper)
+	 * @param board - board reference
+	 * @param chosen_step - the point that shows the chosen step
+	 */
+	virtual void play_next_step(Board& board, Point chosen_step);
+	/**
+	 * checks for all the possible moves.
+	 * @param board - board reference
+	 * @param moves_calculator - moves calculator object
+	 * @param this_player_sign - char
+	 * @return - a vector of points, all the possible moves.
+	 */
 	virtual vector<Point> get_possible_moves(Board& board, MovesCalculator moves_calculator, char this_player_sign);
+	/**
+	 * choose the best move of the computer according the 'minimax' algorithm.
+	 * @param options_list - a vector of all the options
+	 * @return - the chosen point
+	 */
 	virtual Point choose_best_move(vector<Point> options_list, Fliper fliper, Board& board);
-//	virtual void play_next_step(Board& board, Point chosen_step);
-
 };
 
 #endif /* COMPUTERPLAYER_H_ */

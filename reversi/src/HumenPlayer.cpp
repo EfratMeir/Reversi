@@ -1,10 +1,5 @@
 /*
  * HumenPlayer.cpp
- *
- *  Created on: Nov 3, 2017
- *      Author: Efrat Meir
- *      user name: meirefr
- *      ID: 201543253
  */
 
 #include <HumenPlayer.h>
@@ -42,7 +37,6 @@ vector<Point> HumenPlayer::get_possible_moves(Board& board,
 	}
 	cout << endl;
 	return options;
-
 }
 
 Point HumenPlayer::choose_best_move(vector<Point> options_list, Fliper flip, Board& board) {
@@ -86,12 +80,16 @@ Point HumenPlayer::choose_best_move(vector<Point> options_list, Fliper flip, Boa
 }
 
 
-HumenPlayer::~HumenPlayer() {
-	// TODO Auto-generated destructor stub
-}
 char HumenPlayer::get_sign() {
 	return this->sign;
 }
+
+void HumenPlayer::play_next_step(Board& board, Point chosen_step) {
+	board.setPoint(chosen_step);
+}
+
+
+
 bool HumenPlayer::isAnOption(Point p, vector<Point> options) {
 	for (unsigned int i = 0; i < options.size(); i++) {
 		if (p.get_row() == options[i].get_row()
@@ -100,4 +98,7 @@ bool HumenPlayer::isAnOption(Point p, vector<Point> options) {
 		}
 	}
 	return false;
+}
+HumenPlayer::~HumenPlayer() {
+
 }

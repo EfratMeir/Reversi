@@ -1,8 +1,5 @@
 /*
  * Sprite.h
- *
- *  Created on: Nov 3, 2017
- *      Author: efrat
  */
 
 #ifndef SPRITE_H_

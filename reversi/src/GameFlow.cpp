@@ -1,10 +1,5 @@
 /*
  * GameFlow.cpp
- *
- *  Created on: Nov 4, 2017
- *      Author: Efrat Meir
- *      user name: meirefr
- *      ID: 201543253
  */
 
 #include <GameFlow.h>
@@ -27,19 +22,28 @@ void GameFlow::initialize() {
 	b.getCounter().add(2, 'X');
 	b.getCounter().add(2, 'O');
 
-	Player* playerss[2];
-
-	playerss[0] = new HumenPlayer(b, 'X');
-	playerss[1] = new HumenPlayer(b, 'O');
-//	HumenPlayer black_player = HumenPlayer(b, 'X');
-//	HumenPlayer white_player = HumenPlayer(b, 'O');
-//	vector <HumenPlayer> players;
-//	players.push_back(black_player);
-//	players.push_back(white_player);
-	this->turn_base = TurnBase(b, playerss);
+	Player* players[2];
+	players[0] = new HumenPlayer('X');
+	char chosen_player = choose_players();
+	if (chosen_player == 'c' || chosen_player == 'C'){
+		players[1] = new ComputerPlayer('O');
+	}
+	else{ //if chosen player is human player
+	players[1] = new HumenPlayer('O');
+	}
+	this->turn_base = TurnBase(b, players);
 
 }
-
+char GameFlow::choose_players(){
+	cout << "to play against the computer type 'c'" << endl << "to play against human player type 'h'" << endl;
+	char chosen;
+	cin >> chosen;
+	if (!(chosen == 'c' || chosen == 'C' || chosen == 'h' || chosen == 'H')){
+		cout << "you entered an invalid char." <<endl;
+		choose_players();
+	}
+	return chosen;
+}
 void GameFlow::run() {
 	turn_base.play_game();
 	cout << "GAME IS OVER!" << endl << "THE WINNER IS: ";
@@ -66,7 +70,6 @@ char GameFlow::findWinner(TurnBase turn_base) {
 	if (turn_base.getBoard().getCounter().getBlackCount() < turn_base.getBoard().getCounter().getWhiteCount()) {
 		return 'O';
 	}
-
 	return 'T';
 }
 

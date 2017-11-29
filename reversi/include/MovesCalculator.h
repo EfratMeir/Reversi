@@ -1,10 +1,5 @@
 /*
  * MovesCalculator.h
- *
- *  Created on: Nov 4, 2017
- *      Author: Efrat Meir
- *      user name: meirefr
- *      ID: 201543253
  */
 
 #ifndef MOVESCALCULATOR_H_

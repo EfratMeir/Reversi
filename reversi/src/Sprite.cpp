@@ -1,8 +1,5 @@
 /*
  * Sprite.cpp
- *
- *  Created on: Nov 3, 2017
- *      Author: efrat
  */
 
 #include <Sprite.h>

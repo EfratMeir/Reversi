@@ -1,10 +1,5 @@
 /*
  * Player.h
- *
- *  Created on: Nov 3, 2017
- *      Author: Efrat Meir
- *      user name: meirefr
- *      ID: 201543253
  */
 
 #ifndef PLAYER_H_
@@ -14,6 +9,7 @@
 #include <MovesCalculator.h>
 #include <Player.h>
 #include <Point.h>
+#include <Fliper.h>
 
 #include <vector>
 //blalalalal
@@ -25,21 +21,30 @@ using namespace std;
 class Player {
 public:
 
-	static const char sign = 'N';
+	 char sign;
 	MovesCalculator moves_calculator;
 	/**
 	* board - an initialized board reference
 	* this function checks for options, chooses and adds the new move to the board
 	*/
-	virtual Point play_one_turn(Board& board) = 0;
+	virtual Point play_one_turn(Board& board, Fliper fliper);
 	virtual char get_sign() = 0;
-	static const bool no_moves = false;
+	virtual bool get_no_moves() = 0;
+
+	/**
+		* puts the chosen point on the board.
+		* (updating the counter will be from fliper)
+		* @param board - board reference
+		* @param chosen_step - the point that shows the chosen step
+		*/
+		virtual void play_next_step(Board& board, Point chosen_step) = 0;
 	/*
 	 * destructor
 	 */
 	virtual ~Player() = 0;
 
 private:
+//	bool no_moves;
 	/**
 	 * checks for all the possible moves.
 	 * @param board - board reference
@@ -47,22 +52,17 @@ private:
 	 * @param this_player_sign - char
 	 * @return - a vector of points, all the possible moves.
 	 */
-	virtual vector<Point> get_possible_moves(Board& board, MovesCalculator moves_calculator, char this_player_sign) = 0;
+	virtual vector<Point> get_possible_moves(Board& board,
+			MovesCalculator moves_calculator, char this_player_sign) = 0;
 
 	/**
 	* choose the best move out of the possible moves
 	* @param options_list - a vector of all the options
 	* @return - the chosen point
 	*/
-	virtual Point choose_best_move(vector<Point> options_list) = 0;
+	virtual Point choose_best_move(vector<Point> options_list, Fliper flip, Board& board) = 0;
 
-	/**
-	* puts the chosen point on the board.
-	* (updating the counter will be from fliper)
-	* @param board - board reference
-	* @param chosen_step - the point that shows the chosen step
-	*/
-	virtual void play_next_step(Board& board, Point chosen_step) = 0;
+
 
 };
 

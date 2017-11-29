@@ -1,10 +1,5 @@
 /*
  * Fliper.cpp
- *
- *  Created on: Nov 6, 2017
- *      Author: Efrat Meir
- *      user name: meirefr
- *      ID: 201543253
  */
 
 #include <Fliper.h>
@@ -19,16 +14,16 @@ int Fliper::flip(Board& board, Point chosen_point, char flip_to) {
 
 	this->points_to_flip.erase(this->points_to_flip.begin(), this->points_to_flip.end());
 	vector<Point> temp;
-	checkAndUpdateDown(chosen_point, board);
-	checkAndUpdateUp(chosen_point, board);
-	checkAndUpdateRight(chosen_point, board);
-	checkAndUpdateLeft(chosen_point, board);
-	checkAndUpdateDownRight(chosen_point, board);
-	checkAndUpdateDownLeft(chosen_point, board);
-	checkAndUpdateUpLeft(chosen_point, board);
-	checkAndUpdateUpRight(chosen_point, board);
+	checkAndUpdateDown(chosen_point, board, flip_to);
+	checkAndUpdateUp(chosen_point, board, flip_to);
+	checkAndUpdateRight(chosen_point, board, flip_to);
+	checkAndUpdateLeft(chosen_point, board, flip_to);
+	checkAndUpdateDownRight(chosen_point, board, flip_to);
+	checkAndUpdateDownLeft(chosen_point, board, flip_to);
+	checkAndUpdateUpLeft(chosen_point, board, flip_to);
+	checkAndUpdateUpRight(chosen_point, board, flip_to);
 
-	for (int i = 0; i < this->points_to_flip.size(); i++) {
+	for (unsigned i = 0; i < this->points_to_flip.size(); i++) {
 		this->points_to_flip[i].set_sign(flip_to);
 		board.setPoint(this->points_to_flip[i]);
 	}
@@ -36,8 +31,8 @@ int Fliper::flip(Board& board, Point chosen_point, char flip_to) {
 	int num_fliped = this->points_to_flip.size();
 	//the board.setPoint added to the counter everything needed, but fliper needs to distract from the sign-flipped counter:
 	board.getCounter().minus(num_fliped, FindOpponentSign(flip_to));
-	cout << "black counter:" << board.getCounter().getBlackCount() << endl <<
-			"white counter:" << board.getCounter().getWhiteCount() << endl;
+//	cout << "black counter:" << board.getCounter().getBlackCount() << endl <<
+//			"white counter:" << board.getCounter().getWhiteCount() << endl;
 
 	return num_fliped;
 
@@ -54,8 +49,8 @@ char Fliper::FindOpponentSign(char my_sign) {
 	return opp_sign;
 }
 
-void Fliper::checkAndUpdateUp(Point chosen_point, Board board) {
-	char sign = chosen_point.get_sign();
+void Fliper::checkAndUpdateUp(Point chosen_point, Board board, char flip_to) {
+	char sign = flip_to;
 	char opp_sign = FindOpponentSign(sign);
 	vector<Point> temp;
 //	vector<Point> to_flip;
@@ -79,8 +74,8 @@ void Fliper::checkAndUpdateUp(Point chosen_point, Board board) {
 }
 
 
-void Fliper::checkAndUpdateDown(Point chosen_point, Board board) {
-	char sign = chosen_point.get_sign();
+void Fliper::checkAndUpdateDown(Point chosen_point, Board board, char flip_to) {
+	char sign = flip_to;
 	char opp_sign = FindOpponentSign(sign);
 	vector<Point> temp;
 	int row = chosen_point.get_row();
@@ -101,8 +96,8 @@ void Fliper::checkAndUpdateDown(Point chosen_point, Board board) {
 	}
 }
 
-void Fliper::checkAndUpdateRight(Point chosen_point, Board board) {
-	char sign = chosen_point.get_sign();
+void Fliper::checkAndUpdateRight(Point chosen_point, Board board, char flip_to) {
+	char sign = flip_to;
 	char opp_sign = FindOpponentSign(sign);
 	vector<Point> temp;
 	int row = chosen_point.get_row();
@@ -123,8 +118,8 @@ void Fliper::checkAndUpdateRight(Point chosen_point, Board board) {
 	}
 }
 
-void Fliper::checkAndUpdateLeft(Point chosen_point, Board board) {
-	char opp_sign = FindOpponentSign(chosen_point.get_sign());
+void Fliper::checkAndUpdateLeft(Point chosen_point, Board board, char flip_to) {
+	char opp_sign = FindOpponentSign(flip_to);
 	vector<Point> temp;
 	int row = chosen_point.get_row();
 	int col = chosen_point.get_col();
@@ -137,15 +132,15 @@ void Fliper::checkAndUpdateLeft(Point chosen_point, Board board) {
 	else
 		break;
 		}
-	if (col - i >= 0 && board.parr[row][col - i].get_sign() == chosen_point.get_sign()) {
+	if (col - i >= 0 && board.parr[row][col - i].get_sign() == flip_to) {
 		if (temp.size() > 0) {
 			addVecToVec(temp, this->points_to_flip);
 		}
 	}
 }
 
-void Fliper::checkAndUpdateUpRight(Point chosen_point, Board board) {
-	char opp_sign = FindOpponentSign(chosen_point.get_sign());
+void Fliper::checkAndUpdateUpRight(Point chosen_point, Board board, char flip_to) {
+	char opp_sign = FindOpponentSign(flip_to);
 	vector<Point> temp;
 	int row = chosen_point.get_row();
 	int col = chosen_point.get_col();
@@ -159,15 +154,15 @@ void Fliper::checkAndUpdateUpRight(Point chosen_point, Board board) {
 		break;
 		}
 	if (row - i >= 0 && col + i <= board.getNumCols()
-			&& board.parr[row - i][col + i].get_sign() == chosen_point.get_sign()) {
+			&& board.parr[row - i][col + i].get_sign() == flip_to) {
 		if (temp.size() > 0) {
 			addVecToVec(temp, this->points_to_flip);
 		}
 	}
 }
 
-void Fliper::checkAndUpdateUpLeft(Point chosen_point, Board board) {
-	char opp_sign = FindOpponentSign(chosen_point.get_sign());
+void Fliper::checkAndUpdateUpLeft(Point chosen_point, Board board, char flip_to) {
+	char opp_sign = FindOpponentSign(flip_to);
 	vector<Point> temp;
 	int row = chosen_point.get_row();
 	int col = chosen_point.get_col();
@@ -180,15 +175,15 @@ void Fliper::checkAndUpdateUpLeft(Point chosen_point, Board board) {
 	else
 		break;
 		}
-	if (row - i >= 0 && col - i >= 0 && board.parr[row - i][col - i].get_sign() == chosen_point.get_sign()) {
+	if (row - i >= 0 && col - i >= 0 && board.parr[row - i][col - i].get_sign() == flip_to) {
 		if (temp.size() > 0) {
 			addVecToVec(temp, this->points_to_flip);
 		}
 	}
 }
 
-void Fliper::checkAndUpdateDownRight(Point chosen_point, Board board) {
-	char opp_sign = FindOpponentSign(chosen_point.get_sign());
+void Fliper::checkAndUpdateDownRight(Point chosen_point, Board board, char flip_to) {
+	char opp_sign = FindOpponentSign(flip_to);
 	vector<Point> temp;
 	int row = chosen_point.get_row();
 	int col = chosen_point.get_col();
@@ -203,15 +198,15 @@ void Fliper::checkAndUpdateDownRight(Point chosen_point, Board board) {
 		break;
 		}
 	if (row + i <= board.getNumRows() && col + i <= board.getNumCols() &&
-			board.parr[row + i][col + i].get_sign() == chosen_point.get_sign()) {
+			board.parr[row + i][col + i].get_sign() == flip_to) {
 		if (temp.size() > 0) {
 			addVecToVec(temp, this->points_to_flip);
 		}
 	}
 }
 
-void Fliper::checkAndUpdateDownLeft(Point chosen_point, Board board) {
-	char opp_sign = FindOpponentSign(chosen_point.get_sign());
+void Fliper::checkAndUpdateDownLeft(Point chosen_point, Board board, char flip_to) {
+	char opp_sign = FindOpponentSign(flip_to);
 	vector<Point> temp;
 	int row = chosen_point.get_row();
 	int col = chosen_point.get_col();
@@ -226,7 +221,7 @@ void Fliper::checkAndUpdateDownLeft(Point chosen_point, Board board) {
 		break;
 		}
 	if (row + i <= board.getNumRows() && col - i >= 0 &&
-			board.parr[row + i][col - i].get_sign() == chosen_point.get_sign()) {
+			board.parr[row + i][col - i].get_sign() == flip_to) {
 		if (temp.size() > 0) {
 			addVecToVec(temp, this->points_to_flip);
 		}
@@ -234,7 +229,7 @@ void Fliper::checkAndUpdateDownLeft(Point chosen_point, Board board) {
 }
 
 void Fliper::addVecToVec(vector<Point> from, vector<Point> &to) {
-	for (int i = 0; i < from.size(); i++) {
+	for (unsigned i = 0; i < from.size(); i++) {
 		to.push_back(from[i]);
 	}
 }

@@ -1,10 +1,5 @@
 /*
  * Player.cpp
- *
- *  Created on: Nov 3, 2017
- *      Author: Efrat Meir
- *      user name: meirefr
- *      ID: 201543253
  */
 
 #include <Board.h>
@@ -12,19 +7,22 @@
 #include <iostream>
 #include<vector>
 using namespace std;
-//
-//Player::Player() {
-//	this->sign;
-//	//this->board = Board(0,0); //not initialized
-//	this->moves_calculator = MovesCalculator();
-//}
-//
-//Player::Player(Board& board, char sign) {
-//	this->sign = sign;
-//	//this->board = board;
-//	this->moves_calculator = MovesCalculator();
-//}
-//
+
+Point Player::play_one_turn(Board& board, Fliper flip) {
+	vector<Point> options = get_possible_moves(board, this->moves_calculator, sign);
+	if (options.size() == 0) {
+		return Point(-1,-1, 'Y'); //no point
+	}
+	Point chosen_point = choose_best_move(options, flip, board);
+	play_next_step(board, chosen_point);
+	return chosen_point;
+}
+
+void Player::play_next_step(Board& board, Point chosen_step) {
+	board.setPoint(chosen_step);
+	board.getCounter().add_one(chosen_step.get_sign());
+}
+
 Player::~Player() {
 	// TODO Auto-generated destructor stub
 }

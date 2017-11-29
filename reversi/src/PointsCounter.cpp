@@ -1,10 +1,5 @@
 /*
  * PointsCounter.cpp
- *
- *  Created on: Nov 9, 2017
- *      Author: Efrat Meir
- *      user name: meirefr
- *      ID: 201543253
  */
 
 #include <PointsCounter.h>

@@ -1,8 +1,5 @@
 /*
  *  Created on: Oct 28, 2017
- *      Author: Efrat Meir
- *      user name meirefr
- *      ID 201543253
  */
 
 /**

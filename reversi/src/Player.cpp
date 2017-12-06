@@ -9,7 +9,7 @@
 using namespace std;
 
 Point Player::play_one_turn(Board& board, Fliper flip) {
-	vector<Point> options = get_possible_moves(board, this->moves_calculator, sign);
+	vector<Point> options = get_possible_moves(board, this->moves_calculator);
 	if (options.size() == 0) {
 		return Point(-1,-1, 'Y'); //no point
 	}

@@ -22,7 +22,7 @@ bool HumenPlayer::get_no_moves(){
 	return this->no_moves;
 }
 vector<Point> HumenPlayer::get_possible_moves(Board& board,
-		MovesCalculator moves_calculator, char this_player_sign) {
+		MovesCalculator moves_calculator) {
 	this->no_moves = false;
 	vector<Point> options = moves_calculator.calc_moves(board, this->sign);
 	if (options.size() == 0) {

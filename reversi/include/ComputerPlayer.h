@@ -26,7 +26,7 @@ public:
 	/**
 	 * get the sign of the rival player.
 	 */
-	char get_opp_sign(char sign);
+	char get_opp_sign();
 	/**
 	 * get the sign of the player.
 	 */
@@ -71,7 +71,7 @@ private:
 	 * @param this_player_sign - char
 	 * @return - a vector of points, all the possible moves.
 	 */
-	virtual vector<Point> get_possible_moves(Board& board, MovesCalculator moves_calculator, char this_player_sign);
+	virtual vector<Point> get_possible_moves(Board& board, MovesCalculator moves_calculator);
 	/**
 	 * choose the best move of the computer according the 'minimax' algorithm.
 	 * @param options_list - a vector of all the options

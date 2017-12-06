@@ -11,7 +11,7 @@ ComputerPlayer::ComputerPlayer() {
 	this->moves_calculator = MovesCalculator();
 	this->no_moves = false;
 	this->computer_sign = this->sign;
-	this->rival_sign = get_opp_sign(sign);
+	this->rival_sign = get_opp_sign();
 	//this->rival = new HumenPlayer('X');
 	this->rival_turn = false;
 
@@ -23,7 +23,7 @@ ComputerPlayer::ComputerPlayer(char sign) {
 	this->no_moves = false;
 	this->computer_sign = this->sign;
 	//this->rival = new HumenPlayer('X');
-	this->rival_sign = get_opp_sign(sign);
+	this->rival_sign = get_opp_sign();
 	this->rival_turn = false;
 
 }
@@ -36,7 +36,7 @@ char ComputerPlayer::get_sign() {
 void ComputerPlayer::play_next_step(Board& board, Point chosen_step) {
 	board.setPoint(chosen_step);
 }
-char ComputerPlayer::get_opp_sign(char sign){
+char ComputerPlayer::get_opp_sign(){
 	char opp_sign;
 		if (this->sign == 'X') {
 			opp_sign = 'O';
@@ -50,7 +50,7 @@ ComputerPlayer::~ComputerPlayer() {
 	// TODO Auto-generated destructor stub
 }
 vector<Point> ComputerPlayer::get_possible_moves(Board& board,
-	MovesCalculator moves_calculator, char this_player_sign) {
+	MovesCalculator moves_calculator) {
 	this->no_moves = false;
 	vector<Point> options = moves_calculator.calc_moves(board, sign);
 	if (options.size() == 0 && !rival_turn) {
@@ -90,7 +90,7 @@ int ComputerPlayer::rate_move(Point point, Fliper fliper, Board& board){
 	rival_turn = true;
 	this->sign = this->rival_sign;
 	//check the option moves of the rival player (the human player)
-	vector<Point> rival_options = get_possible_moves(temp_b, this->moves_calculator, this->rival_sign);
+	vector<Point> rival_options = get_possible_moves(temp_b, this->moves_calculator);
 	vector<Point>::iterator it;
 	//the lowest score the rival(human) can get is 64
 	int best_score = -64;

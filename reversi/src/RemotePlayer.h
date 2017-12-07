@@ -19,14 +19,17 @@ public:
 	bool get_no_moves();
 	char get_sign();
 	Connecter& getConnecter();
+	void setOpponentHasNoMoves(bool opp_has_no_moves);
 
 private:
 	/*
 	 * true if the player hsa no more moves, false otherwise.
 	 */
-	Connecter connecter;
 	bool has_no_moves;
 	char sign;
+	Point opponent_last_move;
+	bool opponent_has_no_move;
+	Connecter connecter;
 	/**
 	 * puts the chosen point on the board.
 	 * (updating the counter will be from fliper)

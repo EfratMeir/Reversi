@@ -20,6 +20,8 @@ Server::Server(int port): port(port), serverSocket(0) {
 	cout << "Server" << endl;
 }
 
+// AFTER KEREN CHANGE TO HANDLE TO CLIENTS:
+
 void Server::start() {
 	//create a socket point
 	serverSocket = socket(AF_INET, SOCK_STREAM, 0);
@@ -49,29 +51,83 @@ void Server::start() {
 
 		//accept a new client connection:
 		int clientSocket = accept(serverSocket, (struct sockaddr *)&clientAddress, &clientAddressLen);
-
 		cout << "Client connected" << endl;
 		if (clientSocket == -1)
 			throw "Error on accept";
-
-		handleClient(clientSocket);
-
+		int clientSocket2 = accept(serverSocket, (struct sockaddr *)&clientAddress, &clientAddressLen);
+		cout << "Client2 connected" << endl;
+		if (clientSocket == -1)
+			throw "Error on accept";
+		handleClient(clientSocket, clientSocket2);
 		//close communication with the client:
 		close(clientSocket);
+		close(clientSocket2);
 	}
 
 }
+
+//ROI'S CODE:
+
+//void Server::start() {
+//	//create a socket point
+//	serverSocket = socket(AF_INET, SOCK_STREAM, 0);
+//	if (serverSocket == -1) {
+//		throw "Error opening socket";
+//	}
+//
+//	//assign a local address to the socket:
+//	struct sockaddr_in serverAddress;
+//	bzero((void *)&serverAddress, sizeof(serverAddress));
+//	serverAddress.sin_family = AF_INET;
+//	serverAddress.sin_addr.s_addr = INADDR_ANY;
+//	serverAddress.sin_port = htons(port);
+//	if (bind (serverSocket, (struct sockaddr*)&serverAddress, sizeof(serverAddress)) == -1) {
+//		throw "Error on binding";
+//	}
+//
+//	//start listening to incoming connections:
+//	listen(serverSocket, MAX_CONNECTED_CLIENTS);
+//
+//	//define the client socket's structures:
+//	struct sockaddr_in clientAddress;
+//	socklen_t clientAddressLen;
+//
+//	while (true)  {
+//		cout << "Waiting for client connections..." << endl;
+//
+//		//accept a new client connection:
+//		int clientSocket = accept(serverSocket, (struct sockaddr *)&clientAddress, &clientAddressLen);
+//
+//		cout << "Client connected" << endl;
+//		if (clientSocket == -1)
+//			throw "Error on accept";
+//
+//		handleClient(clientSocket);
+//
+//		//close communication with the client:
+//		close(clientSocket);
+//	}
+//
+//}
 
 void Server::stop() {
 	close(serverSocket);
 }
 
+//KEREN CHANGED TO HANDLE 2 CLIENTS:
 
-void Server::handleClient(int clientSocket) {
+void Server::handleClient(int clientSocket1, int clientSocket2) {
 	int arg1, arg2;
 	char op;
+	//write to each client 1 or 2 Respectively
+
+	int first_player = 1;
+	int second_player = 2;
+//	writeColorNum(first_player, second_player, clientSocket1, clientSocket2);
+
 	//CHANGE TO HANDLE ACORDING TO THE GAME
-	int n = read(clientSocket, &arg1, sizeof(arg1));
+	int n = read(clientSocket1, &arg1, sizeof(arg1));
+
 	if (n == -1) {
 	cout << "Error reading arg1" << endl;
 	return;
@@ -80,26 +136,65 @@ void Server::handleClient(int clientSocket) {
 		cout << "Client disconnected" << endl;
 		return;
 	}
-	n = read(clientSocket, &op, sizeof(op));
+	n = read(clientSocket1, &op, sizeof(op));
 	if (n == -1) {
 		cout << "Error reading operator" << endl;
 		return;
 	}
-	n = read(clientSocket, &arg2, sizeof(arg2));
+	n = read(clientSocket1, &arg2, sizeof(arg2));
 	if (n == -1) {
 		cout << "Error reading arg2" << endl;
 		return;
 	}
 	cout << "Got exercise: " << arg1 << op << arg2 << endl;
-	int result = calc(arg1, op, arg2);
+//	int result = calc(arg1, op, arg2);
 
 	// Write the result back to the client
-	n = write(clientSocket, &result, sizeof(result));
-	if (n == -1) {
-	cout << "Error writing to socket" << endl;
-	return;
-	}
+//	n = write(clientSocket1, &result, sizeof(result));
+//	if (n == -1) {
+//	cout << "Error writing to socket" << endl;
+//	return;
+//	}
 }
+
+
+
+//ROEI'S CODE
+
+
+//void Server::handleClient(int clientSocket) {
+//	int arg1, arg2;
+//	char op;
+//	//CHANGE TO HANDLE ACORDING TO THE GAME
+//	int n = read(clientSocket, &arg1, sizeof(arg1));
+//	if (n == -1) {
+//	cout << "Error reading arg1" << endl;
+//	return;
+//	}
+//	if (n == 0) {
+//		cout << "Client disconnected" << endl;
+//		return;
+//	}
+//	n = read(clientSocket, &op, sizeof(op));
+//	if (n == -1) {
+//		cout << "Error reading operator" << endl;
+//		return;
+//	}
+//	n = read(clientSocket, &arg2, sizeof(arg2));
+//	if (n == -1) {
+//		cout << "Error reading arg2" << endl;
+//		return;
+//	}
+//	cout << "Got exercise: " << arg1 << op << arg2 << endl;
+//	int result = calc(arg1, op, arg2);
+//
+//	// Write the result back to the client
+//	n = write(clientSocket, &result, sizeof(result));
+//	if (n == -1) {
+//	cout << "Error writing to socket" << endl;
+//	return;
+//	}
+//}
 
 int Server::calc(int arg1, const char op, int arg2) const {
 

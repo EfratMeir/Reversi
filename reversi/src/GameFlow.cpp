@@ -29,6 +29,7 @@ void GameFlow::initialize() {
 	}
 	if (chosen_player == 'r' || chosen_player == 'R'){
 		players[1] = new RemotePlayer('O'); // I HAVE NOT DELETED YET!!!! DO NOT FORGET
+		is_remote_game = true;
 	}
 	else{
 	//chosen player is a human player

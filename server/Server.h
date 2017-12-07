@@ -19,7 +19,7 @@ private:
 	int serverSocket; //the sockets file descriptor
 
 	// Handle requests from a specific client
-	void handleClient(int clientSocket);
+	void handleClient(int clientSocket, int clientSocket2);
 	int calc(int arg1, const char op, int arg2) const;
 };
 

@@ -29,6 +29,7 @@ public:
 	*/
 	virtual Point play_one_turn(Board& board, Fliper fliper);
 	virtual char get_sign() = 0;
+	virtual void set_sign(char sign) = 0;
 	virtual bool get_no_moves() = 0;
 
 	/**
@@ -53,7 +54,7 @@ private:
 	 * @return - a vector of points, all the possible moves.
 	 */
 	virtual vector<Point> get_possible_moves(Board& board,
-			MovesCalculator moves_calculator, char this_player_sign) = 0;
+			MovesCalculator moves_calculator) = 0;
 
 	/**
 	* choose the best move out of the possible moves

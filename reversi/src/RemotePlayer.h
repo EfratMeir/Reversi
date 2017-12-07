@@ -1,63 +1,34 @@
 /*
- * ComputerPlayer.h
- *  Created on: Nov 3, 2017
+ * RemotePlayer.h
+ *
+ *  Created on: Dec 6, 2017
+ *      Author: efrat
  */
 
-#ifndef COMPUTERPLAYER_H_
-#define COMPUTERPLAYER_H_
+#ifndef SRC_REMOTEPLAYER_H_
+#define SRC_REMOTEPLAYER_H_
+
 #include "Player.h"
-#include <iostream>
+#include "Connecter.h"
 
-
-class ComputerPlayer: public Player {
+class RemotePlayer: public Player{
 public:
-	/**
-	* default constructor
-	*/
-	ComputerPlayer();
-	/**
-	 * constructor
-	 */
-	ComputerPlayer(char sign);
-	/**
-	 * get the bool 'no_moves' - true if the player have no moves.
-	 */
+	RemotePlayer();
+	RemotePlayer(char sign);
+	virtual ~RemotePlayer();
 	bool get_no_moves();
-	/**
-	 * get the sign of the rival player.
-	 */
-	char get_opp_sign();
-	/**
-	 * get the sign of the player.
-	 */
-	virtual char get_sign();
 	virtual void set_sign(char sign);
-
-	/**
-	* calculates the possible moves.
-	*/
-	MovesCalculator moves_calculator;
-	/**
-	 * rate the possible moves of the rival.
-	 * @param point
-	 * @param fliper
-	 * @param board
-	 * @return the best score the rival can get
-	 */
-	int rate_move(Point point, Fliper fliper, Board& board);
-	/**
-	 * destructor
-	 */
-	~ComputerPlayer();
-
-
+	void set_sign();
+	char get_sign();
+	Connecter& getConnecter();
 
 private:
-	bool no_moves;
+	/*
+	 * true if the player hsa no more moves, false otherwise.
+	 */
+	Connecter connecter;
+	bool has_no_moves;
 	char sign;
-	char computer_sign;
-	char rival_sign;
-	bool rival_turn;
 	/**
 	 * puts the chosen point on the board.
 	 * (updating the counter will be from fliper)
@@ -79,6 +50,8 @@ private:
 	 * @return - the chosen point
 	 */
 	virtual Point choose_best_move(vector<Point> options_list, Fliper fliper, Board& board);
+	int initializeConnecter();
+
 };
 
-#endif /* COMPUTERPLAYER_H_ */
+#endif /* SRC_REMOTEPLAYER_H_ */

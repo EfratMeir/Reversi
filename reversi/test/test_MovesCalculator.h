@@ -112,7 +112,6 @@ TEST_F(test_MovesCalculator, testDownRightBoarder) {
 TEST_F(test_MovesCalculator, testDownLeftBoarder) {
 	moves.options_list.clear();
 	Board b = Board(4,4);
-
 	b.setPoint(Point(3 - 1, 2 - 1, 'X'));
 	b.setPoint(Point(4 - 1, 2 - 1, 'O'));
 	b.setPoint(Point(4 - 1, 1 - 1, 'O'));

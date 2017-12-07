@@ -31,6 +31,7 @@ public:
 	 * get the sign of the player.
 	 */
 	virtual char get_sign();
+	virtual void set_sign(char sign);
 	/**
 	 * destructor
 	 */
@@ -52,7 +53,7 @@ private:
 	 * @param this_player_sign - char
 	 * @return - a vector of points, all the possible moves.
 	 */
-	virtual vector<Point> get_possible_moves(Board& board, MovesCalculator moves_calculator, char this_player_sign);
+	virtual vector<Point> get_possible_moves(Board& board, MovesCalculator moves_calculator);
 	/**
 	 * lets the human player choose the best move out of the possible moves
 	 * @param options_list - a vector of all the options

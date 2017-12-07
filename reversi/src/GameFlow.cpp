@@ -3,7 +3,7 @@
  */
 
 #include <GameFlow.h>
-
+#include "RemotePlayer.h"
 #define SIZE 8
 GameFlow::GameFlow() {
 
@@ -20,24 +20,47 @@ void GameFlow::initialize() {
 	b.setPoint(Point(4 - 1, 5 - 1, b.black_player));
 	b.setPoint(Point(5 - 1, 4 - 1, b.black_player));
 
+	bool is_remote_game = false;
 	Player* players[2];
-	players[0] = new HumenPlayer('X');
 	char chosen_player = choose_players();
+	if (chosen_player == 'r' || chosen_player == 'R'){
+		Player* remote_player = new RemotePlayer(); // I HAVE NOT DELETED YET!!!! DO NOT FORGET
+		char remote_sign = remote_player->get_sign();
+		if (remote_sign == 'X'){
+			players[0] = remote_player;
+			players[1] = new HumenPlayer('O');
+		}
+		else{
+			players[0] =  new HumenPlayer('X');
+			players[1] = remote_player;
+		}
+	}
+
+
 	if (chosen_player == 'c' || chosen_player == 'C'){
+		players[0] = new HumenPlayer('X');
 		players[1] = new ComputerPlayer('O');
 	}
+
+
 	else{
-	//chosen player is a human player
-	players[1] = new HumenPlayer('O');
+		//chosen player is a human player
+		players[0] = new HumenPlayer('X');
+		players[1] = new HumenPlayer('O');
 	}
-	this->turn_base = TurnBase(b, players);
+	this->turn_base = TurnBase(b, players, is_remote_game);
 
 }
 char GameFlow::choose_players(){
-	cout << "to play against the computer type 'c'" << endl << "to play against human player type 'h'" << endl;
+	cout << "Welcome to reversi!" << endl << "choose an opponent type: " << endl << endl;
+
+	cout << "to play against the computer type 'c'" << endl <<
+			"to play against human player type 'h'" << endl <<
+			"to play against a remote player type 'r'" << endl;
 	char chosen;
 	cin >> chosen;
-	if (!(chosen == 'c' || chosen == 'C' || chosen == 'h' || chosen == 'H')){
+	if (!(chosen == 'c' || chosen == 'C' || chosen == 'h'
+			|| chosen == 'H' || chosen == 'r' || chosen == 'R')){
 		cout << "you have entered an invalid char." <<endl;
 		chosen = choose_players();
 		return chosen;

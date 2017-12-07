@@ -20,7 +20,7 @@ bool HumenPlayer::get_no_moves(){
 	return this->no_moves;
 }
 vector<Point> HumenPlayer::get_possible_moves(Board& board,
-		MovesCalculator moves_calculator, char this_player_sign) {
+		MovesCalculator moves_calculator) {
 	this->no_moves = false;
 	vector<Point> options = moves_calculator.calc_moves(board, this->sign);
 	if (options.size() == 0) {
@@ -81,7 +81,9 @@ Point HumenPlayer::choose_best_move(vector<Point> options_list, Fliper flip, Boa
 char HumenPlayer::get_sign() {
 	return this->sign;
 }
-
+void HumenPlayer::set_sign(char sign){
+	this->sign = sign;
+}
 void HumenPlayer::play_next_step(Board& board, Point chosen_step) {
 	board.setPoint(chosen_step);
 }

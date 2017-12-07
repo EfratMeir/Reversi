@@ -33,6 +33,9 @@ bool ComputerPlayer::get_no_moves(){
 char ComputerPlayer::get_sign() {
 	return this->sign;
 }
+void ComputerPlayer::set_sign(char sign){
+	this->sign = sign;
+}
 void ComputerPlayer::play_next_step(Board& board, Point chosen_step) {
 	board.setPoint(chosen_step);
 }
@@ -50,7 +53,7 @@ ComputerPlayer::~ComputerPlayer() {
 
 }
 vector<Point> ComputerPlayer::get_possible_moves(Board& board,
-	MovesCalculator moves_calculator, char this_player_sign) {
+	MovesCalculator moves_calculator) {
 	this->no_moves = false;
 	vector<Point> options = moves_calculator.calc_moves(board, sign);
 	if (options.size() == 0 && !rival_turn) {
@@ -90,7 +93,7 @@ int ComputerPlayer::rate_move(Point point, Fliper fliper, Board& board){
 	rival_turn = true;
 	this->sign = this->rival_sign;
 	//check the option moves of the rival player (the human player)
-	vector<Point> rival_options = get_possible_moves(temp_b, this->moves_calculator, this->rival_sign);
+	vector<Point> rival_options = get_possible_moves(temp_b, this->moves_calculator);
 	vector<Point>::iterator it;
 	//the lowest score the rival(human) can get is 64
 	int best_score = -64;

@@ -10,7 +10,7 @@
 using namespace std;
 
 MovesCalculator::MovesCalculator() {
-//	int i = 0;
+
 }
 /**
  * //check if the move is inside the list of the possible moves.
@@ -208,7 +208,6 @@ void MovesCalculator::checkUpLeftDiagonal(Board board, Point current_point,
 				if (!allreadyInList(row - i, col - i)){
 					options.push_back(board.parr[row - i][col - i]);
 				}
-
 			}
 		}
 	}
@@ -271,6 +270,7 @@ void MovesCalculator::checkDownLeftDiagonal(Board board, Point current_point,
 }
 
 MovesCalculator::~MovesCalculator() {
+
 }
 
 

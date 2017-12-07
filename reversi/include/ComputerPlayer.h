@@ -26,7 +26,7 @@ public:
 	/**
 	 * get the sign of the rival player.
 	 */
-	char get_opp_sign(char sign);
+	char get_opp_sign();
 	/**
 	 * get the sign of the player.
 	 */

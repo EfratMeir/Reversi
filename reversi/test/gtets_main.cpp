@@ -7,6 +7,9 @@
 
 
 #include "gtest/gtest.h"
+#include "test_MovesCalculator.h"
+#include "test_Fliper.h"
+
 
 GTEST_API_ int main(int argc, char** argv) {
 	testing::InitGoogleTest(&argc, argv);

@@ -1,3 +1,4 @@
+
 /*
  * ComputerPlayer.cpp
  */
@@ -10,7 +11,7 @@ ComputerPlayer::ComputerPlayer() {
 	this->moves_calculator = MovesCalculator();
 	this->no_moves = false;
 	this->computer_sign = this->sign;
-	this->rival_sign = get_opp_sign(sign);
+	this->rival_sign = get_opp_sign();
 	//this->rival = new HumenPlayer('X');
 	this->rival_turn = false;
 
@@ -22,7 +23,7 @@ ComputerPlayer::ComputerPlayer(char sign) {
 	this->no_moves = false;
 	this->computer_sign = this->sign;
 	//this->rival = new HumenPlayer('X');
-	this->rival_sign = get_opp_sign(sign);
+	this->rival_sign = get_opp_sign();
 	this->rival_turn = false;
 
 }
@@ -35,7 +36,7 @@ char ComputerPlayer::get_sign() {
 void ComputerPlayer::play_next_step(Board& board, Point chosen_step) {
 	board.setPoint(chosen_step);
 }
-char ComputerPlayer::get_opp_sign(char sign){
+char ComputerPlayer::get_opp_sign(){
 	char opp_sign;
 		if (this->sign == 'X') {
 			opp_sign = 'O';
@@ -46,7 +47,7 @@ char ComputerPlayer::get_opp_sign(char sign){
 		return opp_sign;
 }
 ComputerPlayer::~ComputerPlayer() {
-	// TODO Auto-generated destructor stub
+
 }
 vector<Point> ComputerPlayer::get_possible_moves(Board& board,
 	MovesCalculator moves_calculator, char this_player_sign) {

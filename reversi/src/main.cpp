@@ -1,11 +1,9 @@
 /*
  *  Created on: Oct 28, 2017
+ *
+ *  REVERSI MAIN
  */
 
-/**
- * IMPORTANT NOTICE: i planed the UML and the game structure together with Keren Levy, as we will be partners in the next exercises.
- * 					 the implementation of this files was made by my self.
- */
 
 #include <Board.h>
 #include <GameFlow.h>

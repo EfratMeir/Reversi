@@ -14,13 +14,11 @@ void GameFlow::initialize() {
 	Board b = Board(8,8);
 
 
-	//indexes are -1 becauses the array start from 0
-	b.parr[4 - 1][4 - 1].set_sign(b.white_player);
-	b.parr[5 - 1][5 - 1].set_sign(b.white_player);
-	b.parr[4 - 1][5 - 1].set_sign(b.black_player);
-	b.parr[5 - 1][4 - 1].set_sign(b.black_player);
-	b.getCounter().add(2, 'X');
-	b.getCounter().add(2, 'O');
+//	indexes are -1 because the array start from 0
+	b.setPoint(Point(4 - 1, 4 - 1, b.white_player));
+	b.setPoint(Point(5 - 1, 5 - 1, b.white_player));
+	b.setPoint(Point(4 - 1, 5 - 1, b.black_player));
+	b.setPoint(Point(5 - 1, 4 - 1, b.black_player));
 
 	Player* players[2];
 	players[0] = new HumenPlayer('X');
@@ -28,7 +26,8 @@ void GameFlow::initialize() {
 	if (chosen_player == 'c' || chosen_player == 'C'){
 		players[1] = new ComputerPlayer('O');
 	}
-	else{ //if chosen player is human player
+	else{
+	//chosen player is a human player
 	players[1] = new HumenPlayer('O');
 	}
 	this->turn_base = TurnBase(b, players);
@@ -39,7 +38,7 @@ char GameFlow::choose_players(){
 	char chosen;
 	cin >> chosen;
 	if (!(chosen == 'c' || chosen == 'C' || chosen == 'h' || chosen == 'H')){
-		cout << "you entered an invalid char." <<endl;
+		cout << "you have entered an invalid char." <<endl;
 		chosen = choose_players();
 		return chosen;
 	}

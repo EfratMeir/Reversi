@@ -33,6 +33,9 @@ bool ComputerPlayer::get_no_moves(){
 char ComputerPlayer::get_sign() {
 	return this->sign;
 }
+void ComputerPlayer::set_sign(char sign){
+	this->sign = sign;
+}
 void ComputerPlayer::play_next_step(Board& board, Point chosen_step) {
 	board.setPoint(chosen_step);
 }
@@ -47,7 +50,7 @@ char ComputerPlayer::get_opp_sign(){
 		return opp_sign;
 }
 ComputerPlayer::~ComputerPlayer() {
-	// TODO Auto-generated destructor stub
+
 }
 vector<Point> ComputerPlayer::get_possible_moves(Board& board,
 	MovesCalculator moves_calculator) {

@@ -47,7 +47,7 @@ Point HumenPlayer::choose_best_move(vector<Point> options_list, Fliper flip, Boa
 	while (true) {
 	x = 0;
 	y = 0;
-	cin >> dummy >> x >> dummy >> y >> dummy; //  (x,y)
+	cin >> x >> dummy >> y; //  x,y
 	chosen_step = Point(x - 1, y - 1, this->sign);
 	if (cin.fail()) {
 		cin.clear();

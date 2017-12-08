@@ -62,7 +62,6 @@ private:
 	virtual Point choose_best_move(vector<Point> options_list, Fliper flip, Board& board);
 
 
-
 	/**
 	 * checks if a point chosen is a valid option
 	 * @ p - point to check

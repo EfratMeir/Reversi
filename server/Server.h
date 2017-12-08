@@ -20,9 +20,9 @@ private:
 
 	// Handle requests from a specific client
 	void handleClient(int clientSocket, int clientSocket2);
+
 	void writeColorNum(int first_player, int second_player,
 			int clientSocket1, int clientSocket2 );
-//	int calc(int arg1, const char op, int arg2) const;
 };
 
 #endif /* SERVER_H_ */

@@ -21,7 +21,7 @@ using namespace std;
 class Player {
 public:
 
-	 char sign;
+	char sign;
 	MovesCalculator moves_calculator;
 	/**
 	* board - an initialized board reference
@@ -31,6 +31,8 @@ public:
 	virtual char get_sign() = 0;
 	virtual void set_sign(char sign) = 0;
 	virtual bool get_no_moves() = 0;
+	Point getOpponentLastMove();
+	void setOpponentLastMove(Point opponent_last_move);
 
 	/**
 		* puts the chosen point on the board.
@@ -62,6 +64,7 @@ private:
 	* @return - the chosen point
 	*/
 	virtual Point choose_best_move(vector<Point> options_list, Fliper flip, Board& board) = 0;
+	Point opponent_last_move;
 
 
 

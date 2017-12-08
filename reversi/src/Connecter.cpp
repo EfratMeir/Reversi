@@ -113,9 +113,14 @@ int Connecter::sendPoint(Point p) {
 
 
 int Connecter::sendNoMoves(bool player_has_no_moves) {
+//	char* no_move_msg = "NoMove";
+//
+//	if (player_has_no_moves == true) {
+//		no_move_msg = "NoMove";
+//	}
+//int n = write(clientSocket, &no_move_msg, sizeof(no_move_msg));
 
 	int n = write(clientSocket, &player_has_no_moves, sizeof(player_has_no_moves));
-
 	if (n == -1) {
 		throw "Error writing player_has_no_moves to socket";
 	}

@@ -13,6 +13,7 @@
 #include <iostream>
 #include <stdio.h>
 
+
 using namespace std;
 #define MAX_CONNECTED_CLIENTS 2
 
@@ -86,16 +87,9 @@ void Server::stop() {
 
 void Server::handleClient(int clientSocket1, int clientSocket2) {
 	int arg1, arg2;
-	char op;
-	//write to each client 1 or 2 Respectively
-
-	int first_player = 1;
-	int second_player = 2;
-	writeColorNum(first_player, second_player, clientSocket1, clientSocket2);
-
-	//CHANGE TO HANDLE ACORDING TO THE GAME
+	char comma;
+	//read the first move from the first player and write to the second
 	int n = read(clientSocket1, &arg1, sizeof(arg1));
-
 	if (n == -1) {
 	cout << "Error reading arg1" << endl;
 	return;
@@ -104,7 +98,7 @@ void Server::handleClient(int clientSocket1, int clientSocket2) {
 		cout << "Client disconnected" << endl;
 		return;
 	}
-	n = read(clientSocket1, &op, sizeof(op));
+	n = read(clientSocket1, &comma, sizeof(comma));
 	if (n == -1) {
 		cout << "Error reading operator" << endl;
 		return;
@@ -114,40 +108,22 @@ void Server::handleClient(int clientSocket1, int clientSocket2) {
 		cout << "Error reading arg2" << endl;
 		return;
 	}
-	cout << "Got exercise: " << arg1 << op << arg2 << endl;
-//	int result = calc(arg1, op, arg2);
+	n = write(clientSocket2, &arg1, sizeof(arg1));
+	if (n == -1) {
+		cout << "Error writing arg1" << endl;
+		return;
+	}
+	n = write(clientSocket2, &comma, sizeof(comma));
+	if (n == -1) {
+		cout << "Error writing " << endl;
+		return;
+	}
+	n = write(clientSocket2, &arg2, sizeof(arg2));
+	if (n == -1) {
+		cout << "Error reading arg2" << endl;
+		return;
+	}
+	return;
+}
 
-	// Write the result back to the client
-//	n = write(clientSocket1, &result, sizeof(result));
-//	if (n == -1) {
-//	cout << "Error writing to socket" << endl;
-//	return;
-//	}
-}
-void Server:: writeColorNum(int first_player, int second_player,
-		int clientSocket1, int clientSocket2 ){
-	int n = write(clientSocket1,&first_player, sizeof(first_player));
-		if (n == -1)
-			cout << "Error writing to socket" << endl;
-		n = write(clientSocket2, &second_player, sizeof(second_player));
-		if (n == -1)
-			cout << "Error writing to socket" << endl;
-}
-//int Server::calc(int arg1, const char op, int arg2) const {
-//
-//	switch (op) {
-//	case '+':
-//	return arg1 + arg2;
-//	case '-':
-//	return arg1 - arg2;
-//	case '*':
-//	return arg1 * arg2;
-//	case '/':
-//	return arg1 / arg2;
-//	default:
-//	cout << "Invalid operator" << endl;
-//	return 0;
-//	}
-//
-//}
 

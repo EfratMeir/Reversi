@@ -29,10 +29,12 @@ void GameFlow::initialize() {
 		if (remote_sign == 'X'){
 			players[0] = remote_player;
 			players[1] = new HumenPlayer('O');
+			is_remote_game = true;
 		}
 		else{
 			players[0] =  new HumenPlayer('X');
 			players[1] = remote_player;
+			is_remote_game = true;
 		}
 	}
 
@@ -41,7 +43,10 @@ void GameFlow::initialize() {
 		players[0] = new HumenPlayer('X');
 		players[1] = new ComputerPlayer('O');
 	}
-
+//	if (chosen_player == 'r' || chosen_player == 'R'){
+//		players[1] = new RemotePlayer('O'); // I HAVE NOT DELETED YET!!!! DO NOT FORGET
+//		is_remote_game = true;
+//	}
 
 	else if (chosen_player == 'h' || chosen_player == 'H'){
 		//chosen player is a human player

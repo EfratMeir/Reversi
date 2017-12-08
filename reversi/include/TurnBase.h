@@ -28,7 +28,7 @@ public:
 	 * constructor
 	 */
 //	TurnBase(Board& board, vector<HumenPlayer> players);
-	TurnBase(Board& board, Player** players, bool remote_game);
+	TurnBase(Board& board, Player** players, bool is_remote_game);
 
 	/**
 	 * runs the game, connecting between players, board and fliper

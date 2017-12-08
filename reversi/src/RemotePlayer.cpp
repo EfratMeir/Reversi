@@ -33,6 +33,7 @@ void RemotePlayer::play_next_step(Board& board, Point chosen_step) {
 
 vector<Point> RemotePlayer::get_possible_moves(Board& board,
 		MovesCalculator moves_calculator) {
+	connecter.sendMsg(this->opponent_last_move, opponent_has_no_move);
 	vector<Point> chosen_move;
 	chosen_move.push_back(connecter.recivePoint());
 	this->has_no_moves = connecter.reciveNoMoves();
@@ -46,6 +47,10 @@ Point RemotePlayer::choose_best_move(vector<Point> options_list, Fliper fliper,
 
 Connecter& RemotePlayer::getConnecter() {
 	return this->connecter;
+}
+
+void RemotePlayer::setOpponentHasNoMoves(bool opp_has_no_moves) {
+	this->opponent_has_no_move = opp_has_no_moves;
 }
 
 int RemotePlayer::initializeConnecter() {
@@ -78,6 +83,7 @@ char RemotePlayer::get_sign() {
 bool RemotePlayer::get_no_moves() {
 	return this->has_no_moves;
 }
+
 
 RemotePlayer::~RemotePlayer() {
 	// TODO Auto-generated destructor stub

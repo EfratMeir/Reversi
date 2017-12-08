@@ -27,7 +27,6 @@ void RemotePlayer::play_next_step(Board& board, Point chosen_step) {
 
 vector<Point> RemotePlayer::get_possible_moves(Board& board,
 		MovesCalculator moves_calculator) {
-	//put it here
 	connecter.sendMsg(this->opponent_last_move, opponent_has_no_move);
 	vector<Point> chosen_move;
 	chosen_move.push_back(connecter.recivePoint());

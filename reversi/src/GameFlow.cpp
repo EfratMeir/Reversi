@@ -43,7 +43,7 @@ void GameFlow::initialize() {
 	}
 
 
-	else{
+	else if (chosen_player == 'h' || chosen_player == 'H'){
 		//chosen player is a human player
 		players[0] = new HumenPlayer('X');
 		players[1] = new HumenPlayer('O');

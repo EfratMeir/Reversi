@@ -42,7 +42,6 @@ void TurnBase::play_game() {
 		i = i > 0 ? 0 : 1;
 	}
 }
-
 TurnBase::~TurnBase() {
 
 }

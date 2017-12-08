@@ -22,13 +22,14 @@ Connecter::Connecter() {
 Connecter::Connecter(const char *serverIP, int serverPort):
 		serverIP(serverIP), serverPort(serverPort), clientSocket(0) {
 	cout << "Client" << endl;
+
 }
 
 void Connecter::connectToServer() {
 
 	//create a socket point:
-	clientSocket = socket(AF_INET, SOCK_STREAM, 0);
-	if (clientSocket == -1) {
+	this->clientSocket = socket(AF_INET, SOCK_STREAM, 0);
+	if (this->clientSocket == -1) {
 		throw "Error opening socket";
 	}
 
@@ -64,6 +65,9 @@ void Connecter::connectToServer() {
 		throw "Error connecting to server";
 	}
 	cout << "Connected to server" << endl;
+
+
+
 }
 
 
@@ -118,9 +122,17 @@ int Connecter::sendNoMoves(bool player_has_no_moves) {
 	return 0;
 }
 int Connecter::reciveColorPlayer(){
+
 	//read the number that say if you are black player or white player.
 	int color;
 	int n = read(clientSocket, &color, sizeof(color));
+//	if (color == -3){
+//		cout << "waiting for second player" << endl;
+//		while (color == -3){
+//			int n = read(clientSocket, &color, sizeof(color));
+//		}
+//	}
+
 	if (n == -1) {
 		throw "Error reading point from socket";
 	}

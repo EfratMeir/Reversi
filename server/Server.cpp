@@ -14,7 +14,7 @@
 #include <stdio.h>
 
 using namespace std;
-#define MAX_CONNECTED_CLIENTS 10
+#define MAX_CONNECTED_CLIENTS 2
 
 Server::Server(int port): port(port), serverSocket(0) {
 	cout << "Server" << endl;
@@ -49,13 +49,28 @@ void Server::start() {
 
 		//accept a new client connection:
 		int clientSocket = accept(serverSocket, (struct sockaddr *)&clientAddress, &clientAddressLen);
-		cout << "Client connected" << endl;
 		if (clientSocket == -1)
 			throw "Error on accept";
-		int clientSocket2 = accept(serverSocket, (struct sockaddr *)&clientAddress, &clientAddressLen);
+		cout << "Client connected" << endl;
+		//tell the client he is first
+		int  first = 1, second = 2;
+		int clientSocket2 = 0;
+
+		while (clientSocket2 == 0){
+			//tell the first player that he is first
+			int n = write(clientSocket, &first, sizeof(first));
+			if (n == -1)
+				cout << "Error writing to socket" << endl;
+			cout << "Waiting for second player connection" << endl;
+			//wait for the second player
+			clientSocket2 = accept(serverSocket, (struct sockaddr *)&clientAddress, &clientAddressLen);
+		}
 		cout << "Client2 connected" << endl;
 		if (clientSocket == -1)
 			throw "Error on accept";
+		int n = write(clientSocket2, &second, sizeof(second));
+			if (n == -1)
+				cout << "Error writing to socket" << endl;
 		handleClient(clientSocket, clientSocket2);
 		//close communication with the client:
 		close(clientSocket);

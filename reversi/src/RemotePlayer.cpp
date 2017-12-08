@@ -8,19 +8,22 @@
 #include <stdlib.h>
 
 RemotePlayer::RemotePlayer() {
+	this->connecter = Connecter("127.0.0.1", 8000);
+	initializeConnecter();
 	this->sign = 'Y'; //not initialize
 	set_sign(); //Remote - not initialized
 	this->moves_calculator = MovesCalculator();
 	this->has_no_moves = false;
-	initializeConnecter();
+
 }
 
 RemotePlayer::RemotePlayer(char sign) {
+	initializeConnecter();
 	this->sign = 'Y'; //not initialize
 	set_sign();
 	this->moves_calculator = MovesCalculator();
 	this->has_no_moves = false;
-	initializeConnecter();
+
 }
 
 
@@ -46,10 +49,10 @@ Connecter& RemotePlayer::getConnecter() {
 }
 
 int RemotePlayer::initializeConnecter() {
-	Connecter connecter("127.0.0.1", 8000);
-	this->connecter = connecter;
+
 	try {
 		connecter.connectToServer();
+
 	} catch (const char *msg) {
 		cout << "Failed to connect to server. Reason: " << msg << endl;
 		exit(-1);
@@ -60,7 +63,7 @@ void RemotePlayer::set_sign(char sign){
 
 }
 void RemotePlayer::set_sign(){
-	int color_player = this->connecter.reciveColorPlayer();
+	int color_player = this->getConnecter().reciveColorPlayer();
 	if(color_player == 1){
 		this->sign = 'O';
 	}

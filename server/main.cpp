@@ -19,5 +19,4 @@ int main() {
 		cout << "cannot start server. Reason: " << msg << endl;
 		exit(-1);
 	}
-
 }

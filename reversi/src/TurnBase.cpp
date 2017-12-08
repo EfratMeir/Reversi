@@ -8,6 +8,7 @@
 
 TurnBase::TurnBase() {
 	this->fliper = Fliper();
+	this->remote_game = false;
 }
 TurnBase::TurnBase(Board& board, Player** players, bool is_reomte_game) {
 	this->board = board;
@@ -25,14 +26,13 @@ void TurnBase::play_game() {
 	cout << "Hello  " << this->players[0]->get_sign() << endl << "Hello  " << players[1]->get_sign() << endl;
 	this->board.pPrint();
 
-	while(!board.isFull() && (!(players[0]->get_no_moves() && players[1]->get_no_moves()))) {
 
+	while(!board.isFull() && (!(players[0]->get_no_moves() && players[1]->get_no_moves()))) {
 		Point chosen_point = players[i]->play_one_turn(board, fliper); //needed any changes here?? after adding remote...
 		if (remote_game) {
 			//update the other player about what the human played:
 			players[j]->setOpponentLastMove(chosen_point);
 		}
-
 		if (board.getCounter().getBlackCount() == 0 || board.getCounter().getWhiteCount() == 0){
 			return;
 		}

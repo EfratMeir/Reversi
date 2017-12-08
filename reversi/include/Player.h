@@ -29,6 +29,7 @@ public:
 	*/
 	virtual Point play_one_turn(Board& board, Fliper fliper);
 	virtual char get_sign() = 0;
+	virtual void set_sign(char sign) = 0;
 	virtual bool get_no_moves() = 0;
 	Point getOpponentLastMove();
 	void setOpponentLastMove(Point opponent_last_move);

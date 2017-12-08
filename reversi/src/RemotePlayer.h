@@ -17,6 +17,8 @@ public:
 	RemotePlayer(char sign);
 	virtual ~RemotePlayer();
 	bool get_no_moves();
+	virtual void set_sign(char sign);
+	void set_sign();
 	char get_sign();
 	Connecter& getConnecter();
 	void setOpponentHasNoMoves(bool opp_has_no_moves);

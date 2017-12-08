@@ -8,13 +8,16 @@
 #include <stdlib.h>
 
 RemotePlayer::RemotePlayer() {
-	this->sign = 'R'; //Remote - not initialized
+	this->sign = 'Y'; //not initialize
+	set_sign(); //Remote - not initialized
+	this->moves_calculator = MovesCalculator();
 	this->has_no_moves = false;
 	initializeConnecter();
 }
 
 RemotePlayer::RemotePlayer(char sign) {
-	this->sign = sign;
+	this->sign = 'Y'; //not initialize
+	set_sign();
 	this->moves_calculator = MovesCalculator();
 	this->has_no_moves = false;
 	initializeConnecter();
@@ -58,7 +61,18 @@ int RemotePlayer::initializeConnecter() {
 	}
 	return 0;
 }
+void RemotePlayer::set_sign(char sign){
 
+}
+void RemotePlayer::set_sign(){
+	int color_player = this->connecter.reciveColorPlayer();
+	if(color_player == 1){
+		this->sign = 'O';
+	}
+	else if(color_player == 2){
+		this->sign= 'X';
+	}
+}
 char RemotePlayer::get_sign() {
 	return this->sign;
 }

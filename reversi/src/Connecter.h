@@ -16,6 +16,7 @@ public:
 	Connecter(const char *serverIP, int serverPort);
 	void connectToServer();
 	int sendMsg(Point p, bool player_has_no_moves);
+	int reciveColorPlayer();
 	Point recivePoint();
 	bool reciveNoMoves();
 

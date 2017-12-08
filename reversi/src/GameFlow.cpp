@@ -22,18 +22,34 @@ void GameFlow::initialize() {
 
 	bool is_remote_game = false;
 	Player* players[2];
-	players[0] = new HumenPlayer('X');
 	char chosen_player = choose_players();
+	if (chosen_player == 'r' || chosen_player == 'R'){
+		Player* remote_player = new RemotePlayer(); // I HAVE NOT DELETED YET!!!! DO NOT FORGET
+		char remote_sign = remote_player->get_sign();
+		if (remote_sign == 'X'){
+			players[0] = remote_player;
+			players[1] = new HumenPlayer('O');
+		}
+		else{
+			players[0] =  new HumenPlayer('X');
+			players[1] = remote_player;
+		}
+	}
+
+
 	if (chosen_player == 'c' || chosen_player == 'C'){
+		players[0] = new HumenPlayer('X');
 		players[1] = new ComputerPlayer('O');
 	}
 	if (chosen_player == 'r' || chosen_player == 'R'){
 		players[1] = new RemotePlayer('O'); // I HAVE NOT DELETED YET!!!! DO NOT FORGET
 		is_remote_game = true;
 	}
+
 	else{
-	//chosen player is a human player
-	players[1] = new HumenPlayer('O');
+		//chosen player is a human player
+		players[0] = new HumenPlayer('X');
+		players[1] = new HumenPlayer('O');
 	}
 	this->turn_base = TurnBase(b, players, is_remote_game);
 

@@ -31,6 +31,7 @@ public:
 	 * get the sign of the player.
 	 */
 	virtual char get_sign();
+	virtual void set_sign(char sign);
 	/**
 	 * destructor
 	 */

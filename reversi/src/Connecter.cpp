@@ -122,12 +122,19 @@ int Connecter::sendNoMoves(bool player_has_no_moves) {
 	}
 	return 0;
 }
-
+int Connecter::reciveColorPlayer(){
+	//read the number that say if you are black player or white player.
+	int color;
+	int n = read(clientSocket, &color, sizeof(color));
+	if (n == -1) {
+		throw "Error reading point from socket";
+	}
+	return color;
+}
 Point Connecter::recivePoint() {
 	// Read the point sent from the server
 	Point p;
 	int n = read(clientSocket, &p, sizeof(p));
-
 	if (n == -1) {
 		throw "Error reading point from socket";
 	}

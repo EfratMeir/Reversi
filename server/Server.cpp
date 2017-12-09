@@ -85,8 +85,6 @@ void Server::start() {
 void Server::stop() {
 	close(serverSocket);
 }
-
-
 void Server::handleClient(int clientSocket1, int clientSocket2) {
 	vector <int> clientsSockets;
 	clientsSockets.push_back(clientSocket1);
@@ -123,12 +121,6 @@ void Server::handleClient(int clientSocket1, int clientSocket2) {
 		return;
 	}
 
-
-
-
-
-
-
 	while (!end1 && !end2) { //I didn't send any "end" msg yet... do not forget
 
 	//read the first move from the first player and write to the second
@@ -148,7 +140,6 @@ void Server::handleClient(int clientSocket1, int clientSocket2) {
 		cout << "Error writing row" << endl;
 		return;
 	}
-
 	n = write(clientsSockets[j], &col, sizeof(col));
 	if (n == -1) {
 		cout << "Error writing col" << endl;
@@ -173,7 +164,7 @@ void Server::handleClient(int clientSocket1, int clientSocket2) {
 
 	if (n == 0) {
 		cout << "Client disconnected" << endl;
-		close(clientsSockets[i]);
+		close(clientsSockets[j]);
 		return;
 	}
 

@@ -19,7 +19,15 @@ TurnBase::TurnBase(Board& board, Player** players, bool is_reomte_game) {
 	this->remote_game = is_reomte_game;
 
 }
+TurnBase::TurnBase(Board& board, Player** players, bool is_reomte_game, Connecter &connecter) {
+	this->board = board;
+	this->players[0] = players[0];
+	this->players[1] = players[1];
+	this->fliper = Fliper();
+	this->remote_game = is_reomte_game;
+	this->connecter = connecter;
 
+}
 //the remote player always will be player[1]!! and human - player[0]
 void TurnBase::play_game() {
 	int i = 0;

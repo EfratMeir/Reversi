@@ -19,6 +19,15 @@ bool HumenPlayer::get_no_moves(){
 
 	return this->no_moves;
 }
+
+void HumenPlayer::setOpponentLastMove(Point opponent_last_move) {
+	int row = opponent_last_move.get_row();
+	int col = opponent_last_move.get_col();
+	Point p = Point(row,col, opponent_last_move.get_sign());
+	this->opponent_last_move = p;
+}
+
+
 vector<Point> HumenPlayer::get_possible_moves(Board& board,
 		MovesCalculator moves_calculator) {
 	this->no_moves = false;
@@ -38,7 +47,7 @@ vector<Point> HumenPlayer::get_possible_moves(Board& board,
 }
 
 Point HumenPlayer::choose_best_move(vector<Point> options_list, Fliper flip, Board& board) {
-	cout << "please choose your next step (row,column)";
+	cout << "please choose your next step row,column" << endl;
 	char dummy;
 	int x;
 	int y;
@@ -101,4 +110,8 @@ bool HumenPlayer::isAnOption(Point p, vector<Point> options) {
 }
 HumenPlayer::~HumenPlayer() {
 
+}
+
+Point HumenPlayer::getOpponentLastMove() {
+	return this->opponent_last_move;
 }

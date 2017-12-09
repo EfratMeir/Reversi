@@ -64,6 +64,13 @@ vector<Point> ComputerPlayer::get_possible_moves(Board& board,
 	return options;
 }
 
+void ComputerPlayer::setOpponentLastMove(Point opponent_last_move) {
+	int row = opponent_last_move.get_row();
+	int col = opponent_last_move.get_col();
+	Point p = Point(row,col, opponent_last_move.get_sign());
+	this->opponent_last_move = p;
+}
+
 Point ComputerPlayer::choose_best_move(vector<Point> options_list, Fliper fliper, Board& board) {
 	vector<Point>::iterator it;
 	cout << "its O's turn"<< endl;
@@ -118,5 +125,9 @@ int ComputerPlayer::rate_move(Point point, Fliper fliper, Board& board){
 	this->rival_turn = false;
 	return best_score;
 
+}
+
+Point ComputerPlayer::getOpponentLastMove() {
+	return this->opponent_last_move;
 }
 

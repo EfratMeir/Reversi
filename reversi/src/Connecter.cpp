@@ -102,10 +102,15 @@ int Connecter::sendMsg(Point p, bool player_has_no_moves) {
 }
 
 int Connecter::sendPoint(Point p) {
-	int n = write(clientSocket, &p, sizeof(p));
-
+	int row = p.get_row();
+	int col = p.get_col();
+	int n = write(clientSocket, &row, sizeof(row));
 	if (n == -1) {
-		throw "Error writing point p to socket";
+		throw "Error writing row to socket";
+	}
+	n = write(clientSocket, &col, sizeof(col));
+	if (n == -1) {
+		throw "Error writing col to socket";
 	}
 	return 0;
 }
@@ -113,12 +118,6 @@ int Connecter::sendPoint(Point p) {
 
 
 int Connecter::sendNoMoves(bool player_has_no_moves) {
-//	char* no_move_msg = "NoMove";
-//
-//	if (player_has_no_moves == true) {
-//		no_move_msg = "NoMove";
-//	}
-//int n = write(clientSocket, &no_move_msg, sizeof(no_move_msg));
 
 	int n = write(clientSocket, &player_has_no_moves, sizeof(player_has_no_moves));
 	if (n == -1) {
@@ -145,11 +144,17 @@ int Connecter::reciveColorPlayer(){
 }
 Point Connecter::recivePoint() {
 	// Read the point sent from the server
-	Point p;
-	int n = read(clientSocket, &p, sizeof(p));
+	int row, col;
+	int n = read(clientSocket, &row, sizeof(row));
 	if (n == -1) {
-		throw "Error reading point from socket";
+		throw "Error reading row from sockcet";
 	}
+
+	n = read(clientSocket, &col, sizeof(col));
+	if (n == -1) {
+		throw "Error reading col from socket";
+	}
+	Point p(row,col,'L'); //the remotePlayer setSign accordingly right after he gets the step.
 	return p;
 }
 

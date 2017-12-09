@@ -23,13 +23,12 @@ void Player::play_next_step(Board& board, Point chosen_step) {
 	board.getCounter().add_one(chosen_step.get_sign());
 }
 
-Point Player::getOpponentLastMove() {
-	 return this->opponent_last_move;
-}
+//Point Player::getOpponentLastMove() {
+//	 return this->opponent_last_move;
+//}
 
-void Player::setOpponentLastMove(Point opponent_last_move) {
-	this->opponent_last_move = opponent_last_move;
-}
+
+
 
 Player::~Player() {
 	// TODO Auto-generated destructor stub

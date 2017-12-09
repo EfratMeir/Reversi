@@ -32,11 +32,15 @@ public:
 	 */
 	virtual char get_sign();
 	virtual void set_sign(char sign);
+	virtual void setOpponentLastMove(Point opponent_last_move);
+	virtual Point getOpponentLastMove();
+
 	/**
 	 * destructor
 	 */
 	virtual ~HumenPlayer();
 private:
+	Point opponent_last_move;
 	char sign;
 	bool no_moves;
 	/**

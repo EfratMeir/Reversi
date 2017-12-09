@@ -20,12 +20,10 @@ TurnBase::TurnBase(Board& board, Player** players, bool is_reomte_game) {
 
 }
 
-//the remote player always will be player[1]!! and human - player[0]
 void TurnBase::play_game() {
 	int i = 0;
 	int j = 1;
 
-	cout << "Hello  " << this->players[0]->get_sign() << endl << "Hello  " << players[1]->get_sign() << endl;
 	cout << "this is the initial board:" << endl;
 	this->board.pPrint();
 
@@ -35,7 +33,6 @@ void TurnBase::play_game() {
 		if (remote_game) {
 			//update the other player about what the human played:
 			players[j]->setOpponentLastMove(chosen_point);
-			//players[j]->opponent_last_move = chosen_point;
 		}
 		if (board.getCounter().getBlackCount() == 0 || board.getCounter().getWhiteCount() == 0){
 			return;

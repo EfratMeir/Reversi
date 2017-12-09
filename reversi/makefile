@@ -5,5 +5,3 @@ a.out: compileAll
 
 compileAll: include/*.h src/*.cpp
 	g++ -Wall -Wextra -Iinclude/ -c src/*.cpp
-
-

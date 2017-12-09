@@ -73,7 +73,7 @@ void ComputerPlayer::setOpponentLastMove(Point opponent_last_move) {
 
 Point ComputerPlayer::choose_best_move(vector<Point> options_list, Fliper fliper, Board& board) {
 	vector<Point>::iterator it;
-	cout << "its O's turn"<< endl;
+//	cout << "its O's turn"<< endl;
 	//the best score the rival(human) can get is 64
 	int low_score_human = 64;
 	Point best_move_comp = Point(0, 0, this->sign);

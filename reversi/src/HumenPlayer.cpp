@@ -8,6 +8,7 @@ HumenPlayer::HumenPlayer(char sign) {
 	this->sign = sign;
 	this->moves_calculator = MovesCalculator();
 	this->no_moves = false;
+	cout << "Hello " << sign << endl;
 }
 
 HumenPlayer::HumenPlayer() {

@@ -19,12 +19,17 @@ public:
 	bool get_no_moves();
 	virtual void set_sign(char sign);
 	void set_sign();
-	char get_sign();
+	virtual char get_sign();
 	Connecter& getConnecter();
 	void setOpponentHasNoMoves(bool opp_has_no_moves);
+
 	string readFromFile(string word);
 	int convertStringToInt(string str);
 	const char* convertStringToChar(string str);
+
+	virtual void setOpponentLastMove(Point opponent_last_move);
+	virtual Point getOpponentLastMove();
+
 
 private:
 	/*
@@ -34,6 +39,7 @@ private:
 	char sign;
 	Point opponent_last_move;
 	bool opponent_has_no_move;
+	bool my_first_move;
 	Connecter connecter;
 	int port;
     const char * IP;

@@ -12,7 +12,7 @@
 #include <string.h>
 #include <iostream>
 #include <stdio.h>
-
+#include <vector>
 
 using namespace std;
 #define MAX_CONNECTED_CLIENTS 2
@@ -86,44 +86,81 @@ void Server::stop() {
 
 
 void Server::handleClient(int clientSocket1, int clientSocket2) {
-	int arg1, arg2;
-	char comma;
+	vector <int> clientsSockets;
+	clientsSockets.push_back(clientSocket1);
+	clientsSockets.push_back(clientSocket2);
+
+	bool end1 = false;
+	bool end2 = false;
+	bool no_moves;
+	int row, col;
+	int i = 0;
+	int j = 1;
+	while (!end1 && !end2) { //I didn't send any "end" msg yet... do not forget
+
 	//read the first move from the first player and write to the second
-	int n = read(clientSocket1, &arg1, sizeof(arg1));
+//	int n = read(clientSocket1, &end1, sizeof(end1));
+//	if (n == -1) {
+//		cout << "Error reading end1" << endl;
+//		return;
+//	}
+//
+//	n = read(clientSocket2, &end2, sizeof(end2));
+//	if (n == -1) {
+//		cout << "Error reading end2" << endl;
+//		return;
+//	}
+
+	int n = read(clientsSockets[i], &row, sizeof(row));
 	if (n == -1) {
-	cout << "Error reading arg1" << endl;
+	cout << "Error reading row" << endl;
 	return;
 	}
+
 	if (n == 0) {
 		cout << "Client disconnected" << endl;
 		return;
 	}
-	n = read(clientSocket1, &comma, sizeof(comma));
+
+	n = read(clientsSockets[i], &col, sizeof(col));
 	if (n == -1) {
-		cout << "Error reading operator" << endl;
+		cout << "Error reading col" << endl;
 		return;
 	}
-	n = read(clientSocket1, &arg2, sizeof(arg2));
+
+	n = read(clientsSockets[i], &no_moves, sizeof(no_moves));
 	if (n == -1) {
-		cout << "Error reading arg2" << endl;
+		cout << "Error reading no_moves" << endl;
 		return;
 	}
-	n = write(clientSocket2, &arg1, sizeof(arg1));
+
+	n = write(clientsSockets[j], &row, sizeof(row));
 	if (n == -1) {
-		cout << "Error writing arg1" << endl;
+		cout << "Error writing row" << endl;
 		return;
 	}
-	n = write(clientSocket2, &comma, sizeof(comma));
+
+	n = write(clientsSockets[j], &col, sizeof(col));
 	if (n == -1) {
-		cout << "Error writing " << endl;
+		cout << "Error writing col" << endl;
 		return;
 	}
-	n = write(clientSocket2, &arg2, sizeof(arg2));
-	if (n == -1) {
-		cout << "Error reading arg2" << endl;
-		return;
+
+	n = write(clientsSockets[j], &no_moves, sizeof(no_moves));
+		if (n == -1) {
+			cout << "Error writing no_moves" << endl;
+			return;
+		}
+
+		i = i > 0 ? 0 : 1;
+		j = j > 0 ? 0 : 1;
 	}
+	//change "turns" of writing and reading
+
 	return;
 }
+
+
+
 
 

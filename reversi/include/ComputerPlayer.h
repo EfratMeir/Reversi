@@ -32,6 +32,9 @@ public:
 	 */
 	virtual char get_sign();
 	virtual void set_sign(char sign);
+	virtual void setOpponentLastMove(Point opponent_last_move);
+	virtual Point getOpponentLastMove();
+
 
 	/**
 	* calculates the possible moves.
@@ -58,6 +61,8 @@ private:
 	char computer_sign;
 	char rival_sign;
 	bool rival_turn;
+	Point opponent_last_move;
+
 	/**
 	 * puts the chosen point on the board.
 	 * (updating the counter will be from fliper)

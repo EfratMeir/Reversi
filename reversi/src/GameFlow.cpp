@@ -79,7 +79,7 @@ void GameFlow::run() {
 	if (winner == 'T') {
 		cout << "Tie! X & O have the same number of points";
 	}
-	else{
+	else {
 		cout << winner << endl;
 	}
 	delete turn_base.get_players()[0];

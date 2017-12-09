@@ -31,8 +31,9 @@ public:
 	virtual char get_sign() = 0;
 	virtual void set_sign(char sign) = 0;
 	virtual bool get_no_moves() = 0;
-	Point getOpponentLastMove();
-	void setOpponentLastMove(Point opponent_last_move);
+	virtual Point getOpponentLastMove() = 0;
+	virtual void setOpponentLastMove(Point opponent_last_move) = 0;
+	Point opponent_last_move;
 
 	/**
 		* puts the chosen point on the board.
@@ -47,6 +48,7 @@ public:
 	virtual ~Player() = 0;
 
 private:
+
 //	bool no_moves;
 	/**
 	 * checks for all the possible moves.
@@ -64,7 +66,6 @@ private:
 	* @return - the chosen point
 	*/
 	virtual Point choose_best_move(vector<Point> options_list, Fliper flip, Board& board) = 0;
-	Point opponent_last_move;
 
 
 

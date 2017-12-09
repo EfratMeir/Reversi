@@ -55,6 +55,7 @@ void GameFlow::initialize() {
 	}
 	this->turn_base = TurnBase(b, players, is_remote_game);
 
+
 }
 char GameFlow::choose_players(){
 	cout << "Welcome to reversi!" << endl << "choose an opponent type: " << endl << endl;

@@ -169,3 +169,15 @@ bool Connecter::reciveNoMoves() {
 	}
 	return player_has_no_moves;
 }
+
+
+bool Connecter::recieveStartGame() {
+
+	// Read the boolean sent from the server
+	bool start_the_game;
+	int n = read(clientSocket, &start_the_game, sizeof(start_the_game));
+	if (n == -1) {
+		throw "Error reading boolean start_the_game from socket";
+	}
+	return start_the_game;
+}

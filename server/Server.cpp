@@ -72,6 +72,8 @@ void Server::start() {
 		int n = write(clientSocket2, &second, sizeof(second));
 			if (n == -1)
 				cout << "Error writing to socket" << endl;
+
+		//notifyGameStarts(clientSocket, clientSocket2);
 		handleClient(clientSocket, clientSocket2);
 		//close communication with the client:
 		close(clientSocket);
@@ -114,6 +116,19 @@ void Server::handleClient(int clientSocket1, int clientSocket2) {
 		cout << "Error reading col" << endl;
 		return;
 	}
+
+	n = read(clientsSockets[i], &no_moves, sizeof(no_moves));
+	if (n == -1) {
+		cout << "Error reading no_moves" << endl;
+		return;
+	}
+
+
+
+
+
+
+
 	while (!end1 && !end2) { //I didn't send any "end" msg yet... do not forget
 
 	//read the first move from the first player and write to the second
@@ -145,7 +160,12 @@ void Server::handleClient(int clientSocket1, int clientSocket2) {
 			cout << "Error writing no_moves" << endl;
 			return;
 		}
-	int n = read(clientsSockets[j], &row, sizeof(row));
+
+		i = i > 0 ? 0 : 1;
+		j = j > 0 ? 0 : 1;
+
+
+	int n = read(clientsSockets[i], &row, sizeof(row));
 	if (n == -1) {
 	cout << "Error reading row" << endl;
 	return;
@@ -157,19 +177,18 @@ void Server::handleClient(int clientSocket1, int clientSocket2) {
 		return;
 	}
 
-	n = read(clientsSockets[j], &col, sizeof(col));
+	n = read(clientsSockets[i], &col, sizeof(col));
 	if (n == -1) {
 		cout << "Error reading col" << endl;
 		return;
 	}
 
-	n = read(clientsSockets[j], &no_moves, sizeof(no_moves));
+	n = read(clientsSockets[i], &no_moves, sizeof(no_moves));
 	if (n == -1) {
 		cout << "Error reading no_moves" << endl;
 		return;
 	}
-		i = i > 0 ? 0 : 1;
-		j = j > 0 ? 0 : 1;
+
 	}
 	//change "turns" of writing and reading
 
@@ -177,6 +196,22 @@ void Server::handleClient(int clientSocket1, int clientSocket2) {
 }
 
 
+
+void Server::notifyGameStarts(int clientSocket1, int clientSocket2) {
+	bool start_game = true;
+	int n = write(clientSocket1, &start_game, sizeof(start_game));
+	if (n == -1) {
+		cout << "Error writing start_game" << endl;
+		return;
+	}
+
+	n = write(clientSocket2, &start_game, sizeof(start_game));
+	if (n == -1) {
+		cout << "Error writing start_game" << endl;
+		return;
+	}
+
+}
 
 
 

@@ -19,14 +19,14 @@ public:
 	int reciveColorPlayer();
 	Point recivePoint();
 	bool reciveNoMoves();
-
-	//int sendExercise(int arg1, char op, int arg2);
+	bool recieveStartGame();
 private:
 	char *serverIP; //CHANGE FROM CONST CHAR* TO CHAR*
 	int serverPort;
 	int clientSocket;
 	int sendPoint(Point p);
 	int sendNoMoves(bool player_has_no_moves);
+
 };
 
 #endif /* CONNECTER_H_ */

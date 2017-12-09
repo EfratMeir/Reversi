@@ -23,7 +23,7 @@ RemotePlayer::RemotePlayer() {
 	set_sign(); //Remote - not initialized
 	this->moves_calculator = MovesCalculator();
 	this->has_no_moves = false;
-	this->opponent_last_move = Point(0, 0,' ');
+	//this->opponent_last_move = Point(0, 0,' ');
 	//must initialize for the first move. this is ok because this spot allways empty in the first move...
 	this->my_first_move = true;
 
@@ -98,6 +98,7 @@ vector<Point> RemotePlayer::get_possible_moves(Board& board,
 	}
 	my_first_move = false;
 	vector<Point> chosen_move;
+	chosen_move.clear();
 	Point chosen = connecter.recivePoint();
 	chosen.set_sign(this->get_sign());
 	chosen_move.push_back(chosen);

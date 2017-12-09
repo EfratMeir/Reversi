@@ -23,6 +23,8 @@ private:
 
 	void writeColorNum(int first_player, int second_player,
 			int clientSocket1, int clientSocket2 );
+
+	void notifyGameStarts(int clientSocket1, int clientSocket2);
 };
 
 #endif /* SERVER_H_ */

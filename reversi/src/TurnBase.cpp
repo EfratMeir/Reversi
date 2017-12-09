@@ -5,6 +5,7 @@
 #include <TurnBase.h>
 #include <stdlib.h>
 #include "RemotePlayer.h"
+#include "Connecter.h"
 
 TurnBase::TurnBase() {
 	this->fliper = Fliper();

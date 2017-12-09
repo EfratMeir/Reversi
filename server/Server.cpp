@@ -96,6 +96,24 @@ void Server::handleClient(int clientSocket1, int clientSocket2) {
 	int row, col;
 	int i = 0;
 	int j = 1;
+	//read the first move of the first player
+	int n = read(clientsSockets[i], &row, sizeof(row));
+	if (n == -1) {
+	cout << "Error reading row" << endl;
+	return;
+	}
+
+	if (n == 0) {
+		cout << "Client disconnected" << endl;
+		close(clientsSockets[j]);
+		return;
+	}
+
+	n = read(clientsSockets[i], &col, sizeof(col));
+	if (n == -1) {
+		cout << "Error reading col" << endl;
+		return;
+	}
 	while (!end1 && !end2) { //I didn't send any "end" msg yet... do not forget
 
 	//read the first move from the first player and write to the second
@@ -110,30 +128,6 @@ void Server::handleClient(int clientSocket1, int clientSocket2) {
 //		cout << "Error reading end2" << endl;
 //		return;
 //	}
-
-	int n = read(clientsSockets[i], &row, sizeof(row));
-	if (n == -1) {
-	cout << "Error reading row" << endl;
-	return;
-	}
-
-	if (n == 0) {
-		cout << "Client disconnected" << endl;
-		return;
-	}
-
-	n = read(clientsSockets[i], &col, sizeof(col));
-	if (n == -1) {
-		cout << "Error reading col" << endl;
-		return;
-	}
-
-	n = read(clientsSockets[i], &no_moves, sizeof(no_moves));
-	if (n == -1) {
-		cout << "Error reading no_moves" << endl;
-		return;
-	}
-
 	n = write(clientsSockets[j], &row, sizeof(row));
 	if (n == -1) {
 		cout << "Error writing row" << endl;
@@ -151,7 +145,29 @@ void Server::handleClient(int clientSocket1, int clientSocket2) {
 			cout << "Error writing no_moves" << endl;
 			return;
 		}
+	int n = read(clientsSockets[j], &row, sizeof(row));
+	if (n == -1) {
+	cout << "Error reading row" << endl;
+	return;
+	}
 
+	if (n == 0) {
+		cout << "Client disconnected" << endl;
+		close(clientsSockets[i]);
+		return;
+	}
+
+	n = read(clientsSockets[j], &col, sizeof(col));
+	if (n == -1) {
+		cout << "Error reading col" << endl;
+		return;
+	}
+
+	n = read(clientsSockets[j], &no_moves, sizeof(no_moves));
+	if (n == -1) {
+		cout << "Error reading no_moves" << endl;
+		return;
+	}
 		i = i > 0 ? 0 : 1;
 		j = j > 0 ? 0 : 1;
 	}

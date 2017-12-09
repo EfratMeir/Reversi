@@ -93,9 +93,10 @@ void RemotePlayer::play_next_step(Board& board, Point chosen_step) {
 
 vector<Point> RemotePlayer::get_possible_moves(Board& board,
 		MovesCalculator moves_calculator) {
-//	if(!my_first_move || this->sign == 'X') {
+	if(!my_first_move || this->sign == 'O') { //MYABE X
 		connecter.sendMsg(this->opponent_last_move, opponent_has_no_move);
-//	}
+	}
+	my_first_move = false;
 	vector<Point> chosen_move;
 	Point chosen = connecter.recivePoint();
 	chosen.set_sign(this->get_sign());

@@ -22,6 +22,9 @@ public:
 	char get_sign();
 	Connecter& getConnecter();
 	void setOpponentHasNoMoves(bool opp_has_no_moves);
+	string readFromFile(string word);
+	int convertStringToInt(string str);
+	const char* convertStringToChar(string str);
 
 private:
 	/*
@@ -32,6 +35,8 @@ private:
 	Point opponent_last_move;
 	bool opponent_has_no_move;
 	Connecter connecter;
+	int port;
+    const char * IP;
 	/**
 	 * puts the chosen point on the board.
 	 * (updating the counter will be from fliper)

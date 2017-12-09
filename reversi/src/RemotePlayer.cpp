@@ -5,10 +5,19 @@
  *      Author: efrat
  */
 #include "RemotePlayer.h"
+#include <iostream>
 #include <stdlib.h>
-
+#include <string>
+#include <sstream>
+#include <fstream>
+using namespace std;
 RemotePlayer::RemotePlayer() {
-	this->connecter = Connecter("127.0.0.1", 8000);
+//	char IP = static_cast<char>(readFromFile("IP"));
+//	int port = readFromFile();
+
+	this->port = convertStringToInt(readFromFile("port"));
+	this->IP = convertStringToChar(readFromFile("IP"));
+	this->connecter = Connecter((char*)IP, port);
 	initializeConnecter();
 	this->sign = 'Y'; //not initialize
 	set_sign(); //Remote - not initialized
@@ -16,7 +25,46 @@ RemotePlayer::RemotePlayer() {
 	this->has_no_moves = false;
 
 }
+int RemotePlayer::convertStringToInt(string str){
+	int num = atoi(str.c_str());
+	return num;
+}
+ const char* RemotePlayer::convertStringToChar(string str){
+	 const char * c = str.c_str();
+	 return c;
+}
+string RemotePlayer::readFromFile(string word){
+//	int port_num;
+//	int IP;
+	ifstream infile("reversi_settings.txt");
+	string line;
+	while (std::getline(infile, line)){
+		istringstream iss(line);
+		string word_from_file;
+		while(iss >> word_from_file) {
+		   if (word_from_file == "port" && word == "port"){
+			   iss >> word_from_file;
 
+			   return word_from_file;
+//			   stringstream server(word_from_file);
+//			   server >> port_num;
+//			   return port_num;
+		   }
+		   if(word_from_file == "IP" && word == "IP"){
+			   iss >> word_from_file;
+			   return word_from_file;
+//			   stringstream ip(word_from_file);
+//			   ip >> IP;
+//			   return IP;
+		}
+			// error
+			if (!(iss >> word_from_file)) {
+				return 0;
+			}
+		}
+	}
+	return 0;
+}
 RemotePlayer::RemotePlayer(char sign) {
 	initializeConnecter();
 	this->sign = 'Y'; //not initialize

@@ -17,9 +17,9 @@
 using namespace std;
 
 Connecter::Connecter() {
-	cout << "connecter default construcor" << endl;
+
 }
-Connecter::Connecter(const char *serverIP, int serverPort):
+Connecter::Connecter(char *serverIP, int serverPort): //CHANGE FROM CONST CHAR* TO CHAR*
 		serverIP(serverIP), serverPort(serverPort), clientSocket(0) {
 	cout << "Client" << endl;
 

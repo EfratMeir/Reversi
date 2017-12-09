@@ -13,7 +13,7 @@
 class Connecter {
 public:
 	Connecter();
-	Connecter(const char *serverIP, int serverPort);
+	Connecter( char *serverIP, int serverPort); //change from const char to char MAYBE MISTAKE
 	void connectToServer();
 	int sendMsg(Point p, bool player_has_no_moves);
 	int reciveColorPlayer();
@@ -22,7 +22,7 @@ public:
 
 	//int sendExercise(int arg1, char op, int arg2);
 private:
-	const char *serverIP;
+	char *serverIP; //CHANGE FROM CONST CHAR* TO CHAR*
 	int serverPort;
 	int clientSocket;
 	int sendPoint(Point p);

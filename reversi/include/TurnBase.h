@@ -44,17 +44,18 @@ public:
 	Player** get_players(){
 		return players;
 	}
+
 	/**
 	 * destructor
 	 */
 	virtual ~TurnBase();
-
 private:
 	//class members
+	Connecter connecter;
 	Board board;
 	Player* players[2];
 	Fliper fliper;
-	Connecter connecter;
+
 	bool remote_game;
 };
 

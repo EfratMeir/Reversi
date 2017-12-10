@@ -44,6 +44,8 @@ void TurnBase::play_game() {
 			players[j]->setOpponentLastMove(chosen_point);
 		}
 		if (board.getCounter().getBlackCount() == 0 || board.getCounter().getWhiteCount() == 0){
+			this->connecter.sendPoint(Point(-1,-1,' ')); //send no point
+			this->connecter.sendNoMoves(1);
 			return;
 		}
 		fliper.flip(board, chosen_point, chosen_point.get_sign());
@@ -53,6 +55,8 @@ void TurnBase::play_game() {
 		i = i > 0 ? 0 : 1;
 		j = j > 0 ? 0 : 1;
 	}
+	this->connecter.sendPoint(Point(-1,-1,' '));
+	this->connecter.sendNoMoves(true);
 }
 TurnBase::~TurnBase() {
 

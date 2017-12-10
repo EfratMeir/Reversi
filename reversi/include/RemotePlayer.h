@@ -13,27 +13,59 @@
 
 class RemotePlayer: public Player{
 public:
+	/**
+	 * constructor
+	 * @param connecter
+	 */
 	RemotePlayer(Connecter& connecter);
-//	RemotePlayer(char sign);
-	virtual ~RemotePlayer();
+
+	/**
+	 * return 1 if ther's no moves, else 0
+	 * @return
+	 */
 	bool get_no_moves();
+	/**
+	 * set the sign of the opponent player.
+	 * @param sign
+	 */
 	virtual void set_sign(char sign);
+	/**
+	 * set the sign of the remote player from the server (X if he is first)
+	 */
 	void set_sign();
+	/**
+	 * get the sign of the player
+	 * @return
+	 */
 	virtual char get_sign();
+	/**
+	 * get the connecter
+	 * @return
+	 */
 	Connecter& getConnecter();
+	/**
+	 * set the 'opponent ha no move' bool of the opponent player.
+	 * @param opp_has_no_moves
+	 */
 	void setOpponentHasNoMoves(bool opp_has_no_moves);
-
-	string readFromFile(string word);
-	int convertStringToInt(string str);
-	const char* convertStringToChar(string str);
-
+	/**
+	 * set the last move of the opponent player.
+	 * @param opponent_last_move
+	 */
 	virtual void setOpponentLastMove(Point opponent_last_move);
+	/**
+	 * get the last move of the opponent player.
+	 * @return
+	 */
 	virtual Point getOpponentLastMove();
-
+	/**
+	 * destructor
+	 */
+	virtual ~RemotePlayer();
 
 private:
 	/*
-	 * true if the player hsa no more moves, false otherwise.
+	 * true if the player has no more moves, false otherwise.
 	 */
 	bool has_no_moves;
 	char sign;

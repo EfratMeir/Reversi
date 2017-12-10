@@ -31,8 +31,20 @@ public:
 	 * get the sign of the player.
 	 */
 	virtual char get_sign();
+	/**
+	 * set the sign of the player.
+	 * @param sign
+	 */
 	virtual void set_sign(char sign);
+	/**
+	 * set the last move of the opponent player.
+	 * @param opponent_last_move
+	 */
 	virtual void setOpponentLastMove(Point opponent_last_move);
+	/**
+	 * get the last move of the opponent player.
+	 * @return
+	 */
 	virtual Point getOpponentLastMove();
 
 	/**

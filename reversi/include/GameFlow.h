@@ -42,15 +42,34 @@ public:
 
 private:
 	TurnBase turn_base;
-
 	/*
 	 * checks the winner of the game.
 	 * @return - the sign of the win player.
 	 */
 	char findWinner(TurnBase turn_base);
+	/**
+	 * converts string to int
+	 * @param str the string
+	 * @return the int
+	 */
 	int convertStringToInt(string str);
+	/**
+	 * converst string to char*
+	 * @param str the string
+	 * @return the char*
+	 */
 	const char* convertStringToChar(string str);
+	/**
+	 * read a word in a file and return the word after it.
+	 * @param word the word
+	 * @return the word after it
+	 */
 	string readFromFile(string word);
+	/**
+	 * initialize the connecter
+	 * @param connecter
+	 * @return
+	 */
 	int initializeConnecter(Connecter& connecter);
 };
 

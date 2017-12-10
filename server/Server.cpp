@@ -47,7 +47,6 @@ void Server::start() {
 
 	while (true)  {
 		cout << "Waiting for client connections..." << endl;
-
 		//accept a new client connection:
 		int clientSocket = accept(serverSocket, (struct sockaddr *)&clientAddress, &clientAddressLen);
 		if (clientSocket == -1)
@@ -90,10 +89,8 @@ void Server::handleClient(int clientSocket1, int clientSocket2) {
 	clientsSockets.push_back(clientSocket1);
 	clientsSockets.push_back(clientSocket2);
 
-	bool end1 = false;
-	bool end2 = false;
-	bool no_moves;
-	int row, col;
+	bool no_moves = false;
+	int row = -1, col = -1;
 	int i = 0;
 	int j = 1;
 	//read the first move of the first player
@@ -121,7 +118,7 @@ void Server::handleClient(int clientSocket1, int clientSocket2) {
 		return;
 	}
 
-	while (!end1 && !end2) { //I didn't send any "end" msg yet... do not forget
+	while (true) { //I didn't send any "end" msg yet... do not forget
 
 	//read the first move from the first player and write to the second
 //	int n = read(clientSocket1, &end1, sizeof(end1));

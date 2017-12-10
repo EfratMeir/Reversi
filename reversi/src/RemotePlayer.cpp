@@ -97,10 +97,10 @@ vector<Point> RemotePlayer::get_possible_moves(Board& board,
 	my_first_move = false;
 	vector<Point> chosen_move;
 	chosen_move.clear();
-	Point chosen = connecter.recivePoint();
+	Point chosen = connecter.receivePoint();
 	chosen.set_sign(this->get_sign());
 	chosen_move.push_back(chosen);
-	this->has_no_moves = connecter.reciveNoMoves();
+	this->has_no_moves = connecter.receiveNoMoves();
 	return chosen_move;
 }
 
@@ -132,7 +132,7 @@ void RemotePlayer::set_sign(char sign){
 
 }
 void RemotePlayer::set_sign(){
-	int color_player = this->getConnecter().reciveColorPlayer();
+	int color_player = this->getConnecter().receiveNumPlayer();
 	if(color_player == 1){
 		this->sign = 'O';
 	}

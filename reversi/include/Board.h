@@ -11,8 +11,7 @@
 using namespace std;
 
 class Board {
-private:
-	PointsCounter counter;
+
 public:
 
 	/**
@@ -61,6 +60,7 @@ public:
 	static const char blank = ' ';
 
 private:
+	PointsCounter counter;
 	int num_rows;
 	int num_cols;
 

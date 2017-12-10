@@ -17,7 +17,9 @@
 using namespace std;
 
 Connecter::Connecter() {
-
+	this->serverIP = 0;//not initialize
+	this->serverPort = 0; //not initialize
+	this->clientSocket = 0;
 }
 Connecter::Connecter(char *serverIP, int serverPort): //CHANGE FROM CONST CHAR* TO CHAR*
 		serverIP(serverIP), serverPort(serverPort), clientSocket(0) {
@@ -70,30 +72,6 @@ void Connecter::connectToServer() {
 
 }
 
-
-//int Connecter::sendExercise(int arg1, char op, int arg2) {
-//// Write the exercise arguments to the socket
-//int n = write(clientSocket, &arg1, sizeof(arg1));
-//if (n == -1) {
-//throw "Error writing arg1 to socket";
-//}
-//n = write(clientSocket, &op, sizeof(op));
-//if (n == -1) {
-//throw "Error writing op to socket";
-//}
-//n = write(clientSocket, &arg2, sizeof(arg2));
-//if (n == -1) {
-//throw "Error writing arg2 to socket";
-//}
-//// Read the result from the server
-//int result;
-//n = read(clientSocket, &result, sizeof(result));
-//if (n == -1) {
-//throw "Error reading result from socket";
-//}
-//return result;
-//}
-
 int Connecter::sendMsg(Point p, bool player_has_no_moves) {
 	// Write the chosen point p to the socket
 	sendPoint(p);
@@ -118,31 +96,23 @@ int Connecter::sendPoint(Point p) {
 
 
 int Connecter::sendNoMoves(bool player_has_no_moves) {
-
 	int n = write(clientSocket, &player_has_no_moves, sizeof(player_has_no_moves));
 	if (n == -1) {
 		throw "Error writing player_has_no_moves to socket";
 	}
 	return 0;
 }
-int Connecter::reciveColorPlayer(){
+int Connecter::receiveNumPlayer(){
 
 	//read the number that say if you are black player or white player.
 	int color;
 	int n = read(clientSocket, &color, sizeof(color));
-//	if (color == -3){
-//		cout << "waiting for second player" << endl;
-//		while (color == -3){
-//			int n = read(clientSocket, &color, sizeof(color));
-//		}
-//	}
-
 	if (n == -1) {
 		throw "Error reading point from socket";
 	}
 	return color;
 }
-Point Connecter::recivePoint() {
+Point Connecter::receivePoint() {
 	// Read the point sent from the server
 	int row, col;
 	int n = read(clientSocket, &row, sizeof(row));
@@ -158,7 +128,7 @@ Point Connecter::recivePoint() {
 	return p;
 }
 
-bool Connecter::reciveNoMoves() {
+bool Connecter::receiveNoMoves() {
 
 	// Read the boolean sent from the server
 	bool player_has_no_moves;
@@ -171,7 +141,7 @@ bool Connecter::reciveNoMoves() {
 }
 
 
-bool Connecter::recieveStartGame() {
+bool Connecter::receieveStartGame() {
 
 	// Read the boolean sent from the server
 	bool start_the_game;

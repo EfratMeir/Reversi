@@ -12,20 +12,66 @@
 
 class Connecter {
 public:
+	/**
+	 * constructor
+	 */
 	Connecter();
-	Connecter( char *serverIP, int serverPort); //change from const char to char MAYBE MISTAKE
+	/**
+	 * constructor
+	 * @param serverIP the IP number
+	 * @param serverPort the port number
+	 */
+	Connecter( char *serverIP, int serverPort);
+	/**
+	 * connect the client to server
+	 */
 	void connectToServer();
+	/**
+	 * send the move and if there's no move to server
+	 * @param p the move
+	 * @param player_has_no_moves bool - true if the player has no moves.
+	 * @return the move
+	 */
 	int sendMsg(Point p, bool player_has_no_moves);
-	int reciveColorPlayer();
-	Point recivePoint();
-	bool reciveNoMoves();
-	bool recieveStartGame();
+	/**
+	 * receive from server '1' if he is the first player, 2 if second.
+	 * @return the number
+	 */
+	int receiveNumPlayer();
+	/**
+	 * receive a point from the server (the move of the other player)
+	 * @return the point
+	 */
+	Point receivePoint();
+	/**
+	 * receive from server bool - if there's no moves.
+	 * @return if there's no moves return 1, else 0
+	 */
+	bool receiveNoMoves();
+	/**
+	 * receive a bool that the game can start
+	 * @return 1 if the game can start, else 0
+	 */
+	bool receieveStartGame();
+	/**
+	 * send to server bool - if there's no moves
+	 * @param player_has_no_moves bool
+	 * @return
+	 */
+	int sendNoMoves(bool player_has_no_moves);
+	/**
+	 * send a point to server
+	 * @param p the point
+	 * @return
+	 */
+	int sendPoint(Point p);
 private:
+	//members
 	char *serverIP; //CHANGE FROM CONST CHAR* TO CHAR*
 	int serverPort;
 	int clientSocket;
-	int sendPoint(Point p);
-	int sendNoMoves(bool player_has_no_moves);
+
+
 
 };
 

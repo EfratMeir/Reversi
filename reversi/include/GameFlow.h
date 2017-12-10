@@ -9,7 +9,7 @@
 #include <ComputerPlayer.h>
 #include <Player.h>
 #include <TurnBase.h>
-
+#include "Connecter.h"
 #include <vector>
 
 /*
@@ -48,6 +48,10 @@ private:
 	 * @return - the sign of the win player.
 	 */
 	char findWinner(TurnBase turn_base);
+	int convertStringToInt(string str);
+	const char* convertStringToChar(string str);
+	string readFromFile(string word);
+	int initializeConnecter(Connecter& connecter);
 };
 
 #endif /* GAMEFLOW_H_ */

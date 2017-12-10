@@ -179,5 +179,6 @@ bool Connecter::recieveStartGame() {
 	if (n == -1) {
 		throw "Error reading boolean start_the_game from socket";
 	}
+	cout << "2 players are now connected, we can start!" << endl;
 	return start_the_game;
 }

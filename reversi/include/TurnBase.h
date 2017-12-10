@@ -11,6 +11,7 @@
 #include <PointsCounter.h>
 #include <iostream>
 #include <vector>
+#include "Connecter.h"
 using namespace std;
 
 /**
@@ -27,7 +28,7 @@ public:
 	/**
 	 * constructor
 	 */
-//	TurnBase(Board& board, vector<HumenPlayer> players);
+	TurnBase(Board& board, Player** players, bool is_remote_game, Connecter& connecter);
 	TurnBase(Board& board, Player** players, bool is_remote_game);
 
 	/**
@@ -53,6 +54,7 @@ private:
 	Board board;
 	Player* players[2];
 	Fliper fliper;
+	Connecter connecter;
 	bool remote_game;
 };
 

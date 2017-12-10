@@ -4,6 +4,11 @@
 
 #include <GameFlow.h>
 #include "RemotePlayer.h"
+#include <string>
+#include <sstream>
+#include <fstream>
+#include <iostream>
+#include <stdlib.h>
 #define SIZE 8
 GameFlow::GameFlow() {
 
@@ -12,7 +17,6 @@ GameFlow::GameFlow() {
 void GameFlow::initialize() {
 	//PointsCounter counter = PointsCounter();
 	Board b = Board(8,8);
-
 
 //	indexes are -1 because the array start from 0
 	b.setPoint(Point(4 - 1, 4 - 1, b.white_player));
@@ -24,38 +28,90 @@ void GameFlow::initialize() {
 	Player* players[2];
 	char chosen_player = choose_players();
 	if (chosen_player == 'r' || chosen_player == 'R'){
-		Player* remote_player = new RemotePlayer(); // I HAVE NOT DELETED YET!!!! DO NOT FORGET
+		int port = convertStringToInt(readFromFile("port"));
+		const char* IP = convertStringToChar(readFromFile("IP"));
+		Connecter connecter = Connecter((char*)IP, port);
+		initializeConnecter(connecter);
+		Player* remote_player = new RemotePlayer(connecter); // I HAVE NOT DELETED YET!!!! DO NOT FORGET
 		char remote_sign = remote_player->get_sign();
+		is_remote_game = true;
 		if (remote_sign == 'X'){
 			players[0] = remote_player;
 			players[1] = new HumenPlayer('O');
-			is_remote_game = true;
 		}
 		else{
 			players[0] =  new HumenPlayer('X');
 			players[1] = remote_player;
-			is_remote_game = true;
 		}
-	}
 
+		//wait until server will send a msg that we can start:
+		bool start_game = connecter.recieveStartGame();
+		this->turn_base = TurnBase(b, players, is_remote_game, connecter);
+	}
 
 	if (chosen_player == 'c' || chosen_player == 'C'){
 		players[0] = new HumenPlayer('X');
 		players[1] = new ComputerPlayer('O');
+		this->turn_base = TurnBase(b, players, is_remote_game);
 	}
-//	if (chosen_player == 'r' || chosen_player == 'R'){
-//		players[1] = new RemotePlayer('O'); // I HAVE NOT DELETED YET!!!! DO NOT FORGET
-//		is_remote_game = true;
-//	}
 
 	else if (chosen_player == 'h' || chosen_player == 'H'){
 		//chosen player is a human player
 		players[0] = new HumenPlayer('X');
 		players[1] = new HumenPlayer('O');
+		this->turn_base = TurnBase(b, players, is_remote_game);
 	}
-	this->turn_base = TurnBase(b, players, is_remote_game);
+}
+int GameFlow::initializeConnecter(Connecter& connecter) {
 
+	try {
+		connecter.connectToServer();
 
+	} catch (const char *msg) {
+		cout << "Failed to connect to server. Reason: " << msg << endl;
+		exit(-1);
+	}
+	return 0;
+}
+int GameFlow::convertStringToInt(string str){
+	int num = atoi(str.c_str());
+	return num;
+}
+ const char* GameFlow::convertStringToChar(string str){
+	 const char * c = str.c_str();
+	 return c;
+}
+string GameFlow::readFromFile(string word){
+//	int port_num;
+//	int IP;
+	ifstream infile("reversi_settings.txt");
+	string line;
+	while (std::getline(infile, line)){
+		istringstream iss(line);
+		string word_from_file;
+		while(iss >> word_from_file) {
+		   if (word_from_file == "port" && word == "port"){
+			   iss >> word_from_file;
+
+			   return word_from_file;
+//			   stringstream server(word_from_file);
+//			   server >> port_num;
+//			   return port_num;
+		   }
+		   if(word_from_file == "IP" && word == "IP"){
+			   iss >> word_from_file;
+			   return word_from_file;
+//			   stringstream ip(word_from_file);
+//			   ip >> IP;
+//			   return IP;
+		}
+			// error
+			if (!(iss >> word_from_file)) {
+				return 0;
+			}
+		}
+	}
+	return 0;
 }
 char GameFlow::choose_players(){
 	cout << "Welcome to reversi!" << endl << "choose an opponent type: " << endl << endl;

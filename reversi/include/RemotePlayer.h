@@ -13,8 +13,8 @@
 
 class RemotePlayer: public Player{
 public:
-	RemotePlayer();
-	RemotePlayer(char sign);
+	RemotePlayer(Connecter& connecter);
+//	RemotePlayer(char sign);
 	virtual ~RemotePlayer();
 	bool get_no_moves();
 	virtual void set_sign(char sign);

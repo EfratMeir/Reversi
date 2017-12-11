@@ -1,0 +1,200 @@
+commit f8b8c5faca548ccbf8fa04de3b4b69cab91af35f
+Author: Keren levy <kerenle2@hotmail.com>
+Date:   Sun Dec 10 16:04:49 2017 +0200
+
+    the game can end.
+
+commit 3859ca2685743c7be71403134d5ec70c91ecc1f0
+Merge: 048c34f 834b115
+Author: Efrat Meir <efratoosh44@gmail.com>
+Date:   Sun Dec 10 11:57:51 2017 +0200
+
+    game starts when 2 players connected
+
+commit 048c34ffe67e2005a1830f1a189cafc56adf65f7
+Author: Efrat Meir <efratoosh44@gmail.com>
+Date:   Sun Dec 10 00:45:56 2017 +0200
+
+    fixed printings
+
+commit 834b115f9ec76f1782266ad800ac932bc79012f3
+Author: Keren levy <kerenle2@hotmail.com>
+Date:   Sat Dec 9 21:35:04 2017 +0200
+
+    move the Connecter initialize to the GameFlow class
+
+commit 14c9d1b9b9fa7010018cbdae10f24326b54166f8
+Author: Efrat Meir <efratoosh44@gmail.com>
+Date:   Sat Dec 9 18:38:31 2017 +0200
+
+    bug fixed - communication between clients is good
+
+commit 4892a75454de74c9a55c803ac69963607eed5b9f
+Author: Keren levy <kerenle2@hotmail.com>
+Date:   Sat Dec 9 14:33:05 2017 +0200
+
+    the client can read and send moves
+
+commit fa2a0663303f9f9cec391492a19a255a4a83f84c
+Merge: 4f741e1 9e84265
+Author: Keren levy <kerenle2@hotmail.com>
+Date:   Sat Dec 9 11:46:05 2017 +0200
+
+     read port and IP from file
+
+commit 4f741e108972296f318981057d9b3109b942c7eb
+Author: Keren levy <kerenle2@hotmail.com>
+Date:   Sat Dec 9 11:39:18 2017 +0200
+
+     read port and IP from file
+
+commit 9e842650c2390a8a1c538b55c5dcf82cdecf37a0
+Author: Efrat Meir <efratoosh44@gmail.com>
+Date:   Sat Dec 9 11:16:33 2017 +0200
+
+    turns goes between the 2 clients and server, not final.
+
+commit 374e5991895f76738dc877d803167af6beb2c2b0
+Merge: f4a30ed 29d434a
+Author: Keren levy <kerenle2@hotmail.com>
+Date:   Fri Dec 8 18:47:45 2017 +0200
+
+    change the server to wait fot two clients, change the client to wait for the other
+
+commit f4a30ed0db2c46a8406d16e1fee0c96ca2f2d90d
+Author: Keren levy <kerenle2@hotmail.com>
+Date:   Fri Dec 8 18:02:36 2017 +0200
+
+    change the server to wait fot two clients, change the client to wait for the other
+
+commit 29d434a668ce541eadf545464f3473e8728deb63
+Merge: c2702db bd67a2c
+Author: Efrat Meir <efratoosh44@gmail.com>
+Date:   Fri Dec 8 17:56:27 2017 +0200
+
+    back to version: 'edit turn base, remote player. NOT a final version' - before merging. merge was NOT GOOD
+
+commit c2702dbc93059cf6df21da9d8ecb98ca13e9388c
+Author: Efrat Meir <efratoosh44@gmail.com>
+Date:   Fri Dec 8 17:52:20 2017 +0200
+
+    back to version: 'edit turn base, remote player. NOT a final version' - before merging. merge was NOT GOOD
+
+commit bd67a2cdbaac340b0c3127d4d2eccaad51ec89e0
+Merge: 07ad923 c7da63d
+Author: Efrat Meir <efratoosh44@gmail.com>
+Date:   Thu Dec 7 21:02:35 2017 +0200
+
+    edit turn base, remote player. NOT a final version - merged
+
+commit 07ad9232172221e8a326dac1333d5742a1affd46
+Author: Efrat Meir <efratoosh44@gmail.com>
+Date:   Thu Dec 7 20:30:48 2017 +0200
+
+    edit turn base, remote player. NOT a final version
+
+commit c7da63d4a355b4176fb03837defbd12fa94e63ec
+Merge: 3e017ab 943cdd9
+Author: Keren levy <kerenle2@hotmail.com>
+Date:   Thu Dec 7 20:26:04 2017 +0200
+
+    change the server to accept 2 clients, change the client to wait for the other
+
+commit 3e017ab7b41af749d8fbeb93f58003eefd112869
+Author: Keren levy <kerenle2@hotmail.com>
+Date:   Thu Dec 7 11:13:17 2017 +0200
+
+    fixed bugs
+
+commit 943cdd98ab24f9c4bf57038d4a076118fc12e79f
+Author: Efrat Meir <efratoosh44@gmail.com>
+Date:   Wed Dec 6 22:18:18 2017 +0200
+
+    new classes: Connecter, RemotePlayer, Server
+
+commit 19eabef6c486f1c32a59509d207d499c8eb06c49
+Author: Keren levy <kerenle2@hotmail.com>
+Date:   Thu Nov 30 15:00:52 2017 +0200
+
+    changed makefile
+
+commit a8f5f24aa0626e01c614e4c6ba2e68d37d623489
+Merge: 35b614d 910caeb
+Author: Efrat Meir <efratoosh44@gmail.com>
+Date:   Wed Nov 29 20:27:04 2017 +0200
+
+    added ComputerPlayer_test, updated previus tests, merged
+
+commit 35b614d70d5ea469df9b1f7095c4d82954460a15
+Author: Efrat Meir <efratoosh44@gmail.com>
+Date:   Wed Nov 29 20:01:52 2017 +0200
+
+    added ComputerPlayer_test, updated previus tests
+
+commit 910caebffa347e17b347a9870c9143fa4e6bacf2
+Author: Keren levy <kerenle2@hotmail.com>
+Date:   Wed Nov 29 19:28:50 2017 +0200
+
+    fixed bugs
+
+commit 3cee61967984a2ea5ba5ac5120d6a6846ff6a2ad
+Author: Efrat Meir <efratoosh44@gmail.com>
+Date:   Wed Nov 29 12:54:34 2017 +0200
+
+    test fixtures - Fliper, MovesCalculator
+
+commit 93784076f9a485ba2b8025049045394ebdce55d0
+Author: Efrat Meir <efratoosh44@gmail.com>
+Date:   Wed Nov 29 12:49:25 2017 +0200
+
+    test fixtures - Fliper, MovesCalculator
+
+commit 836c8acac34ac3b9e16397a7a99524c14099b0bd
+Merge: 151fc1e 286d7ef
+Author: Keren levy <kerenle2@hotmail.com>
+Date:   Wed Nov 29 12:40:57 2017 +0200
+
+    added AI player and menu , merged
+
+commit 151fc1e1a1d6c43382674062e761dbcf0b1d1016
+Author: Keren levy <kerenle2@hotmail.com>
+Date:   Tue Nov 28 22:17:29 2017 +0200
+
+    added AI player and menu
+
+commit 286d7ef763ad0775748e478d22a858d387cedf8c
+Author: Efrat Meir <efratoosh44@gmail.com>
+Date:   Tue Nov 28 01:29:27 2017 +0200
+
+    added tests for Fliper, Board
+
+commit cda5d855e8ca955faf1f1ac18e581092eb1e3a1a
+Merge: 9ed535d 741d5cd
+Author: Efrat Meir <efratoosh44@gmail.com>
+Date:   Mon Nov 27 18:12:50 2017 +0200
+
+    changed Fliper. organization n dirctories, befor tests, merged
+
+commit 9ed535d27726d7c5364f8e76e9d48b3ca9973ed6
+Author: Efrat Meir <efratoosh44@gmail.com>
+Date:   Mon Nov 27 17:38:59 2017 +0200
+
+    changed Fliper. organization n dirctories, befor tests
+
+commit 741d5cdbfbd8eda7328808bce7c1b9a74d53fbe4
+Author: Keren levy <kerenle2@hotmail.com>
+Date:   Mon Nov 27 16:59:45 2017 +0200
+
+    update Player's initialize, fix the duplicate move's options
+
+commit e9ad69b90e8734b6708201adf5d21459d52d34dd
+Author: Keren levy <kerenle2@hotmail.com>
+Date:   Sat Nov 25 19:45:35 2017 +0200
+
+    added gtest
+
+commit 7e1da47e2e93f80b40e1d46d6509686650dd4709
+Author: Efrat Meir <efratoosh44@gmail.com>
+Date:   Sat Nov 25 15:33:54 2017 +0200
+
+    uploaded ex2 version

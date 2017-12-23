@@ -4,11 +4,13 @@
 
 #ifndef GAMEFLOW_H_
 #define GAMEFLOW_H_
-#include <Board.h>
-#include <HumenPlayer.h>
-#include <ComputerPlayer.h>
-#include <Player.h>
-#include <TurnBase.h>
+#include "Console.h"
+
+#include "Board.h"
+#include "HumenPlayer.h"
+#include "ComputerPlayer.h"
+#include "Player.h"
+#include "TurnBase.h"
 #include "Connecter.h"
 #include <vector>
 

@@ -2,7 +2,7 @@
  * GameFlow.cpp
  */
 
-#include <GameFlow.h>
+#include "GameFlow.h"
 #include "RemotePlayer.h"
 #include <string>
 #include <sstream>
@@ -16,13 +16,14 @@ GameFlow::GameFlow() {
 
 void GameFlow::initialize() {
 	//PointsCounter counter = PointsCounter();
-	Board b = Board(8,8);
-
+	int board_size = 6;
+	Board b = Board(board_size);
+	Console console = Console(b);
 //	indexes are -1 because the array start from 0
-	b.setPoint(Point(4 - 1, 4 - 1, b.white_player));
-	b.setPoint(Point(5 - 1, 5 - 1, b.white_player));
-	b.setPoint(Point(4 - 1, 5 - 1, b.black_player));
-	b.setPoint(Point(5 - 1, 4 - 1, b.black_player));
+	b.setPoint(Point(board_size/2 -1, board_size/2 - 1, b.white_player));
+	b.setPoint(Point(board_size/2 + 1 - 1, board_size/2 + 1 - 1, b.white_player));
+	b.setPoint(Point(board_size/2 - 1, board_size/2 + 1 - 1, b.black_player));
+	b.setPoint(Point(board_size/2 + 1 - 1, board_size/2 - 1, b.black_player));
 
 	bool is_remote_game = false;
 	Player* players[2];
@@ -47,20 +48,20 @@ void GameFlow::initialize() {
 
 		//wait until server will send a msg that we can start:
 		bool start_game = connecter.receieveStartGame();
-		this->turn_base = TurnBase(b, players, is_remote_game, connecter);
+		this->turn_base = TurnBase(b, players, is_remote_game, connecter, console);
 	}
 
 	if (chosen_player == 'c' || chosen_player == 'C'){
 		players[0] = new HumenPlayer('X');
 		players[1] = new ComputerPlayer('O');
-		this->turn_base = TurnBase(b, players, is_remote_game);
+		this->turn_base = TurnBase(b, players, is_remote_game, console);
 	}
 
 	else if (chosen_player == 'h' || chosen_player == 'H'){
 		//chosen player is a human player
 		players[0] = new HumenPlayer('X');
 		players[1] = new HumenPlayer('O');
-		this->turn_base = TurnBase(b, players, is_remote_game);
+		this->turn_base = TurnBase(b, players, is_remote_game, console);
 	}
 }
 int GameFlow::initializeConnecter(Connecter& connecter) {

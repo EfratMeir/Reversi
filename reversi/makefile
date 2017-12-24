@@ -4,4 +4,4 @@ a.out: compileAll
 	rm -f *.o
 
 compileAll: include/*.h src/*.cpp
-	g++ -Wall -Wextra -Iinclude/ -c src/*.cpp
+	g++ -Iinclude/ -c src/*.cpp

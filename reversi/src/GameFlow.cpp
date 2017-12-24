@@ -32,7 +32,7 @@ void GameFlow::initialize() {
 		const char* IP = convertStringToChar(readFromFile("IP"));
 		Connecter connecter = Connecter((char*)IP, port);
 		initializeConnecter(connecter);
-		Player* remote_player = new RemotePlayer(connecter); // I HAVE NOT DELETED YET!!!! DO NOT FORGET
+		Player* remote_player = new RemotePlayer(connecter);
 		char remote_sign = remote_player->get_sign();
 		is_remote_game = true;
 		if (remote_sign == 'X'){
@@ -42,10 +42,11 @@ void GameFlow::initialize() {
 		else{
 			players[0] =  new HumenPlayer('X');
 			players[1] = remote_player;
+			cout << "Waiting for other player to join..." << endl;
 		}
 
 		//wait until server will send a msg that we can start:
-		bool start_game = connecter.recieveStartGame();
+		bool start_game = connecter.receieveStartGame();
 		this->turn_base = TurnBase(b, players, is_remote_game, connecter);
 	}
 
@@ -82,8 +83,6 @@ int GameFlow::convertStringToInt(string str){
 	 return c;
 }
 string GameFlow::readFromFile(string word){
-//	int port_num;
-//	int IP;
 	ifstream infile("reversi_settings.txt");
 	string line;
 	while (std::getline(infile, line)){
@@ -94,16 +93,10 @@ string GameFlow::readFromFile(string word){
 			   iss >> word_from_file;
 
 			   return word_from_file;
-//			   stringstream server(word_from_file);
-//			   server >> port_num;
-//			   return port_num;
 		   }
 		   if(word_from_file == "IP" && word == "IP"){
 			   iss >> word_from_file;
 			   return word_from_file;
-//			   stringstream ip(word_from_file);
-//			   ip >> IP;
-//			   return IP;
 		}
 			// error
 			if (!(iss >> word_from_file)) {
@@ -132,6 +125,8 @@ char GameFlow::choose_players(){
 void GameFlow::run() {
 	turn_base.play_game();
 	cout << "GAME IS OVER!" << endl << "THE WINNER IS: ";
+//	turn_base.connecter.sendPoint(Point(-1,-1,' ')); //send no point
+//	turn_base.connecter.sendNoMoves(1); //MAYBE TURNBASE NEED TO BE FRIEND CLASS
 	char winner = findWinner(turn_base);
 	if (winner == 'T') {
 		cout << "Tie! X & O have the same number of points";
@@ -146,7 +141,6 @@ void GameFlow::run() {
 GameFlow::~GameFlow() {
 
 }
-
 
 char GameFlow::findWinner(TurnBase turn_base) {
 	if (turn_base.getBoard().getCounter().getBlackCount() > turn_base.getBoard().getCounter().getWhiteCount()) {

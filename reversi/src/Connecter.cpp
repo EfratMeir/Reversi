@@ -66,9 +66,7 @@ void Connecter::connectToServer() {
 			sizeof(serverAddress)) == -1) {
 		throw "Error connecting to server";
 	}
-	cout << "Connected to server" << endl;
-
-
+//	cout << "Connected to server" << endl;
 
 }
 
@@ -110,6 +108,7 @@ int Connecter::receiveNumPlayer(){
 	if (n == -1) {
 		throw "Error reading point from socket";
 	}
+
 	return color;
 }
 Point Connecter::receivePoint() {
@@ -119,6 +118,10 @@ Point Connecter::receivePoint() {
 	if (n == -1) {
 		throw "Error reading row from sockcet";
 	}
+	//check if the other client disconnect, if so - now the server will know,
+	//cause the read command will return 0.
+	int dummy;
+	n = write(clientSocket, &dummy, sizeof(dummy));
 
 	n = read(clientSocket, &col, sizeof(col));
 	if (n == -1) {
@@ -149,6 +152,6 @@ bool Connecter::receieveStartGame() {
 	if (n == -1) {
 		throw "Error reading boolean start_the_game from socket";
 	}
-	cout << "2 players are now connected, we can start!" << endl;
+//	cout << "2 players are now connected, we can start!" << endl;
 	return start_the_game;
 }

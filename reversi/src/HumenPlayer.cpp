@@ -47,7 +47,7 @@ vector<Point> HumenPlayer::get_possible_moves(Board& board,
 	return options;
 }
 
-Point HumenPlayer::choose_best_move(vector<Point> options_list, Fliper flip, Board& board) {
+Point HumenPlayer::choose_best_move(vector<Point> options_list, Fliper flip, Board& board, Console& console) {
 	cout << "please choose your next step row,column" << endl;
 	char dummy;
 	int x;
@@ -94,7 +94,7 @@ char HumenPlayer::get_sign() {
 void HumenPlayer::set_sign(char sign){
 	this->sign = sign;
 }
-void HumenPlayer::play_next_step(Board& board, Point chosen_step) {
+void HumenPlayer::play_next_step(Board& board, Point chosen_step, Console& console) {
 	board.setPoint(chosen_step);
 }
 

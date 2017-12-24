@@ -36,7 +36,7 @@ char ComputerPlayer::get_sign() {
 void ComputerPlayer::set_sign(char sign){
 	this->sign = sign;
 }
-void ComputerPlayer::play_next_step(Board& board, Point chosen_step) {
+void ComputerPlayer::play_next_step(Board& board, Point chosen_step, Console& console) {
 	board.setPoint(chosen_step);
 }
 char ComputerPlayer::get_opp_sign(){
@@ -57,6 +57,7 @@ vector<Point> ComputerPlayer::get_possible_moves(Board& board,
 	this->no_moves = false;
 	vector<Point> options = moves_calculator.calc_moves(board, sign);
 	if (options.size() == 0 && !rival_turn) {
+
 		cout << sign <<", you have no possible moves." << endl;
 		this->no_moves = true;
 		return options;
@@ -71,7 +72,7 @@ void ComputerPlayer::setOpponentLastMove(Point opponent_last_move) {
 	this->opponent_last_move = p;
 }
 
-Point ComputerPlayer::choose_best_move(vector<Point> options_list, Fliper fliper, Board& board) {
+Point ComputerPlayer::choose_best_move(vector<Point> options_list, Fliper fliper, Board& board, Console& console) {
 	vector<Point>::iterator it;
 //	cout << "its O's turn"<< endl;
 	//the best score the rival(human) can get is 64
@@ -79,7 +80,7 @@ Point ComputerPlayer::choose_best_move(vector<Point> options_list, Fliper fliper
 	Point best_move_comp = Point(0, 0, this->sign);
 	for (it = options_list.begin(); it != options_list.end(); ++it ) {
 		Point point = *it;
-		int score = rate_move(point, fliper, board);
+		int score = rate_move(point, fliper, board, console);
 		//if the human got less points in this move, make this move to be the best move for the computer
 		if (score < low_score_human){
 			low_score_human = score;
@@ -87,14 +88,15 @@ Point ComputerPlayer::choose_best_move(vector<Point> options_list, Fliper fliper
 		}
 	}
 	best_move_comp = Point(best_move_comp.get_row(),best_move_comp.get_col(), this->sign);
-	cout << "O' chose to play " << "(" << best_move_comp.get_row() + 1<< "," << best_move_comp.get_col() + 1 << "): " << endl;
+	console.printChosenMove('O', best_move_comp.get_row() + 1, best_move_comp.get_col() + 1);
+//	cout << "O' chose to play " << "(" << best_move_comp.get_row() + 1<< "," << best_move_comp.get_col() + 1 << "): " << endl;
 	return best_move_comp;
 }
-int ComputerPlayer::rate_move(Point point, Fliper fliper, Board& board){
+int ComputerPlayer::rate_move(Point point, Fliper fliper, Board& board, Console& console){
 	Board temp_b = Board();
 	temp_b = board;
 	point.set_sign(this->sign);
-	play_next_step(temp_b, point);
+	play_next_step(temp_b, point, console);
 	fliper.flip(temp_b, point, this->sign);
 	//now its the rival turn
 	rival_turn = true;
@@ -113,7 +115,7 @@ int ComputerPlayer::rate_move(Point point, Fliper fliper, Board& board){
 		Board initial_b = temp_b;
 		Point p = *it;
 		p.set_sign(this->sign);
-		play_next_step(initial_b, p);
+		play_next_step(initial_b, p, console);
 		fliper.flip(initial_b, p, p.get_sign());
 		//initial_b.pPrint();
 		int score = initial_b.getCounter().getBlackCount() - initial_b.getCounter().getWhiteCount();

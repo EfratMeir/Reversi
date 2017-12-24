@@ -42,14 +42,15 @@ void TurnBase::play_game() {
 		this->console.printNowTurn( players[i]->get_sign());
 		//cout << "its " << players[i]->get_sign() << "'s turn." << endl;
 		Point chosen_point = players[i]->play_one_turn(board, fliper, this->console); //needed any changes here?? after adding remote...
-		if (remote_game) {
-			//update the other player about what the human played:
-			players[j]->setOpponentLastMove(chosen_point);
-		}
+
 		if (board.getCounter().getBlackCount() == 0 || board.getCounter().getWhiteCount() == 0){
 			this->connecter.sendPoint(Point(-1,-1,' ')); //send no point
 			this->connecter.sendNoMoves(1);
 			return;
+		}
+		if (remote_game) {
+			//update the other player about what the human played:
+			players[j]->setOpponentLastMove(chosen_point);
 		}
 		fliper.flip(board, chosen_point, chosen_point.get_sign());
 		this->console.printBoard();
@@ -63,7 +64,6 @@ void TurnBase::play_game() {
 	if (this->remote_game){
 		this->connecter.sendPoint(Point(-1,-1,' '));
 		this->connecter.sendNoMoves(true);
-
 	}
 }
 TurnBase::~TurnBase() {

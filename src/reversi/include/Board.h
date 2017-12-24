@@ -25,6 +25,7 @@ public:
 	Board(int board_size);
 //	int size;
 	Point** all_players_list;
+	void deleteBoard();
 	/**
 	 * prints the default game board.
 	 */

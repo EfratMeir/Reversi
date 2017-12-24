@@ -10,32 +10,14 @@ using namespace std;
 #include <vector>
 
 Board::Board() {
-	this->board_size = 6;
-//	this->num_cols = SIZE;
-//	this->num_rows = SIZE;
+	this->board_size = 8; //Default size
 	this->counter = PointsCounter();
-	this->all_players_list = new Point*[this->board_size];
-
-	//points arr:
-
-		for (int i = 0; i < this->board_size; i++) {
-			all_players_list[i] = new Point[this->board_size];
-			for (int j = 0; j < this->board_size; j++) {
-				all_players_list[i][j] = Point(i, j, blank);
-			}
-		}
-
-
+	this->all_players_list = 0;
 }
 Board::Board(int board_size) {
 	this->board_size = board_size;
-//this-> num_rows = rows;
-//	this-> num_cols = cols;
 	this->counter = PointsCounter();
 	this->all_players_list = new Point*[this->board_size];
-
-//points arr:
-
 	for (int i = 0; i < this->board_size; i++) {
 		all_players_list[i] = new Point[this->board_size];
 		for (int j = 0; j < this->board_size; j++) {
@@ -44,7 +26,12 @@ Board::Board(int board_size) {
 	}
 }
 
-
+void Board::deleteBoard(){
+	for (int i = 0; i < this->board_size; i++) {
+		delete[] all_players_list[i];
+	}
+	delete[] all_players_list;
+}
 void Board::setPoint(Point p) {
 	int row = p.get_row();
 	int col = p.get_col();

@@ -16,7 +16,7 @@ GameFlow::GameFlow() {
 
 void GameFlow::initialize() {
 	//PointsCounter counter = PointsCounter();
-	int board_size = 6;
+	int board_size = 8;
 	Board b = Board(board_size);
 	Console console = Console(b);
 //	indexes are -1 because the array start from 0
@@ -126,6 +126,7 @@ char GameFlow::choose_players(){
 void GameFlow::run() {
 	turn_base.play_game();
 	cout << "GAME IS OVER!" << endl << "THE WINNER IS: ";
+
 //	turn_base.connecter.sendPoint(Point(-1,-1,' ')); //send no point
 //	turn_base.connecter.sendNoMoves(1); //MAYBE TURNBASE NEED TO BE FRIEND CLASS
 	char winner = findWinner(turn_base);
@@ -135,6 +136,7 @@ void GameFlow::run() {
 	else {
 		cout << winner << endl;
 	}
+	turn_base.getBoard().deleteBoard();
 	delete turn_base.get_players()[0];
 	delete turn_base.get_players()[1];
 }

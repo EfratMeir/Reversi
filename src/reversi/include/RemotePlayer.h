@@ -81,7 +81,7 @@ private:
 	 * @param board - board reference
 	 * @param chosen_step - the point that shows the chosen step
 	 */
-	virtual void play_next_step(Board& board, Point chosen_step);
+	virtual void play_next_step(Board& board, Point chosen_step, Console& console);
 	/**
 	 * checks for all the possible moves.
 	 * @param board - board reference
@@ -95,7 +95,7 @@ private:
 	 * @param options_list - a vector of all the options
 	 * @return - the chosen point
 	 */
-	virtual Point choose_best_move(vector<Point> options_list, Fliper fliper, Board& board);
+	virtual Point choose_best_move(vector<Point> options_list, Fliper fliper, Board& board, Console& console);
 	int initializeConnecter();
 
 };

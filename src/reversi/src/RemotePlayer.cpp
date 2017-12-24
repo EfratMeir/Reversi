@@ -78,14 +78,15 @@ RemotePlayer::RemotePlayer(Connecter& connecter) {
 //}
 
 
-void RemotePlayer::play_next_step(Board& board, Point chosen_step) {
+void RemotePlayer::play_next_step(Board& board, Point chosen_step, Console& console) {
 	int row = chosen_step.get_row();
 	int col = chosen_step.get_col();
 	board.setPoint(Point(row,col, chosen_step.get_sign()));
 	cout << this->get_sign() << " chose to play: ";
 	chosen_step.printValuesPlusOne();
 	cout << endl;
-	board.pPrint();
+	console.printBoard();
+//board.pPrint();
 	cout << endl;
 }
 
@@ -105,7 +106,7 @@ vector<Point> RemotePlayer::get_possible_moves(Board& board,
 }
 
 Point RemotePlayer::choose_best_move(vector<Point> options_list, Fliper fliper,
-		Board& board) {
+		Board& board, Console& console) {
 	return options_list[0];
 }
 

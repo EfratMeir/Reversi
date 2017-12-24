@@ -10,6 +10,7 @@
 #include <Player.h>
 #include <Point.h>
 #include <Fliper.h>
+#include "Console.h"
 
 #include <vector>
 
@@ -27,7 +28,7 @@ public:
 	* board - an initialized board reference
 	* this function checks for options, chooses and adds the new move to the board
 	*/
-	virtual Point play_one_turn(Board& board, Fliper fliper);
+	virtual Point play_one_turn(Board& board, Fliper fliper, Console& console);
 	virtual char get_sign() = 0;
 	virtual void set_sign(char sign) = 0;
 	virtual bool get_no_moves() = 0;
@@ -41,7 +42,7 @@ public:
 		* @param board - board reference
 		* @param chosen_step - the point that shows the chosen step
 		*/
-		virtual void play_next_step(Board& board, Point chosen_step) = 0;
+		virtual void play_next_step(Board& board, Point chosen_step, Console& console) = 0;
 	/*
 	 * destructor
 	 */
@@ -65,7 +66,7 @@ private:
 	* @param options_list - a vector of all the options
 	* @return - the chosen point
 	*/
-	virtual Point choose_best_move(vector<Point> options_list, Fliper flip, Board& board) = 0;
+	virtual Point choose_best_move(vector<Point> options_list, Fliper flip, Board& board, Console& console) = 0;
 
 
 

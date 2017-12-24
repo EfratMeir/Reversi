@@ -54,14 +54,14 @@ void Fliper::checkAndUpdateUp(Point chosen_point, Board board, char flip_to) {
 	int col = chosen_point.get_col();
 	int i = 1;
 	while (true) {
-	if (row - i >= 0 && board.parr[row - i][col].get_sign() == opp_sign) {
-		temp.push_back(board.parr[row - i][col]);
+	if (row - i >= 0 && board.all_players_list[row - i][col].get_sign() == opp_sign) {
+		temp.push_back(board.all_players_list[row - i][col]);
 		i++;
 	}
 	else
 		break;
 	}
-	if (row - i >=0 && board.parr[row - i][col].get_sign() == sign) {
+	if (row - i >=0 && board.all_players_list[row - i][col].get_sign() == sign) {
 		if (temp.size() > 0) {
 		addVecToVec(temp, this->points_to_flip);
 		}
@@ -78,14 +78,14 @@ void Fliper::checkAndUpdateDown(Point chosen_point, Board board, char flip_to) {
 	int col = chosen_point.get_col();
 	int i = 1;
 	while (true) {
-	if (row + i <= board.getNumRows() && board.parr[row + i][col].get_sign() == opp_sign) {
-		temp.push_back(board.parr[row + i][col]);
+	if (row + i <= board.getBoardSize() && board.all_players_list[row + i][col].get_sign() == opp_sign) {
+		temp.push_back(board.all_players_list[row + i][col]);
 		i++;
 	}
 	else
 		break;
 		}
-	if (row + i <= board.getNumRows() && board.parr[row + i][col].get_sign() == sign) {
+	if (row + i <= board.getBoardSize() && board.all_players_list[row + i][col].get_sign() == sign) {
 		if (temp.size() > 0) {
 			addVecToVec(temp, this->points_to_flip);
 		}
@@ -100,14 +100,14 @@ void Fliper::checkAndUpdateRight(Point chosen_point, Board board, char flip_to) 
 	int col = chosen_point.get_col();
 	int i = 1;
 	while (true) {
-	if (col + i <= board.getNumCols() && board.parr[row][col + i].get_sign() == opp_sign) {
-		temp.push_back(board.parr[row][col + i]);
+	if (col + i <= board.getBoardSize() && board.all_players_list[row][col + i].get_sign() == opp_sign) {
+		temp.push_back(board.all_players_list[row][col + i]);
 		i++;
 	}
 	else
 		break;
 		}
-	if (col + i <= board.getNumCols() && board.parr[row][col + i].get_sign() == sign) {
+	if (col + i <= board.getBoardSize() && board.all_players_list[row][col + i].get_sign() == sign) {
 		if (temp.size() > 0) {
 			addVecToVec(temp, this->points_to_flip);
 		}
@@ -121,14 +121,14 @@ void Fliper::checkAndUpdateLeft(Point chosen_point, Board board, char flip_to) {
 	int col = chosen_point.get_col();
 	int i = 1;
 	while (true) {
-	if (col - i >= 0 && board.parr[row][col - i].get_sign() == opp_sign) {
-		temp.push_back(board.parr[row][col - i]);
+	if (col - i >= 0 && board.all_players_list[row][col - i].get_sign() == opp_sign) {
+		temp.push_back(board.all_players_list[row][col - i]);
 		i++;
 	}
 	else
 		break;
 		}
-	if (col - i >= 0 && board.parr[row][col - i].get_sign() == flip_to) {
+	if (col - i >= 0 && board.all_players_list[row][col - i].get_sign() == flip_to) {
 		if (temp.size() > 0) {
 			addVecToVec(temp, this->points_to_flip);
 		}
@@ -142,15 +142,15 @@ void Fliper::checkAndUpdateUpRight(Point chosen_point, Board board, char flip_to
 	int col = chosen_point.get_col();
 	int i = 1;
 	while (true) {
-	if (row - i >= 0 && col + i <= board.getNumCols() && board.parr[row - i][col + i].get_sign() == opp_sign) {
-		temp.push_back(board.parr[row - i][col + i]);
+	if (row - i >= 0 && col + i <= board.getBoardSize() && board.all_players_list[row - i][col + i].get_sign() == opp_sign) {
+		temp.push_back(board.all_players_list[row - i][col + i]);
 		i++;
 	}
 	else
 		break;
 		}
-	if (row - i >= 0 && col + i <= board.getNumCols()
-			&& board.parr[row - i][col + i].get_sign() == flip_to) {
+	if (row - i >= 0 && col + i <= board.getBoardSize()
+			&& board.all_players_list[row - i][col + i].get_sign() == flip_to) {
 		if (temp.size() > 0) {
 			addVecToVec(temp, this->points_to_flip);
 		}
@@ -164,14 +164,14 @@ void Fliper::checkAndUpdateUpLeft(Point chosen_point, Board board, char flip_to)
 	int col = chosen_point.get_col();
 	int i = 1;
 	while (true) {
-	if (row - i >= 0 && col - i >= 0 && board.parr[row - i][col - i].get_sign() == opp_sign) {
-		temp.push_back(board.parr[row - i][col - i]);
+	if (row - i >= 0 && col - i >= 0 && board.all_players_list[row - i][col - i].get_sign() == opp_sign) {
+		temp.push_back(board.all_players_list[row - i][col - i]);
 		i++;
 	}
 	else
 		break;
 		}
-	if (row - i >= 0 && col - i >= 0 && board.parr[row - i][col - i].get_sign() == flip_to) {
+	if (row - i >= 0 && col - i >= 0 && board.all_players_list[row - i][col - i].get_sign() == flip_to) {
 		if (temp.size() > 0) {
 			addVecToVec(temp, this->points_to_flip);
 		}
@@ -185,16 +185,16 @@ void Fliper::checkAndUpdateDownRight(Point chosen_point, Board board, char flip_
 	int col = chosen_point.get_col();
 	int i = 1;
 	while (true) {
-	if (row + i <= board.getNumRows() && col + i <= board.getNumCols() &&
-			board.parr[row + i][col + i].get_sign() == opp_sign) {
-		temp.push_back(board.parr[row + i][col + i]);
+	if (row + i <= board.getBoardSize() && col + i <= board.getBoardSize() &&
+			board.all_players_list[row + i][col + i].get_sign() == opp_sign) {
+		temp.push_back(board.all_players_list[row + i][col + i]);
 		i++;
 	}
 	else
 		break;
 		}
-	if (row + i <= board.getNumRows() && col + i <= board.getNumCols() &&
-			board.parr[row + i][col + i].get_sign() == flip_to) {
+	if (row + i <= board.getBoardSize() && col + i <= board.getBoardSize() &&
+			board.all_players_list[row + i][col + i].get_sign() == flip_to) {
 		if (temp.size() > 0) {
 			addVecToVec(temp, this->points_to_flip);
 		}
@@ -208,16 +208,16 @@ void Fliper::checkAndUpdateDownLeft(Point chosen_point, Board board, char flip_t
 	int col = chosen_point.get_col();
 	int i = 1;
 	while (true) {
-	if (row + i <= board.getNumRows() && col - i >= 0 &&
-			board.parr[row + i][col - i].get_sign() == opp_sign) {
-		temp.push_back(board.parr[row + i][col - i]);
+	if (row + i <= board.getBoardSize() && col - i >= 0 &&
+			board.all_players_list[row + i][col - i].get_sign() == opp_sign) {
+		temp.push_back(board.all_players_list[row + i][col - i]);
 		i++;
 	}
 	else
 		break;
 		}
-	if (row + i <= board.getNumRows() && col - i >= 0 &&
-			board.parr[row + i][col - i].get_sign() == flip_to) {
+	if (row + i <= board.getBoardSize() && col - i >= 0 &&
+			board.all_players_list[row + i][col - i].get_sign() == flip_to) {
 		if (temp.size() > 0) {
 			addVecToVec(temp, this->points_to_flip);
 		}

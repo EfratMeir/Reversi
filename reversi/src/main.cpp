@@ -21,6 +21,6 @@ using namespace std;
 
 int main() {
 	GameFlow game = GameFlow();
-	game.initialize();
+//	game.initialize();
 	game.run();
 }

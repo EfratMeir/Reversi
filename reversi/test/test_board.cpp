@@ -10,7 +10,7 @@
 
 
 	int size = 8;
-	Board b = Board(size, size);
+	Board b = Board(size);
 TEST(BoardTest, checkIsFull) {
 
 	for (int i = 0; i < size; i++) {
@@ -30,7 +30,7 @@ TEST(BoardTest, checkIsFull) {
 
 TEST(BoardTest, counterUpdatedWhenSetPoint) {
 	int size = 8;
-	Board b = Board(size, size);
+	Board b = Board(size);
 	for (int i = 0; i < size; i++) {
 		for (int j = 0; j < size; j++) {
 			b.setPoint(Point(i,j, 'X'));

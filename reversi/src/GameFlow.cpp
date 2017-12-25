@@ -38,7 +38,7 @@ void GameFlow::initialize(Board& b, Console& console) {
 		const char* IP = convertStringToChar(readFromFile("IP"));
 		Connecter connecter = Connecter((char*)IP, port);
 		initializeConnecter(connecter);
-		Player* remote_player = new RemotePlayer(connecter); // I HAVE NOT DELETED YET!!!! DO NOT FORGET
+		Player* remote_player = new RemotePlayer(connecter);
 		char remote_sign = remote_player->get_sign();
 		is_remote_game = true;
 		if (remote_sign == 'X'){

@@ -121,20 +121,22 @@ void Server::handleClient(int clientSocket1, int clientSocket2) {
 	while (true) { //I didn't send any "end" msg yet... do not forget
 
 	//read the first move from the first player and write to the second
-//	int n = read(clientSocket1, &end1, sizeof(end1));
-//	if (n == -1) {
-//		cout << "Error reading end1" << endl;
-//		return;
-//	}
-//
-//	n = read(clientSocket2, &end2, sizeof(end2));
-//	if (n == -1) {
-//		cout << "Error reading end2" << endl;
-//		return;
-//	}
+
 	n = write(clientsSockets[j], &row, sizeof(row));
 	if (n == -1) {
 		cout << "Error writing row" << endl;
+		return;
+	}
+	//check if the client disconnected, if so - disconnect the other player.
+	int dummy = -3;
+	n = read(clientsSockets[j], &dummy, sizeof(dummy));
+	if (n == -1) {
+		cout << "Error reading row" << endl;
+		return;
+		}
+	if (n == 0) {
+		cout << "Client disconnected" << endl;
+		close(clientsSockets[i]);
 		return;
 	}
 	n = write(clientsSockets[j], &col, sizeof(col));
@@ -198,6 +200,5 @@ void Server::notifyGameStarts(int clientSocket1, int clientSocket2) {
 	}
 
 }
-
 
 

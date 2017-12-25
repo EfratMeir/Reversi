@@ -14,7 +14,7 @@
 class Display {
 public:
 	Display();
-	virtual void printBoard() = 0;
+	virtual void printBoard(Board& b) = 0;
 	virtual ~Display();
 };
 

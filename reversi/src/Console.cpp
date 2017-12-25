@@ -11,9 +11,7 @@ Console::Console() {
 	// TODO Auto-generated constructor stub
 
 }
-Console::Console(Board& board){
-	this->board = board;
-}
+
 void Console::printConnectToServer(){
 	cout << "Connected to server" << endl;
 }
@@ -62,33 +60,33 @@ void Console::printWinner(char winner){
 		cout << winner << endl;
 	}
 }
-void Console:: printBoard(){
+void Console:: printBoard(Board& board){
 	// i - index for rows
 	// j - index for columns
-	Point** all_players = this->board.getAllPlayers();
-	for (int i = 0; i < this->board.getBoardSize() ; i++) {
+//	Point** all_players = board.getAllPlayers();
+	for (int i = 0; i < board.getBoardSize() ; i++) {
 		cout << " | " << i +1 ;
 	}
 	cout << " |" << endl;
-	for (int i = 0; i < 2 + (4 * this->board.getBoardSize()); i++){
+	for (int i = 0; i < 2 + (4 * board.getBoardSize()); i++){
 		cout << "-";
 	}
 	cout << endl;
 
-	for (int i = 0; i < this->board.getBoardSize(); i++) {
-		for (int j = 0; j < this->board.getBoardSize() + 1; j++) {  //size + 1 because  of the rows indexes
+	for (int i = 0; i < board.getBoardSize(); i++) {
+		for (int j = 0; j < board.getBoardSize() + 1; j++) {  //size + 1 because  of the rows indexes
 			if (j == 0) {
 				cout << i + 1;
 			}
-			if (j == this->board.getBoardSize()) {
+			if (j == board.getBoardSize()) {
 				cout << "| " << endl ;
-				for (int i = 0; i < 2 + (4 * this->board.getBoardSize()); i++){
+				for (int i = 0; i < 2 + (4 * board.getBoardSize()); i++){
 						cout << "-";
 					}
 				cout << endl;
 			}
 			else {
-				cout << "| " << all_players[i][j].get_sign() << " ";
+				cout << "| " << board.all_players_list[i][j].get_sign() << " ";
 			}
 		}
 	}

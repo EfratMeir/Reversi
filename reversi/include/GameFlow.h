@@ -48,7 +48,7 @@ private:
 	 * checks the winner of the game.
 	 * @return - the sign of the win player.
 	 */
-	char findWinner(TurnBase turn_base);
+	char findWinner(TurnBase& turn_base);
 	/**
 	 * converts string to int
 	 * @param str the string

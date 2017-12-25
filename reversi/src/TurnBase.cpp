@@ -10,6 +10,7 @@
 TurnBase::TurnBase() {
 	this->fliper = Fliper();
 	this->remote_game = false;
+	this->board = Board();
 }
 TurnBase::TurnBase(Board& board, Player** players, bool is_reomte_game, Console& console) {
 	this->board = board;
@@ -36,7 +37,7 @@ void TurnBase::play_game() {
 	int j = 1;
 
 	cout << "this is the initial board:" << endl;
-	this->console.printBoard();
+	this->console.printBoard(board);
 	while(!board.isFull() && (!(players[0]->get_no_moves() && players[1]->get_no_moves()))) {
 		this->console.printNowTurn( players[i]->get_sign());
 		Point chosen_point = players[i]->play_one_turn(board, fliper, this->console); //needed any changes here?? after adding remote...
@@ -54,7 +55,7 @@ void TurnBase::play_game() {
 			return ;
 		}
 		fliper.flip(board, chosen_point, chosen_point.get_sign());
-		this->console.printBoard();
+		this->console.printBoard(board);
 		this->console.printCounter(board.getCounter());
 
 		i = i > 0 ? 0 : 1;

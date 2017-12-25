@@ -2,35 +2,31 @@
  * Board.cpp
  */
 
-#include "Board.h"
+#include <Board.h>
 #include <Point.h>
 #include <iostream>
 #include <string.h>
 using namespace std;
+#define SIZE 8
 #include <vector>
 
 Board::Board() {
-	this->board_size = 8; //Default size
+	this->board_size = SIZE;
 	this->counter = PointsCounter();
-	this->all_players_list = 0;
+	for (int i = 0; i < this->board_size; i++) {
+		for (int j = 0; j < this->board_size; j++) {
+			this->all_players_list[i][j] = Point(i, j, blank);
+		}
+	}
 }
 Board::Board(int board_size) {
-	this->board_size = board_size;
+	this-> board_size = board_size;
 	this->counter = PointsCounter();
-	this->all_players_list = new Point*[this->board_size];
 	for (int i = 0; i < this->board_size; i++) {
-		all_players_list[i] = new Point[this->board_size];
 		for (int j = 0; j < this->board_size; j++) {
 			all_players_list[i][j] = Point(i, j, blank);
 		}
 	}
-}
-
-void Board::deleteBoard(){
-	for (int i = 0; i < this->board_size; i++) {
-		delete[] all_players_list[i];
-	}
-	delete[] all_players_list;
 }
 void Board::setPoint(Point p) {
 	int row = p.get_row();
@@ -42,11 +38,9 @@ void Board::setPoint(Point p) {
 		this->counter.add_one(sign);
 	}
 }
-Point** Board::getAllPlayers(){
-	return all_players_list;
-}
+
 bool Board::isFull() {
-	int capacity = this->board_size * this->board_size ; //* this->board_size;
+	int capacity = board_size * board_size;
 	return counter.getBlackCount() + counter.getWhiteCount() >= capacity;
 
 }

@@ -34,7 +34,7 @@ public:
 	/*
 	 * checks if 2 points has the same row & col values
 	 */
-	bool isSamePoint(Point other);
+	bool isSamePoint(Point& other);
 	/*
 	 * prints the current sign of the point
 	 */

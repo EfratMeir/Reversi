@@ -13,7 +13,7 @@
 GameFlow::GameFlow() {
 	int board_size = 8;
 	Board b = Board(board_size);
-	Console console = Console(b);
+	Console console = Console();
 	this->initialize(b, console);
 }
 
@@ -146,7 +146,7 @@ void GameFlow::run() {
 //	else {
 //		cout << winner << endl;
 //	}
-	turn_base.getBoard().deleteBoard();
+//	turn_base.getBoard().deleteBoard();
 	delete turn_base.get_players()[0];
 	delete turn_base.get_players()[1];
 }
@@ -155,7 +155,7 @@ GameFlow::~GameFlow() {
 
 }
 
-char GameFlow::findWinner(TurnBase turn_base) {
+char GameFlow::findWinner(TurnBase& turn_base) {
 	if (turn_base.getBoard().getCounter().getBlackCount() > turn_base.getBoard().getCounter().getWhiteCount()) {
 		return 'X';
 	}

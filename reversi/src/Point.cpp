@@ -42,7 +42,7 @@ char Point::get_sign() {
 	return this->sign;
 }
 
-bool Point::isSamePoint(Point other) {
+bool Point::isSamePoint(Point& other) {
 	if (other.get_row() == row && other.get_col() == col) {
 		return true;
 	}

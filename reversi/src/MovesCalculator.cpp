@@ -28,7 +28,7 @@ bool MovesCalculator::allreadyInList(int row, int col) {
 	return false;
 }
 
-vector<Point> MovesCalculator::calc_moves(Board board, char this_player_sign) {
+vector<Point> MovesCalculator::calc_moves(Board& board, char this_player_sign) {
 //	vector<Point> options_list;
 	//initialize the list, erase all the last options
 	this->options_list.erase(this->options_list.begin(),
@@ -52,7 +52,7 @@ vector<Point> MovesCalculator::calc_moves(Board board, char this_player_sign) {
 	return options_list;
 }
 
-void MovesCalculator::checkRight(Board board, Point current_point,
+void MovesCalculator::checkRight(Board& board, Point& current_point,
 		char this_playr_sign, vector<Point>& options) {
 	if (current_point.get_sign() != this_playr_sign && current_point.get_sign()
 			!= board.blank) {
@@ -81,7 +81,7 @@ void MovesCalculator::checkRight(Board board, Point current_point,
 
 }
 
-void MovesCalculator::checkLeft(Board board, Point current_point,
+void MovesCalculator::checkLeft(Board& board, Point& current_point,
 		char this_playr_sign, vector<Point>& options) {
 	if (current_point.get_sign() != this_playr_sign && current_point.get_sign() != board.blank) {
 		int row = current_point.get_row();
@@ -108,7 +108,7 @@ void MovesCalculator::checkLeft(Board board, Point current_point,
 	}
 }
 
-void MovesCalculator::checkDown(Board board, Point current_point,
+void MovesCalculator::checkDown(Board& board, Point& current_point,
 		char this_playr_sign, vector<Point>& options) {
 	if (current_point.get_sign() != this_playr_sign && current_point.get_sign() != board.blank) {
 		int row = current_point.get_row();
@@ -133,7 +133,7 @@ void MovesCalculator::checkDown(Board board, Point current_point,
 	}
 }
 
-void MovesCalculator::checkUp(Board board, Point current_point,
+void MovesCalculator::checkUp(Board& board, Point& current_point,
 		char this_playr_sign, vector<Point>& options) {
 
 	if (current_point.get_sign() != this_playr_sign && current_point.get_sign() != board.blank) {
@@ -159,7 +159,7 @@ void MovesCalculator::checkUp(Board board, Point current_point,
 	}
 }
 
-void MovesCalculator::checkUpRightDiagonal(Board board, Point current_point,
+void MovesCalculator::checkUpRightDiagonal(Board& board, Point& current_point,
 		char this_playr_sign, vector<Point>& options) {
 
 	if (current_point.get_sign() != this_playr_sign && current_point.get_sign() != board.blank) {
@@ -186,7 +186,7 @@ void MovesCalculator::checkUpRightDiagonal(Board board, Point current_point,
 	}
 }
 
-void MovesCalculator::checkUpLeftDiagonal(Board board, Point current_point,
+void MovesCalculator::checkUpLeftDiagonal(Board& board, Point& current_point,
 		char this_playr_sign, vector<Point>& options) {
 
 	if (current_point.get_sign() != this_playr_sign && current_point.get_sign() != board.blank) {
@@ -213,7 +213,7 @@ void MovesCalculator::checkUpLeftDiagonal(Board board, Point current_point,
 	}
 }
 
-void MovesCalculator::checkDownRightDiagonal(Board board, Point current_point,
+void MovesCalculator::checkDownRightDiagonal(Board& board, Point& current_point,
 		char this_playr_sign, vector<Point>& options) {
 
 	if (current_point.get_sign() != this_playr_sign && current_point.get_sign() != board.blank) {
@@ -241,7 +241,7 @@ void MovesCalculator::checkDownRightDiagonal(Board board, Point current_point,
 
 
 
-void MovesCalculator::checkDownLeftDiagonal(Board board, Point current_point,
+void MovesCalculator::checkDownLeftDiagonal(Board& board, Point& current_point,
 		char this_playr_sign, vector<Point>& options) {
 
 	if (current_point.get_sign() != this_playr_sign && current_point.get_sign() != board.blank) {

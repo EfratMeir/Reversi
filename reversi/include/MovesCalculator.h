@@ -24,7 +24,7 @@ public:
 	 * possible moves, using all the "check directions" functions
 	 * @return - vector of points - options of moves
 	 */
-	vector<Point> calc_moves(Board board, char this_player_sign);
+	vector<Point> calc_moves(Board& board, char this_player_sign);
 	bool allreadyInList(int row, int col);
 	vector<Point> options_list;
 
@@ -37,14 +37,14 @@ public:
  * @this_player_sign - char
  * @options - a vector of options to add to.
  */
-	void checkRight(Board board, Point current_point, char this_playr_sign, vector<Point>& options);
-	void checkLeft(Board board, Point current_point, char this_playr_sign, vector<Point>& options);
-	void checkDown(Board board, Point current_point, char this_playr_sign, vector<Point>& options);
-	void checkUp(Board board, Point current_point, char this_playr_sign, vector<Point>& options);
-	void checkUpRightDiagonal(Board board, Point current_point, char this_playr_sign, vector<Point>& options);
-	void checkUpLeftDiagonal(Board board, Point current_point, char this_playr_sign, vector<Point>& options);
-	void checkDownRightDiagonal(Board board, Point current_point, char this_playr_sign, vector<Point>& options);
-	void checkDownLeftDiagonal(Board board, Point current_point, char this_playr_sign, vector<Point>& options);
+	void checkRight(Board& board, Point& current_point, char this_playr_sign, vector<Point>& options);
+	void checkLeft(Board& board, Point& current_point, char this_playr_sign, vector<Point>& options);
+	void checkDown(Board& board, Point& current_point, char this_playr_sign, vector<Point>& options);
+	void checkUp(Board& board, Point& current_point, char this_playr_sign, vector<Point>& options);
+	void checkUpRightDiagonal(Board& board, Point& current_point, char this_playr_sign, vector<Point>& options);
+	void checkUpLeftDiagonal(Board& board, Point& current_point, char this_playr_sign, vector<Point>& options);
+	void checkDownRightDiagonal(Board& board, Point& current_point, char this_playr_sign, vector<Point>& options);
+	void checkDownLeftDiagonal(Board& board, Point& current_point, char this_playr_sign, vector<Point>& options);
 
 	/*
 	 * destructor

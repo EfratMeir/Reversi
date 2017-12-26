@@ -5433,6 +5433,7 @@ UnitTest* UnitTest::GetInstance() {
   static UnitTest* const instance = new UnitTest;
   return instance;
 #else
+
   static UnitTest instance;
   return &instance;
 #endif  // (_MSC_VER == 1310 && !defined(_DEBUG)) || defined(__BORLANDC__)

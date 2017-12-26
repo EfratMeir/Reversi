@@ -40,7 +40,7 @@ public:
 	 * set the last move of the opponent player.
 	 * @param opponent_last_move
 	 */
-	virtual void setOpponentLastMove(Point opponent_last_move);
+	virtual void setOpponentLastMove(Point& opponent_last_move);
 	/**
 	 * get the last move of the opponent player.
 	 * @return
@@ -61,7 +61,7 @@ private:
 	 * @param board - board reference
 	 * @param chosen_step - the point that shows the chosen step
 	 */
-	virtual void play_next_step(Board& board, Point chosen_step, Console& console);
+	virtual void play_next_step(Board& board, Point& chosen_step, Console& console);
 	/**
 	 * checks for all the possible moves.
 	 * @param board - board reference
@@ -69,13 +69,13 @@ private:
 	 * @param this_player_sign - char
 	 * @return - a vector of points, all the possible moves.
 	 */
-	virtual vector<Point> get_possible_moves(Board& board, MovesCalculator moves_calculator);
+	virtual vector<Point> get_possible_moves(Board& board, MovesCalculator& moves_calculator);
 	/**
 	 * lets the human player choose the best move out of the possible moves
 	 * @param options_list - a vector of all the options
 	 * @return - the chosen point
 	 */
-	virtual Point choose_best_move(vector<Point> options_list, Fliper flip, Board& board, Console& console);
+	virtual Point choose_best_move(vector<Point> options_list, Fliper& flip, Board& board, Console& console);
 
 
 	/**
@@ -84,7 +84,7 @@ private:
 	 * @ options - a vector of all the possible points
 	 * @return true / false
 	 */
-	bool isAnOption(Point p, vector<Point> options);
+	bool isAnOption(Point& p, vector<Point> options);
 };
 
 #endif /* HUMENPLAYER_H_ */

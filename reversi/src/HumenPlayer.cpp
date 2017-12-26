@@ -21,7 +21,7 @@ bool HumenPlayer::get_no_moves(){
 	return this->no_moves;
 }
 
-void HumenPlayer::setOpponentLastMove(Point opponent_last_move) {
+void HumenPlayer::setOpponentLastMove(Point& opponent_last_move) {
 	int row = opponent_last_move.get_row();
 	int col = opponent_last_move.get_col();
 	Point p = Point(row,col, opponent_last_move.get_sign());
@@ -30,7 +30,7 @@ void HumenPlayer::setOpponentLastMove(Point opponent_last_move) {
 
 
 vector<Point> HumenPlayer::get_possible_moves(Board& board,
-		MovesCalculator moves_calculator) {
+		MovesCalculator& moves_calculator) {
 	this->no_moves = false;
 	vector<Point> options = moves_calculator.calc_moves(board, this->sign);
 	if (options.size() == 0) {
@@ -47,7 +47,7 @@ vector<Point> HumenPlayer::get_possible_moves(Board& board,
 	return options;
 }
 
-Point HumenPlayer::choose_best_move(vector<Point> options_list, Fliper flip, Board& board, Console& console) {
+Point HumenPlayer::choose_best_move(vector<Point> options_list, Fliper& flip, Board& board, Console& console) {
 	cout << "please choose your next step row,column" << endl;
 	char dummy;
 	int x;
@@ -94,13 +94,13 @@ char HumenPlayer::get_sign() {
 void HumenPlayer::set_sign(char sign){
 	this->sign = sign;
 }
-void HumenPlayer::play_next_step(Board& board, Point chosen_step, Console& console) {
+void HumenPlayer::play_next_step(Board& board, Point& chosen_step, Console& console) {
 	board.setPoint(chosen_step);
 }
 
 
 
-bool HumenPlayer::isAnOption(Point p, vector<Point> options) {
+bool HumenPlayer::isAnOption(Point& p, vector<Point> options) {
 	for (unsigned int i = 0; i < options.size(); i++) {
 		if (p.get_row() == options[i].get_row()
 				&& p.get_col() == options[i].get_col()) {

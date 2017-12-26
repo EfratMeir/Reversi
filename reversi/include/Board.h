@@ -7,7 +7,7 @@
 #include <Point.h>
 #include <PointsCounter.h>
 #include <iostream>
-//#define SIZE 6
+#define SIZE 8
 using namespace std;
 
 class Board {
@@ -23,9 +23,11 @@ public:
 	 * constructor.
 	 */
 	Board(int board_size);
+//	Board(const Board &cpyB);
 //	int size;
-	Point** all_players_list;
-	void deleteBoard();
+	Point all_players_list[SIZE][SIZE];
+//	void deleteBoard();
+//	Board& cpy();
 	/**
 	 * prints the default game board.
 	 */
@@ -35,13 +37,6 @@ public:
 	int getBoardSize() {
 		return board_size;
 	}
-//	int getNumCols() const {
-//		return num_cols;
-//	}
-//
-//	int getNumRows() const {
-//		return num_rows;
-//	}
 
 	PointsCounter& getCounter() {
 		return counter;
@@ -65,8 +60,6 @@ public:
 private:
 	PointsCounter counter;
 	int board_size;
-	//int num_cols;
-
 };
 
 #endif /* BOARD_H_ */

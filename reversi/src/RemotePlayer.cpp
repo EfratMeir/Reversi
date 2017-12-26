@@ -78,20 +78,20 @@ RemotePlayer::RemotePlayer(Connecter& connecter) {
 //}
 
 
-void RemotePlayer::play_next_step(Board& board, Point chosen_step, Console& console) {
+void RemotePlayer::play_next_step(Board& board, Point& chosen_step, Console& console) {
 	int row = chosen_step.get_row();
 	int col = chosen_step.get_col();
 	board.setPoint(Point(row,col, chosen_step.get_sign()));
 	cout << this->get_sign() << " chose to play: ";
 	chosen_step.printValuesPlusOne();
 	cout << endl;
-	console.printBoard();
+	console.printBoard(board);
 //board.pPrint();
 	cout << endl;
 }
 
 vector<Point> RemotePlayer::get_possible_moves(Board& board,
-		MovesCalculator moves_calculator) {
+		MovesCalculator& moves_calculator) {
 	if(!my_first_move || this->sign == 'O') { //MYABE X
 		connecter.sendMsg(this->opponent_last_move, opponent_has_no_move);
 	}
@@ -105,7 +105,7 @@ vector<Point> RemotePlayer::get_possible_moves(Board& board,
 	return chosen_move;
 }
 
-Point RemotePlayer::choose_best_move(vector<Point> options_list, Fliper fliper,
+Point RemotePlayer::choose_best_move(vector<Point> options_list, Fliper& fliper,
 		Board& board, Console& console) {
 	return options_list[0];
 }
@@ -153,7 +153,7 @@ Point RemotePlayer::getOpponentLastMove() {
 	return this->opponent_last_move;
 }
 
-void RemotePlayer::setOpponentLastMove(Point opponent_last_move) {
+void RemotePlayer::setOpponentLastMove(Point& opponent_last_move) {
 	int row = opponent_last_move.get_row();
 	int col = opponent_last_move.get_col();
 	Point p = Point(row,col, opponent_last_move.get_sign());

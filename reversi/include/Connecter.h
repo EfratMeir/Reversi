@@ -9,7 +9,7 @@
 #define CONNECTER_H_
 
 #include "Point.h"
-
+#include <vector>
 class Connecter {
 public:
 	/**
@@ -59,12 +59,26 @@ public:
 	 * @return
 	 */
 	int sendNoMoves(bool player_has_no_moves);
+
+	/**
+	 * receive a bool that the game can start
+	 * @return 1 if the game can start, else 0
+	 */
+	vector<string> receieveGamesTojoinList();
+
 	/**
 	 * send a point to server
 	 * @param p the point
 	 * @return
 	 */
 	int sendPoint(Point p);
+
+	/**
+	 * receive from server '1' if he is the first player, 2 if second.
+	 * @return the number
+	 */
+	int receiveStartCommandMsg();
+
 private:
 	//members
 	char *serverIP; //CHANGE FROM CONST CHAR* TO CHAR*

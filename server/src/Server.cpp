@@ -6,16 +6,19 @@
  */
 
 #include "Server.h"
+#include <vector>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <unistd.h>
 #include <string.h>
 #include <iostream>
 #include <stdio.h>
-#include <vector>
 
 using namespace std;
 #define MAX_CONNECTED_CLIENTS 2
+
+Server::Server() {
+}
 
 Server::Server(int port): port(port), serverSocket(0) {
 	cout << "Server" << endl;
@@ -51,7 +54,7 @@ void Server::start() {
 		int clientSocket = accept(serverSocket, (struct sockaddr *)&clientAddress, &clientAddressLen);
 		if (clientSocket == -1)
 			throw "Error on accept";
-		cout << "Client connected" << endl;
+		cout << "Client connected" << endl; //from here - to change....
 		//tell the client he is first
 		int  first = 1, second = 2;
 		int clientSocket2 = 0;
@@ -118,20 +121,8 @@ void Server::handleClient(int clientSocket1, int clientSocket2) {
 		return;
 	}
 
-	while (true) { //I didn't send any "end" msg yet... do not forget
+	while (true) {
 
-	//read the first move from the first player and write to the second
-//	int n = read(clientSocket1, &end1, sizeof(end1));
-//	if (n == -1) {
-//		cout << "Error reading end1" << endl;
-//		return;
-//	}
-//
-//	n = read(clientSocket2, &end2, sizeof(end2));
-//	if (n == -1) {
-//		cout << "Error reading end2" << endl;
-//		return;
-//	}
 	n = write(clientsSockets[j], &row, sizeof(row));
 	if (n == -1) {
 		cout << "Error writing row" << endl;
@@ -198,6 +189,12 @@ void Server::notifyGameStarts(int clientSocket1, int clientSocket2) {
 	}
 
 }
+
+
+
+
+
+
 
 
 

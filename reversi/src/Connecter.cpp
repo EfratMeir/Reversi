@@ -152,6 +152,39 @@ bool Connecter::receieveStartGame() {
 	if (n == -1) {
 		throw "Error reading boolean start_the_game from socket";
 	}
-//	cout << "2 players are now connected, we can start!" << endl;
 	return start_the_game;
 }
+
+vector<string> Connecter::receieveGamesTojoinList() {
+	int num;
+	vector<string> games_to_join_list;
+
+	int n = read(clientSocket, &num, sizeof(num));
+	if (n == -1) {
+		throw "Error reading num of games to join from socket";
+	}
+
+	for (int i = 0; i < num; i++) {
+		char* name;
+		int n = read(clientSocket, &name, sizeof(name)); //WORKS THIS WAY? OR ITS GO OVER THE PREVIOUS NAME? CHECK.
+		if (n == -1) {
+			throw "Error reading a game to join name from socket";
+		}
+		games_to_join_list.push_back(name);
+	}
+	return games_to_join_list;
+}
+
+int Connecter::receiveStartCommandMsg() {
+	int game_started;
+
+	int n = read(clientSocket, &game_started, sizeof(game_started));
+	if (n == -1) {
+		throw "Error reading the start command msg from socket";
+	}
+	return game_started;
+
+}
+
+
+

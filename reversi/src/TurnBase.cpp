@@ -29,7 +29,6 @@ TurnBase::TurnBase(Board& board, Player** players, bool is_reomte_game, Connecte
 	this->remote_game = is_reomte_game;
 	this->connecter = connecter;
 	this-> console = console;
-
 }
 
 void TurnBase::play_game() {

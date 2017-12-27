@@ -56,10 +56,10 @@ void GameFlow::startRemoteGame(Player* players[2], Board& b, Console& console){
 	const char* IP = convertStringToChar(readFromFile("IP"));
 	Connecter connecter = Connecter((char*)IP, port);
 	initializeConnecter(connecter);
-	enterCommand(console, connecter);
+	char remote_sign = enterCommand(console, connecter); //start or join or see all possible games
 
 	Player* remote_player = new RemotePlayer(connecter);
-	char remote_sign = remote_player->get_sign();
+//	char remote_sign = remote_player->get_sign();
 	is_remote_game = true;
 	if (remote_sign == 'X'){
 		players[0] = remote_player;
@@ -77,24 +77,35 @@ void GameFlow::startRemoteGame(Player* players[2], Board& b, Console& console){
 	this->turn_base.getConsole().canStart();
 	this->turn_base = TurnBase(b, players, is_remote_game, connecter, console);
 }
-void GameFlow::enterCommand(Console& console, Connecter& connecter){
+/**
+ * the function send a command to the server.
+ * @param console
+ * @param connecter
+ * return the sign of the *remote player.* if the command is start , the sign of the remote is o.
+ * if the ccommand is join the sign is x.
+ */
+char GameFlow::enterCommand(Console& console, Connecter& connecter){
 	console.printEnterCommand();
-//	string command_temp ;
-//	getline(cin >> ws, command_temp);
-//	const char* command = convertStringToChar(command_temp);
-//	connecter.sendCommand(command);
 	char command[MAX_COMMAND_SIZE];
 	cin.ignore();
 	cin.getline(command, MAX_COMMAND_SIZE);
 	cout << "the command is" << command;
 	connecter.sendCommand(command);
-	int game_name = connecter.receieveStartGame();
-	if (game_name == -1){ //the game name is already exist
-		console.nameExist();
+	char* command_name = strtok (command," ");
+
+	if (strcmp(command_name, "start") == 0){
+		int game_name = connecter.receieveStartGame();
+		if (game_name == -1){ //the game name is already exist
+			console.nameExist();
+			enterCommand(console, connecter);
+			return 'O';
+		}
+		else{
+			cout << "you opened a new game "<< endl;
+			return 'O';
+		}
 	}
-//	if (command.find("start ") != -1){ //if its a start command
-//
-//	}
+	return 'X';
 
 }
 char GameFlow::choose_players(){

@@ -50,9 +50,28 @@
 							</tool>
 						</toolChain>
 					</folderInfo>
-					<fileInfo id="cdt.managedbuild.config.gnu.cross.exe.debug.400145123.1553666968" name="main.cpp" rcbsApplicability="disable" resourcePath="src/main.cpp" toolsToInvoke="cdt.managedbuild.tool.gnu.cross.cpp.compiler.1790504248.166709880">
-						<tool id="cdt.managedbuild.tool.gnu.cross.cpp.compiler.1790504248.166709880" name="Cross G++ Compiler" superClass="cdt.managedbuild.tool.gnu.cross.cpp.compiler.1790504248"/>
-					</fileInfo>
+					<folderInfo id="cdt.managedbuild.config.gnu.cross.exe.debug.400145123.159671687" name="/" resourcePath="src">
+						<toolChain id="cdt.managedbuild.toolchain.gnu.cross.exe.debug.2011926615" name="Cross GCC" superClass="cdt.managedbuild.toolchain.gnu.cross.exe.debug" unusedChildren="">
+							<tool id="cdt.managedbuild.tool.gnu.cross.c.compiler.355969558" name="Cross GCC Compiler" superClass="cdt.managedbuild.tool.gnu.cross.c.compiler.371198025">
+								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.541728855" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
+							</tool>
+							<tool id="cdt.managedbuild.tool.gnu.cross.cpp.compiler.810323004" name="Cross G++ Compiler" superClass="cdt.managedbuild.tool.gnu.cross.cpp.compiler.1790504248">
+								<option id="gnu.cpp.compiler.option.include.paths.1210039077" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/server/ /${ProjName}/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/server}&quot;"/>
+									<listOptionValue builtIn="false" value="/home/efrat/Reversi/server/include"/>
+									<listOptionValue builtIn="false" value="/home/keren/Reversi/server/include"/>
+								</option>
+								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.613988289" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
+							</tool>
+							<tool id="cdt.managedbuild.tool.gnu.cross.c.linker.1325798585" name="Cross GCC Linker" superClass="cdt.managedbuild.tool.gnu.cross.c.linker.1359185671"/>
+							<tool id="cdt.managedbuild.tool.gnu.cross.cpp.linker.669461689" name="Cross G++ Linker" superClass="cdt.managedbuild.tool.gnu.cross.cpp.linker.1027902976"/>
+							<tool id="cdt.managedbuild.tool.gnu.cross.archiver.1331511713" name="Cross GCC Archiver" superClass="cdt.managedbuild.tool.gnu.cross.archiver.437574117"/>
+							<tool id="cdt.managedbuild.tool.gnu.cross.assembler.623439225" name="Cross GCC Assembler" superClass="cdt.managedbuild.tool.gnu.cross.assembler.19997413">
+								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.531923338" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
+							</tool>
+						</toolChain>
+					</folderInfo>
 					<sourceEntries>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
@@ -123,5 +142,11 @@
 	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 	<storageModule moduleId="scannerConfiguration">
 		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.cross.exe.debug.400145123;cdt.managedbuild.config.gnu.cross.exe.debug.400145123.;cdt.managedbuild.tool.gnu.cross.cpp.compiler.1790504248;cdt.managedbuild.tool.gnu.cpp.compiler.input.378977442">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.cross.exe.debug.400145123;cdt.managedbuild.config.gnu.cross.exe.debug.400145123.;cdt.managedbuild.tool.gnu.cross.c.compiler.371198025;cdt.managedbuild.tool.gnu.c.compiler.input.997547427">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
 	</storageModule>
 </cproject>

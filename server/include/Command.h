@@ -5,16 +5,21 @@
  *      Author: efrat
  */
 
-#ifndef SRC_COMMAND_H_
-#define SRC_COMMAND_H_
-#include "Server.h"
-#include <string>
+#ifndef INCLUDE_COMMAND_H_
+#define INCLUDE_COMMAND_H_
+//#include "Server.h"
+
+#include <iostream>
 #include <vector>
+
+using namespace std;
+
 class Command {
 public:
+//	virtual void execute(vector<string> args) = 0; //maybe deleete
 	virtual void execute(int clientSocket, vector<string> args) = 0;
 	virtual ~Command() = 0;
 private:
 };
 
-#endif /* SRC_COMMAND_H_ */
+#endif /* INCLUDE_COMMAND_H_ */

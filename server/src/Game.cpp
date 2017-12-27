@@ -4,10 +4,13 @@
  *  Created on: Dec 24, 2017
  *      Author: efrat
  */
+#include <string.h>
+#include <iostream>
 
-#include "Game.h"
+#include <Game.h>
 
-Game::Game(char* name) {
+
+Game::Game(const char* name) {
 	this->name = name;
 }
 
@@ -15,7 +18,7 @@ Game::~Game() {
 	// TODO Auto-generated destructor stub
 }
 
-char* Game::getName() {
+const char* Game::getName() {
 	return this->name;
 }
 

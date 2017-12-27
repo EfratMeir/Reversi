@@ -5,19 +5,25 @@
  *      Author: efrat
  */
 
-#include "Server.h"
-#include <vector>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <unistd.h>
-#include <string.h>
-#include <iostream>
-#include <stdio.h>
 
+
+#include <netinet/in.h>
+#include <sys/socket.h>
+#include <Server.h>
+#include <unistd.h>
+#include <cstring>
+#include <iostream>
+#include <vector>
+#include <sstream>
+#include <string.h>
 using namespace std;
-#define MAX_CONNECTED_CLIENTS 2
+
+#define MAX_CONNECTED_CLIENTS 20
 #define MAX_COMMAND_SIZE 50
+
+
 Server::Server() {
+	cout << "server default constructor called" << endl;
 }
 
 Server::Server(int port): port(port), serverSocket(0) {
@@ -47,7 +53,7 @@ void Server::start() {
 	//define the client socket's structures:
 	struct sockaddr_in clientAddress;
 	socklen_t clientAddressLen;
-
+	vector<string> args;
 	while (true)  {
 		cout << "Waiting for client connections..." << endl;
 		//accept a new client connection:
@@ -56,47 +62,63 @@ void Server::start() {
 			throw "Error on accept";
 		cout << "Client connected" << endl; //from here - to change....
 		//read a command
-		char command[MAX_COMMAND_SIZE];
-		int n = read(clientSocket, command, sizeof(command));
-		cout << "command is "<< command <<endl;
+		char commandAndArgs[MAX_COMMAND_SIZE];
+		int n = read(clientSocket, commandAndArgs, sizeof(commandAndArgs));
+		cout << "command is "<< commandAndArgs <<endl; //deleteeeeeeeeeeeee
 		if (n == -1) {
 		cout << "Error reading a command" << endl;
 		return;
 		}
 
+		//		convert sockent num int to string ant put it as the first arg.
+		stringstream ss;
+		ss << clientSocket;
+		string str_socket = ss.str();
+		args.push_back(str_socket);
+		// split all the args of the command
+		char* pch;
+		pch = strtok (commandAndArgs," ");
+		string command = pch;
+//		string command = strtok(NULL, " ");
+		pch = strtok (NULL, " ");
+		while (pch != 0){
+			args.push_back(pch);
+		    pch = strtok (NULL, " ");
+		}
+//		this->client_handler.handleClient(clientSocket);  //open thread. not now
+		this->client_handler.getCommandManeger().executeCommand(command, args);
 		if (n == 0) {
 			cout << "Client disconnected" << endl;
 			close(clientSocket);
 			return;
 		}
 
-		//tell the client he is first
-		int  first = 1, second = 2;
-		int clientSocket2 = 0;
+//		//tell the client he is first
+//		int  first = 1, second = 2;
+//		int clientSocket2 = 0;
 
-		while (clientSocket2 == 0){
-			//tell the first player that he is first
-			int n = write(clientSocket, &first, sizeof(first));
-			if (n == -1)
-				cout << "Error writing to socket" << endl;
-			cout << "Waiting for second player connection" << endl;
-			//wait for the second player
-			clientSocket2 = accept(serverSocket, (struct sockaddr *)&clientAddress, &clientAddressLen);
-		}
-		cout << "Client2 connected" << endl;
-		if (clientSocket == -1)
-			throw "Error on accept";
-		n = write(clientSocket2, &second, sizeof(second));
-			if (n == -1)
-				cout << "Error writing to socket" << endl;
+//		while (clientSocket2 == 0){
+//			//tell the first player that he is first
+//			int n = write(clientSocket, &first, sizeof(first));
+//			if (n == -1)
+//				cout << "Error writing to socket" << endl;
+//			cout << "Waiting for second player connection" << endl;
+//			//wait for the second player
+//			clientSocket2 = accept(serverSocket, (struct sockaddr *)&clientAddress, &clientAddressLen);
+//		}
+//		cout << "Client2 connected" << endl;
+//		if (clientSocket == -1)
+//			throw "Error on accept";
+//		n = write(clientSocket2, &second, sizeof(second));
+//			if (n == -1)
+//				cout << "Error writing to socket" << endl;
 
-		notifyGameStarts(clientSocket, clientSocket2);
-		handleClient(clientSocket, clientSocket2);
+//		notifyGameStarts(clientSocket, clientSocket2);
+//		handleClient(clientSocket, clientSocket2);
 		//close communication with the client:
 		close(clientSocket);
-		close(clientSocket2);
+//		/close(clientSocket2);
 	}
-
 }
 
 void Server::stop() {
@@ -204,12 +226,3 @@ void Server::notifyGameStarts(int clientSocket1, int clientSocket2) {
 	}
 
 }
-
-
-
-
-
-
-
-
-

@@ -45,7 +45,7 @@ char Fliper::FindOpponentSign(char my_sign) {
 	return opp_sign;
 }
 
-void Fliper::checkAndUpdateUp(Point chosen_point, Board board, char flip_to) {
+void Fliper::checkAndUpdateUp(Point chosen_point, Board& board, char flip_to) {
 	char sign = flip_to;
 	char opp_sign = FindOpponentSign(sign);
 	vector<Point> temp;
@@ -70,7 +70,7 @@ void Fliper::checkAndUpdateUp(Point chosen_point, Board board, char flip_to) {
 }
 
 
-void Fliper::checkAndUpdateDown(Point chosen_point, Board board, char flip_to) {
+void Fliper::checkAndUpdateDown(Point chosen_point, Board& board, char flip_to) {
 	char sign = flip_to;
 	char opp_sign = FindOpponentSign(sign);
 	vector<Point> temp;
@@ -92,7 +92,7 @@ void Fliper::checkAndUpdateDown(Point chosen_point, Board board, char flip_to) {
 	}
 }
 
-void Fliper::checkAndUpdateRight(Point chosen_point, Board board, char flip_to) {
+void Fliper::checkAndUpdateRight(Point chosen_point, Board& board, char flip_to) {
 	char sign = flip_to;
 	char opp_sign = FindOpponentSign(sign);
 	vector<Point> temp;
@@ -114,7 +114,7 @@ void Fliper::checkAndUpdateRight(Point chosen_point, Board board, char flip_to) 
 	}
 }
 
-void Fliper::checkAndUpdateLeft(Point chosen_point, Board board, char flip_to) {
+void Fliper::checkAndUpdateLeft(Point chosen_point, Board& board, char flip_to) {
 	char opp_sign = FindOpponentSign(flip_to);
 	vector<Point> temp;
 	int row = chosen_point.get_row();
@@ -135,7 +135,7 @@ void Fliper::checkAndUpdateLeft(Point chosen_point, Board board, char flip_to) {
 	}
 }
 
-void Fliper::checkAndUpdateUpRight(Point chosen_point, Board board, char flip_to) {
+void Fliper::checkAndUpdateUpRight(Point chosen_point, Board& board, char flip_to) {
 	char opp_sign = FindOpponentSign(flip_to);
 	vector<Point> temp;
 	int row = chosen_point.get_row();
@@ -157,7 +157,7 @@ void Fliper::checkAndUpdateUpRight(Point chosen_point, Board board, char flip_to
 	}
 }
 
-void Fliper::checkAndUpdateUpLeft(Point chosen_point, Board board, char flip_to) {
+void Fliper::checkAndUpdateUpLeft(Point chosen_point, Board& board, char flip_to) {
 	char opp_sign = FindOpponentSign(flip_to);
 	vector<Point> temp;
 	int row = chosen_point.get_row();
@@ -178,7 +178,7 @@ void Fliper::checkAndUpdateUpLeft(Point chosen_point, Board board, char flip_to)
 	}
 }
 
-void Fliper::checkAndUpdateDownRight(Point chosen_point, Board board, char flip_to) {
+void Fliper::checkAndUpdateDownRight(Point chosen_point, Board& board, char flip_to) {
 	char opp_sign = FindOpponentSign(flip_to);
 	vector<Point> temp;
 	int row = chosen_point.get_row();
@@ -201,7 +201,7 @@ void Fliper::checkAndUpdateDownRight(Point chosen_point, Board board, char flip_
 	}
 }
 
-void Fliper::checkAndUpdateDownLeft(Point chosen_point, Board board, char flip_to) {
+void Fliper::checkAndUpdateDownLeft(Point chosen_point, Board& board, char flip_to) {
 	char opp_sign = FindOpponentSign(flip_to);
 	vector<Point> temp;
 	int row = chosen_point.get_row();

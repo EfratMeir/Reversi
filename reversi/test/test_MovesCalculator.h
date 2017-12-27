@@ -15,7 +15,7 @@ class test_MovesCalculator: public testing::Test {
 public:
 	virtual void setUp() {
 		this->moves = MovesCalculator();
-		this->b = Board(8,8);
+		this->b = Board(8);
 	}
 protected:
 	MovesCalculator moves;
@@ -55,7 +55,7 @@ TEST_F(test_MovesCalculator, testCalcMoves) {
 
 TEST_F(test_MovesCalculator, testUpLeftBoarder) {
 	moves.options_list.clear();
-	Board b = Board(4,4);
+	Board b = Board(4);
 
 	b.setPoint(Point(2 - 1, 2 - 1, 'O'));
 	b.setPoint(Point(3 - 1, 3 - 1, 'O'));
@@ -67,7 +67,7 @@ TEST_F(test_MovesCalculator, testUpLeftBoarder) {
 
 
 	moves.options_list.clear();
-	b = Board(4,4);
+	b = Board(4);
 
 	b.setPoint(Point(2 - 1, 1 - 1, 'O'));
 	b.setPoint(Point(3 - 1, 2 - 1, 'O'));
@@ -81,7 +81,7 @@ TEST_F(test_MovesCalculator, testUpLeftBoarder) {
 
 TEST_F(test_MovesCalculator, testUpRightBoarder) {
 	moves.options_list.clear();
-	Board b = Board(4,4);
+	Board b = Board(4);
 
 	b.setPoint(Point(2 - 1, 3 - 1, 'X'));
 	b.setPoint(Point(1 - 1, 4 - 1, 'O'));
@@ -95,7 +95,7 @@ TEST_F(test_MovesCalculator, testUpRightBoarder) {
 
 TEST_F(test_MovesCalculator, testDownRightBoarder) {
 	moves.options_list.clear();
-	Board b = Board(4,4);
+	Board b = Board(4);
 
 	b.setPoint(Point(3 - 1, 3 - 1, 'X'));
 	b.setPoint(Point(4 - 1, 3 - 1, 'X'));
@@ -111,7 +111,7 @@ TEST_F(test_MovesCalculator, testDownRightBoarder) {
 
 TEST_F(test_MovesCalculator, testDownLeftBoarder) {
 	moves.options_list.clear();
-	Board b = Board(4,4);
+	Board b = Board(4);
 	b.setPoint(Point(3 - 1, 2 - 1, 'X'));
 	b.setPoint(Point(4 - 1, 2 - 1, 'O'));
 	b.setPoint(Point(4 - 1, 1 - 1, 'O'));

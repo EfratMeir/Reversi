@@ -40,7 +40,7 @@ public:
 	 * set the last move of the opponent
 	 * @param opponent_last_move
 	 */
-	virtual void setOpponentLastMove(Point opponent_last_move);
+	virtual void setOpponentLastMove(Point& opponent_last_move);
 	/**
 	 * get the last move of the opponent
 	 * @return
@@ -57,7 +57,7 @@ public:
 	 * @param board
 	 * @return the best score the rival can get
 	 */
-	int rate_move(Point point, Fliper fliper, Board& board, Console& console);
+	int rate_move(Point& point, Fliper& fliper, Board& board, Console& console);
 	/**
 	 * destructor
 	 */
@@ -80,7 +80,7 @@ private:
 	 * @param board - board reference
 	 * @param chosen_step - the point that shows the chosen step
 	 */
-	virtual void play_next_step(Board& board, Point chosen_step, Console& console);
+	virtual void play_next_step(Board& board, Point& chosen_step, Console& console);
 	/**
 	 * checks for all the possible moves.
 	 * @param board - board reference
@@ -88,13 +88,13 @@ private:
 	 * @param this_player_sign - char
 	 * @return - a vector of points, all the possible moves.
 	 */
-	virtual vector<Point> get_possible_moves(Board& board, MovesCalculator moves_calculator);
+	virtual vector<Point> get_possible_moves(Board& board, MovesCalculator& moves_calculator);
 	/**
 	 * choose the best move of the computer according the 'minimax' algorithm.
 	 * @param options_list - a vector of all the options
 	 * @return - the chosen point
 	 */
-	virtual Point choose_best_move(vector<Point> options_list, Fliper fliper, Board& board, Console& console);
+	virtual Point choose_best_move(vector<Point> options_list, Fliper& fliper, Board& board, Console& console);
 };
 
 #endif /* COMPUTERPLAYER_H_ */

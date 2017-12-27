@@ -44,145 +44,145 @@ TEST_F(test_Fliper, testitest) {
 
 
 TEST_F(test_Fliper, testCheckRight) {
-	Board b = Board(8,8);
+	Board b = Board(8);
 	initializeMiddlePoints8X8(b);
 	f.flip(b, Point(5 - 1, 6 - 1, 'X'), 'X');
-	EXPECT_TRUE(b.parr[5 - 1][5 - 1].get_sign() == 'X');
+	EXPECT_TRUE(b.all_players_list[5 - 1][5 - 1].get_sign() == 'X');
 }
 
 TEST_F(test_Fliper, testCheckLeft) {
-	Board b = Board(8,8);
+	Board b = Board(8);
 	initializeMiddlePoints8X8(b);
 	f.flip(b, Point(4 - 1, 3 - 1, 'X'), 'X');
-	EXPECT_TRUE(b.parr[4 - 1][4 - 1].get_sign() == 'X');
+	EXPECT_TRUE(b.all_players_list[4 - 1][4 - 1].get_sign() == 'X');
 }
 
 TEST_F(test_Fliper, testCheckUp) {
-	Board b = Board(8,8);
+	Board b = Board(8);
 	initializeMiddlePoints8X8(b);
 	f.flip(b, Point(3 - 1, 4 - 1, 'X'), 'X');
-	EXPECT_TRUE(b.parr[4 - 1][4 - 1].get_sign() == 'X');
+	EXPECT_TRUE(b.all_players_list[4 - 1][4 - 1].get_sign() == 'X');
 }
 
 TEST_F(test_Fliper, testCheckDown) {
-	Board b = Board(8,8);
+	Board b = Board(8);
 	initializeMiddlePoints8X8(b);
 	f.flip(b, Point(6 - 1, 5 - 1, 'X'), 'X');
-	EXPECT_TRUE(b.parr[5 - 1][5 - 1].get_sign() == 'X');
+	EXPECT_TRUE(b.all_players_list[5 - 1][5 - 1].get_sign() == 'X');
 }
 
 TEST_F(test_Fliper, testCheckUpRight) {
-	Board b = Board(8,8);
+	Board b = Board(8);
 	initializeMiddlePoints8X8(b);
 	b.setPoint(Point(6 - 1, 4 - 1, 'X'));
 	f.flip(b, Point(4 - 1, 6 - 1, 'X'), 'X');
-	EXPECT_TRUE(b.parr[5 - 1][5 - 1].get_sign() == 'X');
+	EXPECT_TRUE(b.all_players_list[5 - 1][5 - 1].get_sign() == 'X');
 }
 
 TEST_F(test_Fliper, testCheckUpLeft) {
-	Board b = Board(8,8);
+	Board b = Board(8);
 	initializeMiddlePoints8X8(b);
 	b.setPoint(Point(6 - 1, 6 - 1, 'X'));
 	f.flip(b, Point(3 - 1, 3 - 1, 'X'), 'X');
-	EXPECT_TRUE(b.parr[5 - 1][5 - 1].get_sign() == 'X');
-	EXPECT_TRUE(b.parr[4 - 1][4 - 1].get_sign() == 'X');
+	EXPECT_TRUE(b.all_players_list[5 - 1][5 - 1].get_sign() == 'X');
+	EXPECT_TRUE(b.all_players_list[4 - 1][4 - 1].get_sign() == 'X');
 }
 
 TEST_F(test_Fliper, testCheckDownRight) {
-	Board b = Board(8,8);
+	Board b = Board(8);
 	initializeMiddlePoints8X8(b);
 	b.setPoint(Point(3 - 1, 3 - 1, 'X'));
 	f.flip(b, Point(6 - 1, 6 - 1, 'X'), 'X');
-	EXPECT_TRUE(b.parr[5 - 1][5 - 1].get_sign() == 'X');
-	EXPECT_TRUE(b.parr[4 - 1][4 - 1].get_sign() == 'X');
+	EXPECT_TRUE(b.all_players_list[5 - 1][5 - 1].get_sign() == 'X');
+	EXPECT_TRUE(b.all_players_list[4 - 1][4 - 1].get_sign() == 'X');
 }
 
 TEST_F(test_Fliper, testCheckDownLeft) {
-	Board b = Board(8,8);
+	Board b = Board(8);
 	initializeMiddlePoints8X8(b);
 	b.setPoint(Point(4 - 1, 6 - 1, 'X'));
 	f.flip(b, Point(6 - 1, 4 - 1, 'X'), 'X');
-	EXPECT_TRUE(b.parr[5 - 1][5 - 1].get_sign() == 'X');
+	EXPECT_TRUE(b.all_players_list[5 - 1][5 - 1].get_sign() == 'X');
 }
 
 TEST_F(test_Fliper, testNotFlipingWhenNotNeeded_UpLeft) {
-	Board b = Board(4,4);
+	Board b = Board(4);
 	initializeMiddlePoints4X4(b);
 	b.setPoint(Point(1 - 1, 1 - 1, 'O'));
 	f.flip(b, Point(4 - 1, 4 - 1, 'X'), 'X');
-	EXPECT_FALSE(b.parr[3 - 1][3 - 1].get_sign() == 'X');
-	EXPECT_FALSE(b.parr[2 - 1][2 - 1].get_sign() == 'X');
-	EXPECT_FALSE(b.parr[1 - 1][1 - 1].get_sign() == 'X');
+	EXPECT_FALSE(b.all_players_list[3 - 1][3 - 1].get_sign() == 'X');
+	EXPECT_FALSE(b.all_players_list[2 - 1][2 - 1].get_sign() == 'X');
+	EXPECT_FALSE(b.all_players_list[1 - 1][1 - 1].get_sign() == 'X');
 }
 
 TEST_F(test_Fliper, testNotFlipingWhenNotNeeded_UpRight) {
-	Board b = Board(4,4);
+	Board b = Board(4);
 	initializeMiddlePoints4X4(b);
 	b.setPoint(Point(2 - 1, 4 - 1, 'O'));
 	f.flip(b, Point(4 - 1, 2 - 1, 'X'), 'X');
-	EXPECT_FALSE(b.parr[3 - 1][3 - 1].get_sign() == 'X');
-	EXPECT_FALSE(b.parr[2 - 1][4 - 1].get_sign() == 'X');
+	EXPECT_FALSE(b.all_players_list[3 - 1][3 - 1].get_sign() == 'X');
+	EXPECT_FALSE(b.all_players_list[2 - 1][4 - 1].get_sign() == 'X');
 }
 
 TEST_F(test_Fliper, testNotFlipingWhenNotNeeded_DownLeft) {
-	Board b = Board(4,4);
+	Board b = Board(4);
 	initializeMiddlePoints4X4(b);
 	b.setPoint(Point(4 - 1, 1 - 1, 'X'));
 	f.flip(b, Point(1 - 1, 4 - 1, 'O'), 'O');
-	EXPECT_FALSE(b.parr[2 - 1][3 - 1].get_sign() == 'O');
-	EXPECT_FALSE(b.parr[3 - 1][2 - 1].get_sign() == 'O');
-	EXPECT_FALSE(b.parr[4 - 1][1 - 1].get_sign() == 'O');
+	EXPECT_FALSE(b.all_players_list[2 - 1][3 - 1].get_sign() == 'O');
+	EXPECT_FALSE(b.all_players_list[3 - 1][2 - 1].get_sign() == 'O');
+	EXPECT_FALSE(b.all_players_list[4 - 1][1 - 1].get_sign() == 'O');
 }
 
 TEST_F(test_Fliper, testNotFlipingWhenNotNeeded_DownRight) {
-	Board b = Board(4,4);
+	Board b = Board(4);
 	initializeMiddlePoints4X4(b);
 	b.setPoint(Point(4 - 1, 4 - 1, 'O'));
 	f.flip(b, Point(1 - 1, 1 - 1, 'X'), 'X');
-	EXPECT_FALSE(b.parr[2 - 1][2 - 1].get_sign() == 'X');
-	EXPECT_FALSE(b.parr[3 - 1][3 - 1].get_sign() == 'X');
-	EXPECT_FALSE(b.parr[4 - 1][4 - 1].get_sign() == 'X');
+	EXPECT_FALSE(b.all_players_list[2 - 1][2 - 1].get_sign() == 'X');
+	EXPECT_FALSE(b.all_players_list[3 - 1][3 - 1].get_sign() == 'X');
+	EXPECT_FALSE(b.all_players_list[4 - 1][4 - 1].get_sign() == 'X');
 }
 
 TEST_F(test_Fliper, testNotFlipingWhenNotNeeded_Down) {
-	Board b = Board(4,4);
+	Board b = Board(4);
 	initializeMiddlePoints4X4(b);
 	f.flip(b, Point(1 - 1, 3 - 1, 'X'), 'X');
-	EXPECT_FALSE(b.parr[2 - 1][3 - 1].get_sign() == 'O');
-	EXPECT_FALSE(b.parr[3 - 1][3 - 1].get_sign() == 'X');
+	EXPECT_FALSE(b.all_players_list[2 - 1][3 - 1].get_sign() == 'O');
+	EXPECT_FALSE(b.all_players_list[3 - 1][3 - 1].get_sign() == 'X');
 }
 
 TEST_F(test_Fliper, testNotFlipingWhenNotNeeded_Up) {
-	Board b = Board(4,4);
+	Board b = Board(4);
 	initializeMiddlePoints4X4(b);
 	b.setPoint(Point(1 - 1, 2 - 1, 'O'));
 	f.flip(b, Point(4 - 1, 2 - 1, 'X'), 'X');
-	EXPECT_FALSE(b.parr[2 - 1][2 - 1].get_sign() == 'X');
-	EXPECT_FALSE(b.parr[1 - 1][2 - 1].get_sign() == 'X');
+	EXPECT_FALSE(b.all_players_list[2 - 1][2 - 1].get_sign() == 'X');
+	EXPECT_FALSE(b.all_players_list[1 - 1][2 - 1].get_sign() == 'X');
 }
 
 TEST_F(test_Fliper, testNotFlipingWhenNotNeeded_Right) {
-	Board b = Board(4,4);
+	Board b = Board(4);
 	initializeMiddlePoints4X4(b);
 	b.setPoint(Point(3 - 1, 4 - 1, 'O'));
 	f.flip(b, Point(3 - 1, 2 - 1, 'X'), 'X');
-	EXPECT_FALSE(b.parr[3 - 1][3 - 1].get_sign() == 'X');
-	EXPECT_FALSE(b.parr[3 - 1][4 - 1].get_sign() == 'X');
+	EXPECT_FALSE(b.all_players_list[3 - 1][3 - 1].get_sign() == 'X');
+	EXPECT_FALSE(b.all_players_list[3 - 1][4 - 1].get_sign() == 'X');
 }
 
 TEST_F(test_Fliper, testNotFlipingWhenNotNeeded_Left) {
-	Board b = Board(4,4);
+	Board b = Board(4);
 	initializeMiddlePoints4X4(b);
 	b.setPoint(Point(3 - 1, 1 - 1, 'X'));
 	f.flip(b, Point(3 - 1, 4 - 1, 'O'), 'O');
-	EXPECT_FALSE(b.parr[3 - 1][1 - 1].get_sign() == 'O');
-	EXPECT_FALSE(b.parr[3 - 1][2 - 1].get_sign() == 'O');
-	EXPECT_FALSE(b.parr[3 - 1][3 - 1].get_sign() == 'X');
+	EXPECT_FALSE(b.all_players_list[3 - 1][1 - 1].get_sign() == 'O');
+	EXPECT_FALSE(b.all_players_list[3 - 1][2 - 1].get_sign() == 'O');
+	EXPECT_FALSE(b.all_players_list[3 - 1][3 - 1].get_sign() == 'X');
 
 }
 
 TEST_F(test_Fliper, checkFliperUpdatesPointsCounter) {
-	Board b = Board(8,8);
+	Board b = Board(8);
 	initializeMiddlePoints8X8(b);
 	EXPECT_EQ(b.getCounter().getBlackCount(), 2);
 	f.flip(b, Point(3 - 1, 4 - 1, 'X'), 'X');

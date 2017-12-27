@@ -16,11 +16,10 @@ using namespace std;
 class Console: public Display {
 public:
 	Console();
-	Console(Board& board);
 	void canStart();
 	void printConnectToServer();
 	void printWaitingToOther();
-	virtual void printBoard();
+	virtual void printBoard(Board& b);
 	void printNowTurn(char sign);
 	void printChosenMove(char sign, int row, int col);
 	char choose_players();
@@ -29,7 +28,6 @@ public:
 	void printCounter(PointsCounter counter);
 	virtual ~Console();
 private:
-	Board board;
 };
 
 #endif /* SRC_CONSOLE_H_ */

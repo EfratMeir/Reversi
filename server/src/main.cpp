@@ -6,15 +6,14 @@
  */
 
 
-#include "Server.h"
-#include <iostream>
-//#include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <Server.h>
+#include <iostream>
+#include <string>
+
 using namespace std;
 #include <sstream>
 #include <fstream>
-//#include <string>
 
 int readFromFile(){
 	int port_num;

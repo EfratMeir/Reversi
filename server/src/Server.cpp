@@ -5,19 +5,21 @@
  *      Author: efrat
  */
 
-#include "Server.h"
-#include <vector>
-#include <sys/socket.h>
+
+
 #include <netinet/in.h>
+#include <sys/socket.h>
+#include <Server.h>
 #include <unistd.h>
-#include <string.h>
+#include <cstring>
 #include <iostream>
-#include <stdio.h>
+#include <vector>
 
 using namespace std;
-#define MAX_CONNECTED_CLIENTS 2
+#define MAX_CONNECTED_CLIENTS 20
 
 Server::Server() {
+	cout << "server default constructor called" << endl;
 }
 
 Server::Server(int port): port(port), serverSocket(0) {

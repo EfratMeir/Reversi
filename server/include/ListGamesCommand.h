@@ -5,19 +5,20 @@
  *      Author: efrat
  */
 
-#ifndef SRC_LISTGAMESCOMMAND_H_
-#define SRC_LISTGAMESCOMMAND_H_
+#ifndef INCLUDE_LISTGAMESCOMMAND_H_
+#define INCLUDE_LISTGAMESCOMMAND_H_
 
-#include "Command.h"
-#include "Game.h"
-#include "Server.h"
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <unistd.h>
+
+#include <pthread.h>
+#include <string.h>
 #include <iostream>
+#include <vector>
+
+#include <Command.h>
+#include <Game.h>
 
 
-namespace std {
+using namespace std;
 
 class ListGamesCommand: public Command{
 
@@ -29,8 +30,9 @@ public:
 
 private:
 	vector<Game> games_list;
+	pthread_mutex_t games_list_mutex;
 };
 
-}
 
-#endif /* SRC_LISTGAMESCOMMAND_H_ */
+
+#endif /* INCLUDE_LISTGAMESCOMMAND_H_ */

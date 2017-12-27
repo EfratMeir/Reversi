@@ -9,9 +9,11 @@
 #define SERVER_H_
 //#include <vector>
 //#include "Game.h"
-#include "ClientHandler.h"
-#include <string>
+
+#include <ClientHandler.h>
+
 using namespace std;
+
 
 class Server {
 public:

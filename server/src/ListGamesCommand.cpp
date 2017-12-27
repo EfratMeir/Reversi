@@ -5,32 +5,38 @@
  *      Author: efrat
  */
 
-#include <src/ListGamesCommand.h>
+#include <ListGamesCommand.h>
+#include <string.h>
+#include <iostream>
+#include <vector>
 
-namespace std {
+#include <unistd.h>
+
+
+using namespace std;
 
 ListGamesCommand::ListGamesCommand(vector<Game>& games_list) {
+	pthread_mutex_lock(&games_list_mutex);
 	this->games_list = games_list;
+	pthread_mutex_unlock(&games_list_mutex);
+
 }
 
 void ListGamesCommand::execute(int clientSocket, vector<string> args) {
 	SendGamesToJoinList(clientSocket, this->games_list);
 }
 
-ListGamesCommand::~ListGamesCommand() {
-	// TODO Auto-generated destructor stub
-}
+void ListGamesCommand::SendGamesToJoinList(int clientSocket,
+		vector<Game> games_list) {
 
-} /* namespace std */
-
-
-void ListGamesCommand::SendGamesToJoinList(int clientSocket, vector<Game> games_list) {
 	vector<string> games_to_join;
+	pthread_mutex_lock(&games_list_mutex);
 	for (unsigned int i = 0; i < games_list.size(); i++) {
 		if (games_list[i].getNumOfplayers() == 1) {
 		 games_to_join.push_back(games_list[i].getName());
 		}
 	}
+	pthread_mutex_unlock(&games_list_mutex);
 
 	int num = games_to_join.size();
 
@@ -47,4 +53,13 @@ void ListGamesCommand::SendGamesToJoinList(int clientSocket, vector<Game> games_
 		}
 	}
 
+
+
 }
+
+ListGamesCommand::~ListGamesCommand() {
+	// TODO Auto-generated destructor stub
+}
+
+
+

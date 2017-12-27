@@ -5,16 +5,17 @@
  *      Author: efrat
  */
 
-#ifndef SRC_STARTCOMMAND_H_
-#define SRC_STARTCOMMAND_H_
+#ifndef INCLUDE_STARTCOMMAND_H_
+#define INCLUDE_STARTCOMMAND_H_
 
 #include <vector>
-#include "Game.h"
-#include "Command.h"
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <unistd.h>
+#include <pthread.h>
 #include <iostream>
+
+#include <Command.h>
+#include <Game.h>
+
+using namespace std;
 
 class StartCommand: public Command {
 public:
@@ -28,11 +29,12 @@ private:
 
 	char* name;
 	vector<Game> games_list;
+	pthread_mutex_t games_list_mutex;
 	bool doesGameExists(char* name);
 	int game_added;
 
 };
 
-#endif /* SRC_STARTCOMMAND_H_ */
+#endif /* INCLUDE_STARTCOMMAND_H_ */
 
 

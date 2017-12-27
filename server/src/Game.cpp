@@ -4,8 +4,11 @@
  *  Created on: Dec 24, 2017
  *      Author: efrat
  */
+#include <string.h>
+#include <iostream>
 
-#include "Game.h"
+#include <Game.h>
+
 
 Game::Game(char* name) {
 	this->name = name;

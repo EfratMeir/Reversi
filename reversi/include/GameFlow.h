@@ -40,6 +40,9 @@ public:
 	/*
 	 * destructor
 	 */
+	void startRemoteGame(Player* players[2],Board& b, Console& console);
+	void enterCommand(Console& console, Connecter& connecter);
+
 	virtual ~GameFlow();
 
 private:

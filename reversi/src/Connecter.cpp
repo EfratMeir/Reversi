@@ -185,6 +185,13 @@ int Connecter::receiveStartCommandMsg() {
 	return game_started;
 
 }
-
+//send the command to the server
+int Connecter::sendCommand(char command[MAX_COMMAND_SIZE]){
+	int n = write(clientSocket, command, MAX_COMMAND_SIZE);
+	if (n == -1) {
+		throw "Error writing player_has_no_moves to socket";
+	}
+	return 0;
+}
 
 

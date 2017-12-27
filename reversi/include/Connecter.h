@@ -7,6 +7,7 @@
 
 #ifndef CONNECTER_H_
 #define CONNECTER_H_
+#define MAX_COMMAND_SIZE 50
 
 #include "Point.h"
 #include <vector>
@@ -37,6 +38,7 @@ public:
 	 * receive from server '1' if he is the first player, 2 if second.
 	 * @return the number
 	 */
+	int sendCommand( char command[MAX_COMMAND_SIZE]);
 	int receiveNumPlayer();
 	/**
 	 * receive a point from the server (the move of the other player)

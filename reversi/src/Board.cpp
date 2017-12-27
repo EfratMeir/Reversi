@@ -7,7 +7,7 @@
 #include <iostream>
 #include <string.h>
 using namespace std;
-#define SIZE 8
+//#define SIZE 8
 #include <vector>
 
 Board::Board() {

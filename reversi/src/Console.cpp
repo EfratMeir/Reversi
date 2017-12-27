@@ -18,6 +18,12 @@ void Console::printConnectToServer(){
 void Console::connectionFailed(const char *msg){
 	cout << "Failed to connect to server. Reason: " << msg << endl;
 }
+void Console::printEnterCommand(){
+	cout << "please enter your command" << endl;
+}
+void Console::nameExist(){
+	cout << "the name is already exist" <<endl;
+}
 void Console::printWaitingToOther(){
 	cout << "Waiting for other player to join..." << endl;
 }
@@ -35,21 +41,13 @@ void Console::printCounter(PointsCounter counter){
 	cout << "black counter:" << counter.getBlackCount() << endl <<
 			"white counter:" << counter.getWhiteCount() << endl;
 }
-char Console::choose_players(){
+void Console::print_hello(){
 	cout << "Welcome to reversi!" << endl << "choose an opponent type: " << endl << endl;
 
 	cout << "to play against the computer type 'c'" << endl <<
 			"to play against human player type 'h'" << endl <<
 			"to play against a remote player type 'r'" << endl;
-	char chosen;
-	cin >> chosen;
-	if (!(chosen == 'c' || chosen == 'C' || chosen == 'h'
-			|| chosen == 'H' || chosen == 'r' || chosen == 'R')){
-		cout << "you have entered an invalid char." <<endl;
-		chosen = choose_players();
-		return chosen;
-	}
-	return chosen;
+
 }
 void Console::printWinner(char winner){
 	cout << "GAME IS OVER!" << endl << "THE WINNER IS: ";
@@ -59,6 +57,9 @@ void Console::printWinner(char winner){
 	else {
 		cout << winner << endl;
 	}
+}
+void Console::printInvalidChar(){
+	cout << "you have entered an invalid char." <<endl;
 }
 void Console:: printBoard(Board& board){
 	// i - index for rows

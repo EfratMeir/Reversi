@@ -19,10 +19,15 @@ public:
 	void canStart();
 	void printConnectToServer();
 	void printWaitingToOther();
+	void printEnterCommand();
+	void nameExist();
+
+//	void enterGameName();
 	virtual void printBoard(Board& b);
 	void printNowTurn(char sign);
 	void printChosenMove(char sign, int row, int col);
-	char choose_players();
+	void print_hello();
+	void printInvalidChar();
 	void printWinner(char winner);
 	void connectionFailed(const char *msg);
 	void printCounter(PointsCounter counter);

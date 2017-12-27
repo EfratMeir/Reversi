@@ -16,7 +16,7 @@
 
 using namespace std;
 #define MAX_CONNECTED_CLIENTS 2
-
+#define MAX_COMMAND_SIZE 50
 Server::Server() {
 }
 
@@ -55,6 +55,21 @@ void Server::start() {
 		if (clientSocket == -1)
 			throw "Error on accept";
 		cout << "Client connected" << endl; //from here - to change....
+		//read a command
+		char command[MAX_COMMAND_SIZE];
+		int n = read(clientSocket, command, sizeof(command));
+		cout << "command is "<< command <<endl;
+		if (n == -1) {
+		cout << "Error reading a command" << endl;
+		return;
+		}
+
+		if (n == 0) {
+			cout << "Client disconnected" << endl;
+			close(clientSocket);
+			return;
+		}
+
 		//tell the client he is first
 		int  first = 1, second = 2;
 		int clientSocket2 = 0;
@@ -71,7 +86,7 @@ void Server::start() {
 		cout << "Client2 connected" << endl;
 		if (clientSocket == -1)
 			throw "Error on accept";
-		int n = write(clientSocket2, &second, sizeof(second));
+		n = write(clientSocket2, &second, sizeof(second));
 			if (n == -1)
 				cout << "Error writing to socket" << endl;
 

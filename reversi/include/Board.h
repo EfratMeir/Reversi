@@ -23,16 +23,12 @@ public:
 	 * constructor.
 	 */
 	Board(int board_size);
-//	Board(const Board &cpyB);
-//	int size;
 	Point all_players_list[SIZE][SIZE];
 //	void deleteBoard();
-//	Board& cpy();
 	/**
 	 * prints the default game board.
 	 */
 	void pPrint();
-
 	//getters:
 	int getBoardSize() {
 		return board_size;

@@ -69,7 +69,11 @@ void Server::start() {
 		cout << "Error reading a command" << endl;
 		return;
 		}
-
+		if (n == 0) {
+			cout << "Client disconnected" << endl;
+			close(clientSocket);
+			return;
+		}
 		//		convert sockent num int to string ant put it as the first arg.
 		stringstream ss;
 		ss << clientSocket;
@@ -87,11 +91,7 @@ void Server::start() {
 		}
 //		this->client_handler.handleClient(clientSocket);  //open thread. not now
 		this->client_handler.getCommandManeger().executeCommand(command, args);
-		if (n == 0) {
-			cout << "Client disconnected" << endl;
-			close(clientSocket);
-			return;
-		}
+
 
 //		//tell the client he is first
 //		int  first = 1, second = 2;
@@ -116,9 +116,11 @@ void Server::start() {
 //		notifyGameStarts(clientSocket, clientSocket2);
 //		handleClient(clientSocket, clientSocket2);
 		//close communication with the client:
-		close(clientSocket);
+
 //		/close(clientSocket2);
+
 	}
+//	}close(clientSocket);
 }
 
 void Server::stop() {

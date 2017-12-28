@@ -13,9 +13,10 @@
 #include <string.h>
 #include <iostream>
 #include <vector>
+#include <unistd.h>
+#include "Command.h"
+#include "Game.h"
 
-#include <Command.h>
-#include <Game.h>
 
 
 using namespace std;
@@ -23,6 +24,7 @@ using namespace std;
 class ListGamesCommand: public Command{
 
 public:
+	ListGamesCommand();
 	ListGamesCommand(vector<Game>& games_list);
 	virtual void execute(int clientSocket, vector<string> args);
 	void SendGamesToJoinList( int clientSocket, vector<Game> games_list);

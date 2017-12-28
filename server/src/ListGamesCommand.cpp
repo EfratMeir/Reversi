@@ -6,15 +6,12 @@
  */
 
 #include <ListGamesCommand.h>
-#include <string.h>
-#include <iostream>
-#include <vector>
-
-#include <unistd.h>
 
 
 using namespace std;
+ListGamesCommand::ListGamesCommand(){
 
+}
 ListGamesCommand::ListGamesCommand(vector<Game>& games_list) {
 	pthread_mutex_lock(&games_list_mutex);
 	this->games_list = games_list;
@@ -28,7 +25,6 @@ void ListGamesCommand::execute(int clientSocket, vector<string> args) {
 
 void ListGamesCommand::SendGamesToJoinList(int clientSocket,
 		vector<Game> games_list) {
-
 	vector<string> games_to_join;
 	pthread_mutex_lock(&games_list_mutex);
 	for (unsigned int i = 0; i < games_list.size(); i++) {

@@ -58,7 +58,7 @@ void GameFlow::startRemoteGame(Player* players[2], Board& b, Console& console){
 	initializeConnecter(connecter);
 	char remote_sign = enterCommand(console, connecter); //start or join or see all possible games
 
-	Player* remote_player = new RemotePlayer(connecter);
+	Player* remote_player = new RemotePlayer(connecter, remote_sign);
 //	char remote_sign = remote_player->get_sign();
 	is_remote_game = true;
 	if (remote_sign == 'X'){
@@ -71,7 +71,6 @@ void GameFlow::startRemoteGame(Player* players[2], Board& b, Console& console){
 		this->turn_base.getConsole().printWaitingToOther();
 //		cout << "Waiting for other player to join..." << endl;
 	}
-
 	//wait until server will send a msg that we can start:
 	bool start_game = connecter.receieveStartGame();
 	this->turn_base.getConsole().canStart();
@@ -89,12 +88,15 @@ char GameFlow::enterCommand(Console& console, Connecter& connecter){
 	char command[MAX_COMMAND_SIZE];
 	cin.ignore();
 	cin.getline(command, MAX_COMMAND_SIZE);
-	cout << "the command is" << command;
+//	cout << "the command is" << command;
+
 	connecter.sendCommand(command);
-	char* command_name = strtok (command," ");
+	char* command_name;
+	command_name = strtok (command," ");
+//	char* command_name = strtok (command," ");
 
 	if (strcmp(command_name, "start") == 0){
-		int game_name = connecter.receieveStartGame();
+		int game_name = connecter.receiveStartCommandMsg();
 		if (game_name == -1){ //the game name is already exist
 			console.nameExist();
 			enterCommand(console, connecter);
@@ -104,6 +106,9 @@ char GameFlow::enterCommand(Console& console, Connecter& connecter){
 			cout << "you opened a new game "<< endl;
 			return 'O';
 		}
+	}
+	if (strcmp(command_name, "join") == 0){
+
 	}
 	return 'X';
 

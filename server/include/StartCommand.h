@@ -31,8 +31,6 @@ public:
 private:
 //	string name;
 	const char* name;
-	vector<Game> games_list;
-	pthread_mutex_t games_list_mutex;
 	bool doesGameExists(const char* name);
 	int game_added;
 

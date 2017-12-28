@@ -41,6 +41,4 @@ private:
 	}
 };
 
-
-
 #endif /* INCLUDE_CLIENTHANDLER_H_ */

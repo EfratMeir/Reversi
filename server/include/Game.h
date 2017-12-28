@@ -8,6 +8,8 @@
 #ifndef GAME_H_
 #define GAME_H_
 #include <string.h>
+#include <string.h>
+#include <iostream>
 
 using namespace std;
 

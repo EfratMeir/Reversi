@@ -61,14 +61,14 @@ StartCommand::~StartCommand() {
 
 bool StartCommand::doesGameExists(const char* name) {
 	bool the_same = false;
-	pthread_mutex_lock(&games_list_mutex);
 	for (unsigned int i = 0; i < this->games_list.size(); i++) {
 		if (strcmp(name, this->games_list[i].getName()) == 0) {
+			pthread_mutex_lock(&games_list_mutex);
 			the_same = true;
+			pthread_mutex_unlock(&games_list_mutex);
 			return the_same;
 		}
 	}
-	pthread_mutex_unlock(&games_list_mutex);
 	return the_same;
 }
 

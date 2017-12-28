@@ -28,10 +28,9 @@ ClientHandler::~ClientHandler() {
 	// TODO Auto-generated destructor stub
 }
 
-void* ClientHandler::goToCommands(void *client_socket) {
+void* ClientHandler::goToCommands(void *args) {
 //	CommandManeger command_m;
-	int socket = *((int *)client_socket);
-
+	//int socket = *((int *)client_socket);
 									//CALL COMMAND MANAGER TO MAP FROM HERE
 
 }

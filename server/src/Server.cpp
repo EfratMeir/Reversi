@@ -86,6 +86,7 @@ void Server::start() {
 		    pch = strtok (NULL, " ");
 		}
 //		this->client_handler.handleClient(clientSocket);  //open thread. not now
+		this->client_handler.goToCommands()
 		this->client_handler.getCommandManeger().executeCommand(command, args);
 		if (n == 0) {
 			cout << "Client disconnected" << endl;

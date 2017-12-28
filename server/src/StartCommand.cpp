@@ -32,7 +32,7 @@ void StartCommand::setName(string name){
 	this->name= game_name;
 }
 void StartCommand::execute(int clientSocket, vector<string> args) {
-	setName(args[1]);
+	setName(args[2]);
 	if (doesGameExists(this->name)) {
 		game_added = -1; //game with this name is already exists
 	}

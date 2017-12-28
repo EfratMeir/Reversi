@@ -14,8 +14,8 @@ CommandManeger::CommandManeger() {
 	commandsMap["join"] = new JoinCommand();
 	commandsMap["play"] = new PlayCommand();
 }
-void CommandManeger::executeCommand(string command, vector<string> args){
-	Command* commandObj = commandsMap[command];
+void CommandManeger::executeCommand( vector<string> args){
+	Command* commandObj = commandsMap[args[1]];
 	int socket;
 	sscanf(args[0].c_str(), "%d", &socket); //take ths socket number
 

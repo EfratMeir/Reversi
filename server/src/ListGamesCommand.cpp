@@ -48,9 +48,6 @@ void ListGamesCommand::SendGamesToJoinList(int clientSocket,
 			return;
 		}
 	}
-
-
-
 }
 
 ListGamesCommand::~ListGamesCommand() {

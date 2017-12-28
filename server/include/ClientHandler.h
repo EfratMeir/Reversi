@@ -12,7 +12,8 @@
 #include <pthread.h>
 #include <vector>
 #include <iostream>
-
+#include <string.h>
+#include <sstream>
 #include <CommandManeger.h>
 #include <Game.h>
 
@@ -23,7 +24,9 @@ using namespace std;
 class ClientHandler {
 public:
 	ClientHandler();
-	void handleClient(int client_socket);
+	void handleClient(int client_socket, char commandsAndArgs[50]);
+	void setArgs(int client_socket, char commandsAndArgs[50]);
+
 	CommandManeger& getCommandManeger(){ //deleteeeeee
 		return this->command_maneger;
 	}
@@ -32,7 +35,7 @@ public:
 private:
 	vector<Game> games_list;
 	pthread_mutex_t games_list_mutex;
-
+	vector<string> args_and_command;
 	vector<pthread_t> threads_vec;
 	CommandManeger command_maneger;
 	static void* goToCommands(void *client_socket);

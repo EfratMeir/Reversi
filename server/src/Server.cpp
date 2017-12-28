@@ -14,7 +14,6 @@
 #include <cstring>
 #include <iostream>
 #include <vector>
-#include <sstream>
 #include <string.h>
 using namespace std;
 
@@ -53,7 +52,6 @@ void Server::start() {
 	//define the client socket's structures:
 	struct sockaddr_in clientAddress;
 	socklen_t clientAddressLen;
-	vector<string> args;
 	while (true)  {
 		cout << "Waiting for client connections..." << endl;
 		//accept a new client connection:
@@ -75,22 +73,9 @@ void Server::start() {
 			return;
 		}
 		//		convert sockent num int to string ant put it as the first arg.
-		stringstream ss;
-		ss << clientSocket;
-		string str_socket = ss.str();
-		args.push_back(str_socket);
-		// split all the args of the command
-		char* pch;
-		pch = strtok (commandAndArgs," ");
-		string command = pch;
-//		string command = strtok(NULL, " ");
-		pch = strtok (NULL, " ");
-		while (pch != 0){
-			args.push_back(pch);
-		    pch = strtok (NULL, " ");
-		}
-//		this->client_handler.handleClient(clientSocket);  //open thread. not now
-		this->client_handler.getCommandManeger().executeCommand(command, args);
+
+		this->client_handler.handleClient(clientSocket, commandAndArgs);  //open thread. not now
+//		this->client_handler.getCommandManeger().executeCommand(command, args);
 
 
 //		//tell the client he is first

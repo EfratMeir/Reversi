@@ -16,7 +16,7 @@ void JoinCommand::setName(string name){
 	this->name = game_name;
 }
 void JoinCommand::execute(int clientSocket, vector<string> args){
-	setName(args[1]);
+	setName(args[2]);
 	bool two_players = false;
 	for (unsigned int i = 0; i < this->games_list.size(); i++) {
 		if (strcmp(name, this->games_list[i].getName()) == 0) {

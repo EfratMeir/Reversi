@@ -28,7 +28,7 @@ class CommandManeger {
 public:
 	CommandManeger();
 //	void map(int client_socket, vector<string> args);
-	void executeCommand(string command, vector<string> args);
+	void executeCommand(vector<string> args);
 	virtual ~CommandManeger();
 private:
 	map <string, Command*> commandsMap;

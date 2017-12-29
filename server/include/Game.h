@@ -16,13 +16,13 @@ using namespace std;
 class Game {
 
 public:
-	Game(const char* name);
+	Game(string name);
 	virtual ~Game();
-	const char* getName();
+	string getName();
 	int getNumOfplayers();
 	void addPlayer(int clientSocket);
 private:
-	const char* name;
+	string name;
 	int num_of_players;
 	int clientSocket1;
 	int clientSocket2;

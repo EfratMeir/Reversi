@@ -20,18 +20,18 @@ using namespace std;
 class StartCommand: public Command {
 public:
 	StartCommand();
-	StartCommand(const char* name, vector<Game>& games_list);
+	StartCommand(string name, vector<Game>& games_list);
 //	virtual void execute(vector<string> args);
 	virtual void execute(int clientSocket ,vector<string> args);
 	void SendGameStartsCommandMsg(int clientSocket, int msg);
 	void addGame(Game g);
 	void setName(string name);
 	virtual ~StartCommand();
+//	char* name;
 
 private:
-//	string name;
-	const char* name;
-	bool doesGameExists(const char* name);
+	string name;
+	bool doesGameExists(string name);
 	int game_added;
 
 };

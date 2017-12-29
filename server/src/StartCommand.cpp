@@ -6,17 +6,16 @@
  */
 #include <vector>
 #include <string.h>
-
+#include <cstring>
 #include <StartCommand.h>
 #include <unistd.h>
 
 
 StartCommand::StartCommand(){
-	this->name = 0;
 //	this->games_list = ;
 	this->game_added = 0;
 }
-StartCommand::StartCommand(const char* name, vector<Game>& games_list) {
+StartCommand::StartCommand( string name, vector<Game>& games_list) {
 	this->name = name;
 	pthread_mutex_lock(&games_list_mutex);
 	this->games_list = games_list;
@@ -28,11 +27,15 @@ StartCommand::StartCommand(const char* name, vector<Game>& games_list) {
 ////	SendGameStartsCommandMsg(clientSocket ,game_added);
 //}
 void StartCommand::setName(string name){
-	const char * game_name = name.c_str();
-	this->name= game_name;
+//	const char * temp_name = name.c_str();
+//	char* game_name;
+//	strcpy(this->name, temp_name);
+//	strcpy(this->name, game_name);
+//	this->name = name;
 }
 void StartCommand::execute(int clientSocket, vector<string> args) {
 	setName(args[2]);
+	this->name = args[2];
 	if (doesGameExists(this->name)) {
 		game_added = -1; //game with this name is already exists
 	}
@@ -59,10 +62,12 @@ StartCommand::~StartCommand() {
 }
 
 
-bool StartCommand::doesGameExists(const char* name) {
+bool StartCommand::doesGameExists( string name) {
 	bool the_same = false;
 	for (unsigned int i = 0; i < this->games_list.size(); i++) {
-		if (strcmp(name, this->games_list[i].getName()) == 0) {
+		const char* this_game_name = name.c_str();
+		const char* game_in_list = this->games_list[i].getName().c_str();
+		if (strcmp(this_game_name, game_in_list) == 0) {
 			pthread_mutex_lock(&games_list_mutex);
 			the_same = true;
 			pthread_mutex_unlock(&games_list_mutex);

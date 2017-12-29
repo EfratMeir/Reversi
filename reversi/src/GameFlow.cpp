@@ -61,7 +61,6 @@ void GameFlow::startRemoteGame(Player* players[2], Board& b, Console& console){
 	bool start_game = false;
 	while (!start_game) {
 		command_name = enterCommand(console, connecter); //start or join or see all possible games
-		start_game = connecter.receieveStartGame();
 
 		if (strcmp(command_name, "start") == 0) {
 			remote_sign = 'O';
@@ -79,14 +78,16 @@ void GameFlow::startRemoteGame(Player* players[2], Board& b, Console& console){
 		else{
 			players[0] =  new HumenPlayer('X');
 			players[1] = remote_player;
+		}
 			this->turn_base.getConsole().printWaitingToOther();
 	//		cout << "Waiting for other player to join..." << endl;
-
-			//wait until server will send a msg that we can start:
-			if (strcmp(command_name, "list_games") == 0){
-			}
+		//wait until server will send a msg that we can start:
+		if (strcmp(command_name, "list_games") == 0){
 		}
+		start_game = connecter.receieveStartGame();
+
 	}
+
 	this->turn_base.getConsole().canStart();
 	this->turn_base = TurnBase(b, players, is_remote_game, connecter, console);
 }

@@ -18,14 +18,16 @@ class JoinCommand : public Command{
 public:
 	JoinCommand();
 	void setName(string name);
-	virtual void execute(int clientSocket, vector<string> args);
+
+	virtual void execute(int clientSocket, vector<string> args, vector<Game>& games_list);
 	bool doesGameExists(string name);
 //	pthread_mutex_t games_list_mutex;
 	void SendTwoPlayersInGameMsg(int clientSocket, bool msg);
+	void notifyGameStarts(int clientSocket1, int clientSocket2);
 
 	virtual ~JoinCommand();
 private:
-	string name;
+	string game_to_join_name;
 };
 
 #endif /* SRC_JOINCOMMAND_H_ */

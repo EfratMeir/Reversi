@@ -19,7 +19,7 @@ ListGamesCommand::ListGamesCommand(vector<Game>& games_list) {
 
 }
 
-void ListGamesCommand::execute(int clientSocket, vector<string> args) {
+void ListGamesCommand::execute(int clientSocket, vector<string> args, vector<Game>& games_list) {
 	SendGamesToJoinList(clientSocket, this->games_list);
 }
 

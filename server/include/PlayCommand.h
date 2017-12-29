@@ -16,7 +16,7 @@
 class PlayCommand: public Command {
 public:
 	PlayCommand();
-	virtual void execute(int clientSocket ,vector<string> args);
+	virtual void execute(int clientSocket ,vector<string> args, vector<Game>& games_list);
 	virtual ~PlayCommand();
 private:
 	void play(int clientSocket1, int clientSocket2);

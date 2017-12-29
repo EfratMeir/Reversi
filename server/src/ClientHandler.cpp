@@ -8,29 +8,35 @@
 #include "ClientHandler.h"
 using namespace std;
 
-ClientHandler::ClientHandler() {
 
+
+ClientHandler::ClientHandler() {
 }
 
-void ClientHandler::handleClient(int client_socket, char commandsAndArgs[50]) {
-	setArgs(client_socket,commandsAndArgs);
-	pthread_t new_thread;
+
+
+
+void ClientHandler::handleClient(int client_socket, char commandsAndArgs[50]) {	setArgs(client_socket,commandsAndArgs);
+pthread_t new_thread;
 //	int thread = pthread_create(&new_thread, NULL, goToCommands ,(void*)&this->args_and_command);
 
-	threads_vec.push_back(new_thread);
-	int thread = pthread_create(&threads_vec[threads_vec.size() - 1], NULL, goToCommands ,(void*)&this->args_and_command);
-	if (thread) {
-		cout << "ERROR: unable to create thread: "<< threads_vec.size() << endl;
-		return;
-	}
-//	pthread_exit(NULL);
+threads_vec.push_back(new_thread);
+int thread = pthread_create(&threads_vec[threads_vec.size() - 1], NULL, goToCommands ,(void*)&this->args_and_command);
+if (thread) {
+	cout << "ERROR: unable to create thread: "<< threads_vec.size() << endl;
+	return;
 }
-//return vec with client socket, name of command and all the argumants
-void ClientHandler:: setArgs(int client_socket, char commandsAndArgs[50]){
+	//pthread_exit(NULL);
+
+}
+
+void ClientHandler::setArgs(int client_socket, char commandsAndArgs[50]) {
 	this->args_and_command.erase(this->args_and_command.begin(), this->args_and_command.end());
 	stringstream ss;
 	ss << client_socket;
 	string str_socket = ss.str();
+
+//	string str_socket = ss.str();
 	this->args_and_command.push_back(str_socket);
 	// split all the args of the command
 	char* pch;
@@ -45,12 +51,15 @@ void ClientHandler:: setArgs(int client_socket, char commandsAndArgs[50]){
 }
 
 void* ClientHandler::goToCommands(void* args) {
-	CommandManeger command_m;
-	cout<< "im in threadddddddddd";
+	CommandManeger command_m = CommandManeger(static_games_list);
+
+	cout<< "im in threadddddddddd" << endl;
 	vector<string> args_and_command = *((vector<string>*)args);
 	//CALL COMMAND MANAGER TO MAP FROM HERE
-	command_m.executeCommand(args_and_command);
+	command_m.executeCommand(args_and_command, static_games_list);	//finishes and STUCK here.
+
 }
 ClientHandler::~ClientHandler() {
 	// TODO Auto-generated destructor stub
 }
+

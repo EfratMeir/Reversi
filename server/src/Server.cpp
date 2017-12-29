@@ -67,14 +67,15 @@ void Server::start() {
 		cout << "Error reading a command" << endl;
 		return;
 		}
+
 		if (n == 0) {
 			cout << "Client disconnected" << endl;
 			close(clientSocket);
 			return;
 		}
-		//		convert sockent num int to string ant put it as the first arg.
 
-		this->client_handler.handleClient(clientSocket, commandAndArgs);  //open thread. not now
+		//		convert sockent num int to string ant put it as the first arg.
+		this->client_handler.handleClient(clientSocket, commandAndArgs);  //open thread
 //		this->client_handler.getCommandManeger().executeCommand(command, args);
 
 

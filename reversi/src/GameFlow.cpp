@@ -56,23 +56,37 @@ void GameFlow::startRemoteGame(Player* players[2], Board& b, Console& console){
 	const char* IP = convertStringToChar(readFromFile("IP"));
 	Connecter connecter = Connecter((char*)IP, port);
 	initializeConnecter(connecter);
-	char remote_sign = enterCommand(console, connecter); //start or join or see all possible games
+	char remote_sign;
+	char* command_name = "default";
+	bool start_game = false;
+	while (!start_game) {
+		command_name = enterCommand(console, connecter); //start or join or see all possible games
+		start_game = connecter.receieveStartGame();
 
-	Player* remote_player = new RemotePlayer(connecter, remote_sign);
-//	char remote_sign = remote_player->get_sign();
-	is_remote_game = true;
-	if (remote_sign == 'X'){
-		players[0] = remote_player;
-		players[1] = new HumenPlayer('O');
+		if (strcmp(command_name, "start") == 0) {
+			remote_sign = 'O';
+		}
+		if(strcmp(command_name, "join") == 0) {
+			remote_sign = 'X';
+		}
+		Player* remote_player = new RemotePlayer(connecter, remote_sign);
+	//	char remote_sign = remote_player->get_sign();
+		is_remote_game = true;
+		if (remote_sign == 'X'){
+			players[0] = remote_player;
+			players[1] = new HumenPlayer('O');
+		}
+		else{
+			players[0] =  new HumenPlayer('X');
+			players[1] = remote_player;
+			this->turn_base.getConsole().printWaitingToOther();
+	//		cout << "Waiting for other player to join..." << endl;
+
+			//wait until server will send a msg that we can start:
+			if (strcmp(command_name, "list_games") == 0){
+			}
+		}
 	}
-	else{
-		players[0] =  new HumenPlayer('X');
-		players[1] = remote_player;
-		this->turn_base.getConsole().printWaitingToOther();
-//		cout << "Waiting for other player to join..." << endl;
-	}
-	//wait until server will send a msg that we can start:
-	bool start_game = connecter.receieveStartGame();
 	this->turn_base.getConsole().canStart();
 	this->turn_base = TurnBase(b, players, is_remote_game, connecter, console);
 }
@@ -83,7 +97,7 @@ void GameFlow::startRemoteGame(Player* players[2], Board& b, Console& console){
  * return the sign of the *remote player.* if the command is start , the sign of the remote is o.
  * if the ccommand is join the sign is x.
  */
-char GameFlow::enterCommand(Console& console, Connecter& connecter){
+char* GameFlow::enterCommand(Console& console, Connecter& connecter){
 	console.printEnterCommand();
 	char command[MAX_COMMAND_SIZE];
 	cin.ignore();
@@ -100,17 +114,23 @@ char GameFlow::enterCommand(Console& console, Connecter& connecter){
 		if (game_name == -1){ //the game name is already exist
 			console.nameExist();
 			enterCommand(console, connecter);
-			return 'O';
 		}
 		else{
-			cout << "you opened a new game "<< endl;
-			return 'O';
+			//wait to get a message that the second player is connected and
+			//we can start the game
+			//cout << "you opened a new game "<< endl;
 		}
 	}
 	if (strcmp(command_name, "join") == 0){
+//		bool two_players_in_game = connecter.receieveStartGame();
+//		if (two_players_in_game){
+			return command_name; //maybe not????????????
+		}
+		else {
+//			cout << "you cant join this game" << endl;
+		}
 
-	}
-	return 'X';
+	return command_name;
 
 }
 char GameFlow::choose_players(){

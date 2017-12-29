@@ -12,7 +12,7 @@ PlayCommand::PlayCommand() {
 
 }
 
-void PlayCommand::execute(int clientSocket, vector<string> args) {
+void PlayCommand::execute(int clientSocket, vector<string> args, vector<Game>& games_list) {
 
 
 

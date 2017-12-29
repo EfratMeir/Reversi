@@ -27,12 +27,14 @@ using namespace std;
 class CommandManeger {
 public:
 	CommandManeger();
+	CommandManeger(vector<Game>& static_games_list);
 //	void map(int client_socket, vector<string> args);
-	void executeCommand(vector<string> args);
+	void executeCommand(vector<string> args, vector<Game>& games_list);
 	virtual ~CommandManeger();
+
 private:
 	map <string, Command*> commandsMap;
-
+	vector<Game> static_games_list;
 };
 
 

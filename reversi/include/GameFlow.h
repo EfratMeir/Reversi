@@ -41,7 +41,7 @@ public:
 	 * destructor
 	 */
 	void startRemoteGame(Player* players[2],Board& b, Console& console);
-	char enterCommand(Console& console, Connecter& connecter);
+	char* enterCommand(Console& console, Connecter& connecter);
 
 	virtual ~GameFlow();
 

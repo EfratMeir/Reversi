@@ -11,7 +11,7 @@
 #include <sstream>
 #include <fstream>
 using namespace std;
-RemotePlayer::RemotePlayer(Connecter& connecter) {
+RemotePlayer::RemotePlayer(Connecter& connecter, char sign) {
 
 
 //	this->port = convertStringToInt(readFromFile("port"));
@@ -19,13 +19,14 @@ RemotePlayer::RemotePlayer(Connecter& connecter) {
 //	this->connecter = Connecter((char*)IP, port);
 //	initializeConnecter();
 	this->connecter = connecter;
-	this->sign = 'Y'; //not initialize
-	set_sign(); //Remote - not initialized
+	this->sign = sign; //not initialize
+//	set_sign(); //Remote - not initialized
 	this->moves_calculator = MovesCalculator();
 	this->has_no_moves = false;
 	//this->opponent_last_move = Point(0, 0,' ');
 	//must initialize for the first move. this is ok because this spot allways empty in the first move...
 	this->my_first_move = true;
+	this->opponent_has_no_move = false;
 
 }
 //int RemotePlayer::convertStringToInt(string str){

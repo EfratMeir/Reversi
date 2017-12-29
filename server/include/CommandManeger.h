@@ -15,19 +15,26 @@
 #include <sys/socket.h>
 #include <unistd.h>
 #include <map>
-#include "Command.h"
+#include <stdio.h>
+#include <unistd.h>
+#include "StartCommand.h"
+#include "ListGamesCommand.h"
+#include "JoinCommand.h"
+#include "PlayCommand.h"
 
 using namespace std;
 
 class CommandManeger {
 public:
 	CommandManeger();
+	CommandManeger(vector<Game>& static_games_list);
 //	void map(int client_socket, vector<string> args);
-	void executeCommand(string command, vector<string> args);
+	void executeCommand(vector<string> args, vector<Game>& games_list);
 	virtual ~CommandManeger();
+
 private:
 	map <string, Command*> commandsMap;
-
+	vector<Game> static_games_list;
 };
 
 

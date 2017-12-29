@@ -52,11 +52,12 @@
 					</folderInfo>
 					<folderInfo id="cdt.managedbuild.config.gnu.cross.exe.debug.400145123.159671687" name="/" resourcePath="src">
 						<toolChain id="cdt.managedbuild.toolchain.gnu.cross.exe.debug.2011926615" name="Cross GCC" superClass="cdt.managedbuild.toolchain.gnu.cross.exe.debug" unusedChildren="">
+							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="cdt.managedbuild.targetPlatform.gnu.cross" isAbstract="false" osList="all" superClass="cdt.managedbuild.targetPlatform.gnu.cross"/>
 							<tool id="cdt.managedbuild.tool.gnu.cross.c.compiler.355969558" name="Cross GCC Compiler" superClass="cdt.managedbuild.tool.gnu.cross.c.compiler.371198025">
 								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.541728855" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.cross.cpp.compiler.810323004" name="Cross G++ Compiler" superClass="cdt.managedbuild.tool.gnu.cross.cpp.compiler.1790504248">
-								<option id="gnu.cpp.compiler.option.include.paths.1210039077" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
+								<option id="gnu.cpp.compiler.option.include.paths.1210039077" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/server/ /${ProjName}/include}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/server}&quot;"/>
 									<listOptionValue builtIn="false" value="/home/efrat/Reversi/server/include"/>

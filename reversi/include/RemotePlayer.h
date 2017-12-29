@@ -17,7 +17,7 @@ public:
 	 * constructor
 	 * @param connecter
 	 */
-	RemotePlayer(Connecter& connecter);
+	RemotePlayer(Connecter& connecter, char sign);
 
 	/**
 	 * return 1 if ther's no moves, else 0
@@ -73,8 +73,8 @@ private:
 	bool opponent_has_no_move;
 	bool my_first_move;
 	Connecter connecter;
-	int port;
-    const char * IP;
+//	int port;
+//    const char * IP;
 	/**
 	 * puts the chosen point on the board.
 	 * (updating the counter will be from fliper)

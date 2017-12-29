@@ -4,14 +4,16 @@
  *  Created on: Dec 24, 2017
  *      Author: efrat
  */
-#include <string.h>
-#include <iostream>
 
 #include <Game.h>
 
 
-Game::Game(const char* name) {
+Game::Game(const char* name, int clientSocket1) {
 	this->name = name;
+	this->clientSocket1 = clientSocket1;
+	this->clientSocket2 = 0;
+	this->num_of_players = 1;
+	this->started_playing = false;
 }
 
 Game::~Game() {
@@ -28,14 +30,31 @@ int Game::getNumOfplayers() {
 
 void Game::addPlayer(int clientSocket) {
 	if (num_of_players == 0) {
-		clientSocket1 = clientSocket;
-		num_of_players++;
+		this->clientSocket1 = clientSocket;
+		this->num_of_players = 1;
 	}
 	else {
 		if(num_of_players == 1) {
-			clientSocket2 = clientSocket;
-			num_of_players++;
+			this->clientSocket2 = clientSocket;
+			this->num_of_players = 2;
 		}
 	}
 
+}
+
+bool Game::getStartedPlaying() {
+	return this->started_playing;
+}
+
+int Game::getClientSocket1() {
+	return this->clientSocket1;
+}
+
+int Game::getClientSocket2() {
+	return this->clientSocket2;
+}
+
+
+void Game::setGameStarted() {
+	this->started_playing = true;
 }

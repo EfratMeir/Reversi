@@ -13,6 +13,7 @@
 #include "TurnBase.h"
 #include "Connecter.h"
 #include <vector>
+#include <string.h>
 
 /*
  * initializes the game and mannage it from outside.
@@ -47,6 +48,7 @@ public:
 
 private:
 	TurnBase turn_base;
+
 	/*
 	 * checks the winner of the game.
 	 * @return - the sign of the win player.

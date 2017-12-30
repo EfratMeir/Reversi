@@ -66,7 +66,7 @@ public:
 	 * receive a bool that the game can start
 	 * @return 1 if the game can start, else 0
 	 */
-	vector<string> receieveGamesTojoinList();
+	vector<string>& receieveGamesTojoinList();
 
 	/**
 	 * send a point to server

@@ -67,6 +67,12 @@ void GameFlow::startRemoteGame(Player* players[2], Board& b, Console& console){
 		if(strcmp(command_name, "join") == 0) {
 			remote_sign = 'X';
 		}
+		if (strcmp(command_name, "games_list") == 0) {
+			vector<string> games_list = connecter.receieveGamesTojoinList();
+			console.printGamesList(games_list);
+		}
+
+
 		Player* remote_player = new RemotePlayer(connecter, remote_sign);
 	//	char remote_sign = remote_player->get_sign();
 		is_remote_game = true;
@@ -122,6 +128,7 @@ char* GameFlow::enterCommand(Console& console, Connecter& connecter){
 	if (strcmp(command_name, "join") == 0){
 
 	}
+
 	return command_name;
 
 }

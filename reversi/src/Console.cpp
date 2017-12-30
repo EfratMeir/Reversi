@@ -96,3 +96,9 @@ Console::~Console() {
 	// TODO Auto-generated destructor stub
 }
 
+void Console::printGamesList(vector<string> list) {
+	cout << "available games to join: " <<endl;
+	for(int i = 0; i < list.size(); i++) {
+		cout << list[i] << endl;
+	}
+}

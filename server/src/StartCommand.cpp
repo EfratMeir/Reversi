@@ -24,9 +24,7 @@ StartCommand::StartCommand(const char* name, vector<Game>& games_list) {
 	game_added = 0;
 }
 
-//
-////	SendGameStartsCommandMsg(clientSocket ,game_added);
-//}
+
 void StartCommand::setName(const string name){
 	const char * game_name = name.c_str();
 	this->name = game_name; //PROBLEM IS HERE!! need to strcpy some how. this is only points to game_bame and than it disapperas...

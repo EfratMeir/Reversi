@@ -39,10 +39,7 @@ public:
 	virtual ~ClientHandler();
 
 private:
-	//static vector<Game> games_list;
-	//pthread_mutex_t games_list_mutex;
 	vector<string> args_and_command;
-
 	vector<pthread_t> threads_vec;
 	CommandManeger command_maneger;
 	static void* goToCommands(void *);

@@ -8,7 +8,7 @@
 #include <Game.h>
 
 
-Game::Game(const char* name, int clientSocket1) {
+Game::Game(string name, int clientSocket1) {
 	this->name = name;
 	this->clientSocket1 = clientSocket1;
 	this->clientSocket2 = 0;
@@ -20,7 +20,7 @@ Game::~Game() {
 	// TODO Auto-generated destructor stub
 }
 
-const char* Game::getName() {
+string Game::getName() {
 	return this->name;
 }
 

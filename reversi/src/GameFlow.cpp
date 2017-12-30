@@ -61,16 +61,19 @@ void GameFlow::startRemoteGame(Player* players[2], Board& b, Console& console){
 	bool start_game = false;
 	while (!start_game) {
 		command_name = enterCommand(console, connecter); //start or join or see all possible games
+
 		if (strcmp(command_name, "start") == 0) {
 			remote_sign = 'O';
 		}
 		if(strcmp(command_name, "join") == 0) {
 			remote_sign = 'X';
 		}
-		if (strcmp(command_name, "games_list") == 0) {
-			vector<string> games_list = connecter.receieveGamesTojoinList();
-			console.printGamesList(games_list);
+		if (strcmp(command_name, "list_games") == 0){
+			vector<string> games_to_join;
+			connecter.receieveGamesTojoinList(games_to_join);
+			console.printGamesList(games_to_join);
 		}
+
 
 
 		Player* remote_player = new RemotePlayer(connecter, remote_sign);
@@ -83,15 +86,14 @@ void GameFlow::startRemoteGame(Player* players[2], Board& b, Console& console){
 		else{
 			players[0] =  new HumenPlayer('X');
 			players[1] = remote_player;
+		}
 			this->turn_base.getConsole().printWaitingToOther();
 	//		cout << "Waiting for other player to join..." << endl;
+		//wait until server will send a msg that we can start:
 
-			//wait until server will send a msg that we can start:
-			if (strcmp(command_name, "list_games") == 0)
-			bool start_game = connecter.receieveStartGame();
-		}
+		start_game = connecter.receieveStartGame();
+
 	}
-
 
 	this->turn_base.getConsole().canStart();
 	this->turn_base = TurnBase(b, players, is_remote_game, connecter, console);
@@ -122,15 +124,21 @@ char* GameFlow::enterCommand(Console& console, Connecter& connecter){
 			enterCommand(console, connecter);
 		}
 		else{
+			//wait to get a message that the second player is connected and
+			//we can start the game
 			//cout << "you opened a new game "<< endl;
 		}
 	}
 	if (strcmp(command_name, "join") == 0){
-
-	}
+//		bool two_players_in_game = connecter.receieveStartGame();
+//		if (two_players_in_game){
+			return command_name; //maybe not????????????
+		}
+		else {
+//			cout << "you cant join this game" << endl;
+		}
 
 	return command_name;
-
 }
 char GameFlow::choose_players(){
 	this->turn_base.getConsole().print_hello();

@@ -16,9 +16,10 @@ using namespace std;
 class Game {
 
 public:
-	Game(const char* name, int clientSocket1);
+
+	Game(string name, int clientSocket1);
 	virtual ~Game();
-	const char* getName();
+	string getName();
 	int getNumOfplayers();
 	void addPlayer(int clientSocket);
 	bool getStartedPlaying();
@@ -27,7 +28,7 @@ public:
 	void setGameStarted();
 
 private:
-	const char* name;
+	string name;
 	bool started_playing;
 	int num_of_players;
 	int clientSocket1;

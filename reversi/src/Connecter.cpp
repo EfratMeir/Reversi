@@ -157,33 +157,25 @@ bool Connecter::receieveStartGame() {
 	return start_the_game;
 }
 
-vector<string>& Connecter::receieveGamesTojoinList() {
+void Connecter::receieveGamesTojoinList(vector<string>& games_to_join_list) {
 	int num;
-	vector<string> games_to_join_list;
 
-//	char commandAndArgs[MAX_COMMAND_SIZE];
-//		int n = read(clientSocket, commandAndArgs, sizeof(commandAndArgs));
-//		cout << "command is "<< commandAndArgs <<endl; //deleteeeeeeeeeeeee
-//		if (n == -1) {
-//		cout << "Error reading a command" << endl;
-//		return;
-//		}
-//
 	int n = read(clientSocket, &num, sizeof(num));
 	if (n == -1) {
 		throw "Error reading num of games to join from socket";
 	}
-	cout << "num of games in list: " << num;
+	cout << "num of games in list: " << num << endl;
+	char name[MAX_NAME];
 
 	for (int i = 0; i < num; i++) {
-		char name[MAX_NAME];
 		int n = read(clientSocket, &name, sizeof(name)); //WORKS THIS WAY? OR ITS GO OVER THE PREVIOUS NAME? CHECK.
 		if (n == -1) {
 			throw "Error reading a game to join name from socket";
 		}
-		games_to_join_list.push_back(name);
+		string stringName = string(name);
+
+		games_to_join_list.push_back(stringName);
 	}
-	return games_to_join_list;
 }
 
 int Connecter::receiveStartCommandMsg() {

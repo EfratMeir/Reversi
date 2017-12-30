@@ -6,17 +6,16 @@
  */
 #include <vector>
 #include <string.h>
-
+#include <cstring>
 #include <StartCommand.h>
 #include <unistd.h>
 
 
 StartCommand::StartCommand(){
-	this->name = 0;
 //	this->games_list = ;
 	this->game_added = 0;
 }
-StartCommand::StartCommand(const char* name, vector<Game>& games_list) {
+StartCommand::StartCommand( string name, vector<Game>& games_list) {
 	this->name = name;
 	//pthread_mutex_lock(&games_list_mutex);
 	//this->games_list = games_list;
@@ -25,13 +24,15 @@ StartCommand::StartCommand(const char* name, vector<Game>& games_list) {
 }
 
 
-void StartCommand::setName(const string name){
-	const char * game_name = name.c_str();
-	this->name = game_name; //PROBLEM IS HERE!! need to strcpy some how. this is only points to game_bame and than it disapperas...
-															//but this->name is const. must change not to const
+void StartCommand::setName(string name){
+//	const char * temp_name = name.c_str();
+//	char* game_name;
+//	strcpy(this->name, temp_name);
+//	strcpy(this->name, game_name);
+//	this->name = name;
 }
-void StartCommand::execute(int clientSocket, vector<string> args, vector<Game>& games_list) {
-	setName(args[2]);
+void StartCommand::execute(int clientSocket, vector<string> args, vector<Game>& games_list){
+	this->name = args[2];
 	if (doesGameExists(this->name, games_list)) {
 		game_added = -1; //game with this name is already exists
 	}
@@ -40,7 +41,6 @@ void StartCommand::execute(int clientSocket, vector<string> args, vector<Game>& 
 		addGame(clientSocket, game, games_list);		//ADD HERE THE ACTUALLY START GAME...?? THREAD, CONNECTION...??
 		this->game_added = 1; //is the cast to int enogh???
 	}
-
 	SendGameStartsCommandMsg(clientSocket ,game_added);
 
 }
@@ -60,10 +60,13 @@ StartCommand::~StartCommand() {
 }
 
 
-bool StartCommand::doesGameExists(const char* name, vector<Game>& games_list) {
+
+bool StartCommand::doesGameExists(string name, vector<Game>& games_list) {
 	bool the_same = false;
 	for (unsigned int i = 0; i < /*this->*/games_list.size(); i++) {
-		if (strcmp(name, /*this->*/games_list[i].getName()) == 0) {
+		const char* this_game_name = name.c_str();
+		const char* game_in_list = games_list[i].getName().c_str();
+		if (strcmp(this_game_name, game_in_list) == 0) {
 		//	pthread_mutex_lock(&games_list_mutex);
 			the_same = true;
 		//	pthread_mutex_unlock(&games_list_mutex);

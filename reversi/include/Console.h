@@ -9,6 +9,7 @@
 #define SRC_CONSOLE_H_
 #include "Display.h"
 #include <vector>
+#include <string.h>
 #include <iostream>
 using namespace std;
 /*

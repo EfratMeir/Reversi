@@ -27,7 +27,7 @@ public:
 	ListGamesCommand();
 	ListGamesCommand(vector<Game>& games_list);
 	virtual void execute(int clientSocket, vector<string> args, vector<Game>& games_list);
-	void SendGamesToJoinList( int clientSocket, vector<Game> games_list);
+	void SendGamesToJoinList( int clientSocket, vector<Game>& games_list);
 	virtual ~ListGamesCommand();
 
 private:

@@ -23,9 +23,7 @@ StartCommand::StartCommand( string name, vector<Game>& games_list) {
 	game_added = 0;
 }
 
-//
-////	SendGameStartsCommandMsg(clientSocket ,game_added);
-//}
+
 void StartCommand::setName(string name){
 //	const char * temp_name = name.c_str();
 //	char* game_name;

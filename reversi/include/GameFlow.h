@@ -13,6 +13,7 @@
 #include "TurnBase.h"
 #include "Connecter.h"
 #include <vector>
+#include <string.h>
 
 /*
  * initializes the game and mannage it from outside.
@@ -41,13 +42,13 @@ public:
 	 * destructor
 	 */
 	void startRemoteGame(Player* players[2],Board& b, Console& console);
-	char* enterCommand(Console& console, Connecter& connecter);
+	void enterCommand(Console& console, Connecter& connecter);
 
 	virtual ~GameFlow();
 
 private:
+	char* start_or_join;
 	TurnBase turn_base;
-	string name;
 	/*
 	 * checks the winner of the game.
 	 * @return - the sign of the win player.

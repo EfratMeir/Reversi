@@ -66,7 +66,7 @@ public:
 	 * receive a bool that the game can start
 	 * @return 1 if the game can start, else 0
 	 */
-	vector<string> receieveGamesTojoinList();
+	void receieveGamesTojoinList(vector<string>& games_to_join_list);
 
 	/**
 	 * send a point to server
@@ -80,7 +80,7 @@ public:
 	 * @return the number
 	 */
 	int receiveStartCommandMsg();
-
+	bool receiveJoinValid();
 private:
 	//members
 	char *serverIP; //CHANGE FROM CONST CHAR* TO CHAR*

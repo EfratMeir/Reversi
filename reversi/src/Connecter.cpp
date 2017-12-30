@@ -14,6 +14,7 @@
 #include <string.h>
 #include <unistd.h>
 
+#define MAX_NAME 50
 using namespace std;
 
 Connecter::Connecter() {
@@ -154,26 +155,34 @@ bool Connecter::receieveStartGame() {
 	return start_the_game;
 }
 
-vector<string> Connecter::receieveGamesTojoinList() {
+void Connecter::receieveGamesTojoinList(vector<string>& games_to_join_list) {
 	int num;
-	vector<string> games_to_join_list;
 
 	int n = read(clientSocket, &num, sizeof(num));
 	if (n == -1) {
 		throw "Error reading num of games to join from socket";
 	}
+	cout << "num of games in list: " << num << endl;
+	char name[MAX_NAME];
 
 	for (int i = 0; i < num; i++) {
-		char* name;
 		int n = read(clientSocket, &name, sizeof(name)); //WORKS THIS WAY? OR ITS GO OVER THE PREVIOUS NAME? CHECK.
 		if (n == -1) {
 			throw "Error reading a game to join name from socket";
 		}
-		games_to_join_list.push_back(name);
-	}
-	return games_to_join_list;
-}
+		string stringName = string(name);
 
+		games_to_join_list.push_back(stringName);
+	}
+}
+bool Connecter::receiveJoinValid(){
+	bool join_valid;
+	int n = read(clientSocket, &join_valid, sizeof(join_valid));
+	if (n == -1) {
+		throw "Error reading the start command msg from socket";
+	}
+	return join_valid;
+}
 int Connecter::receiveStartCommandMsg() {
 	int game_started;
 
@@ -188,7 +197,7 @@ int Connecter::receiveStartCommandMsg() {
 int Connecter::sendCommand(char command[MAX_COMMAND_SIZE]){
 	int n = write(clientSocket, command, MAX_COMMAND_SIZE);
 	if (n == -1) {
-		throw "Error writing player_has_no_moves to socket";
+		throw "Error writing command to socket";
 	}
 	return 0;
 }

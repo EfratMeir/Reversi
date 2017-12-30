@@ -19,10 +19,18 @@ void Console::connectionFailed(const char *msg){
 	cout << "Failed to connect to server. Reason: " << msg << endl;
 }
 void Console::printEnterCommand(){
-	cout << "please enter your command" << endl;
+	cout << "the possible commands are: " << endl;
+	cout << "  start <game_name>" << endl;
+	cout << "  list_games" << endl;
+	cout << "  join <game_name>" << endl;
+	cout <<"type your command"<< endl;
+//	cout << "please enter your command" << endl;
 }
 void Console::nameExist(){
-	cout << "the name is already exist" <<endl;
+	cout << "Error - the name is already exist" <<endl;
+}
+void Console::noGame(){
+	cout << "Error - no game with this name." << endl;
 }
 void Console::printWaitingToOther(){
 	cout << "Waiting for other player to join..." << endl;
@@ -97,3 +105,9 @@ Console::~Console() {
 	// TODO Auto-generated destructor stub
 }
 
+void Console::printGamesList(vector<string> list) {
+	cout << "available games to join: " <<endl;
+	for(int i = 0; i < list.size(); i++) {
+		cout << list[i] << endl;
+	}
+}

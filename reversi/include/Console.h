@@ -8,6 +8,8 @@
 #ifndef SRC_CONSOLE_H_
 #define SRC_CONSOLE_H_
 #include "Display.h"
+#include <vector>
+#include <string.h>
 #include <iostream>
 using namespace std;
 /*
@@ -21,7 +23,7 @@ public:
 	void printWaitingToOther();
 	void printEnterCommand();
 	void nameExist();
-
+	void noGame();
 //	void enterGameName();
 	virtual void printBoard(Board& b);
 	void printNowTurn(char sign);
@@ -31,6 +33,7 @@ public:
 	void printWinner(char winner);
 	void connectionFailed(const char *msg);
 	void printCounter(PointsCounter counter);
+	void printGamesList(vector<string> list);
 	virtual ~Console();
 private:
 };

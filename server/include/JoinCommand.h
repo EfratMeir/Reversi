@@ -25,6 +25,7 @@ public:
 //	pthread_mutex_t games_list_mutex;
 	void SendTwoPlayersInGameMsg(int clientSocket, bool msg);
 	void notifyGameStarts(int clientSocket1, int clientSocket2);
+	void sendJoinValid(int client_socket, bool join_valid);
 
 	virtual ~JoinCommand();
 private:

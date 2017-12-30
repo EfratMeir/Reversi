@@ -7,6 +7,7 @@
 
 #ifndef SRC_JOINCOMMAND_H_
 #define SRC_JOINCOMMAND_H_
+#include "Play.h"
 #include "Command.h"
 #include <string.h>
 #include <unistd.h>
@@ -27,6 +28,7 @@ public:
 
 	virtual ~JoinCommand();
 private:
+	Play play;
 	string game_to_join_name;
 };
 

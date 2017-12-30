@@ -13,14 +13,14 @@ CommandManeger::CommandManeger() {
 	commandsMap["start"] = new StartCommand();
 	commandsMap["list_games"] = new ListGamesCommand();
 	commandsMap["join"] = new JoinCommand();
-	commandsMap["play"] = new PlayCommand();
+//	commandsMap["play"] = new PlayCommand();
 }
 CommandManeger::CommandManeger(vector<Game>& games_list) {
 	static_games_list = games_list;
 	commandsMap["start"] = new StartCommand();
 	commandsMap["list_games"] = new ListGamesCommand();
 	commandsMap["join"] = new JoinCommand();
-	commandsMap["play"] = new PlayCommand();
+//	commandsMap["play"] = new PlayCommand();
 }
 void CommandManeger::executeCommand(vector<string> args, vector<Game>& games_list){
 	Command* commandObj = commandsMap[args[1]];

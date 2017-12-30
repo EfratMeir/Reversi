@@ -20,10 +20,10 @@ void JoinCommand::execute(int clientSocket, vector<string> args, vector<Game>& g
 //	setName(args[2]);
 	this->game_to_join_name = args[2];
 	bool two_players = false;
-	for (unsigned int i = 0; i < /*this->*/games_list.size(); i++) {
+	for (unsigned int i = 0; i < games_list.size(); i++) {
 		const char* this_game_to_join = game_to_join_name.c_str();
 		const char* game_in_list = games_list[i].getName().c_str();
-		if (strcmp(this_game_to_join, /*this->*/game_in_list) == 0) {
+		if (strcmp(this_game_to_join, game_in_list) == 0) {
 			//pthread_mutex_lock(&games_list_mutex);
 			games_list[i].addPlayer(clientSocket);
 			two_players = true;
@@ -61,6 +61,7 @@ void JoinCommand::notifyGameStarts(int clientSocket1, int clientSocket2) {
 		cout << "Error writing start_game" << endl;
 		return;
 	}
+	this->play.play(clientSocket1,clientSocket2);
 }
 JoinCommand::~JoinCommand() {
 	// TODO Auto-generated destructor stub

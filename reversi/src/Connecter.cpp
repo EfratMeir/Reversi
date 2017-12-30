@@ -91,8 +91,6 @@ int Connecter::sendPoint(Point p) {
 	return 0;
 }
 
-
-
 int Connecter::sendNoMoves(bool player_has_no_moves) {
 	int n = write(clientSocket, &player_has_no_moves, sizeof(player_has_no_moves));
 	if (n == -1) {
@@ -120,8 +118,8 @@ Point Connecter::receivePoint() {
 	}
 	//check if the other client disconnect, if so - now the server will know,
 	//cause the read command will return 0.
-	int dummy;
-	n = write(clientSocket, &dummy, sizeof(dummy));
+//	int dummy;
+//	n = write(clientSocket, &dummy, sizeof(dummy));
 
 	n = read(clientSocket, &col, sizeof(col));
 	if (n == -1) {

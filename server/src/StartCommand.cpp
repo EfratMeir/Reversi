@@ -44,7 +44,10 @@ void StartCommand::execute(int clientSocket, vector<string> args, vector<Game>& 
 		this->game_added = 1; //is the cast to int enogh???
 	}
 	SendGameStartsCommandMsg(clientSocket ,game_added);
-
+	if(game_added == -1){ //maybe mistake. if there is already a game name like this,
+		//the client will insert anew command with a new socket. so close this socket,!
+		close(clientSocket);
+	}
 }
 
 

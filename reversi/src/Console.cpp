@@ -65,7 +65,8 @@ void Console:: printBoard(Board& board){
 	// i - index for rows
 	// j - index for columns
 //	Point** all_players = board.getAllPlayers();
-	for (int i = 0; i < board.getBoardSize() ; i++) {
+	int size = board.getBoardSize();
+	for (int i = 0; i < size ; i++) {
 		cout << " | " << i +1 ;
 	}
 	cout << " |" << endl;

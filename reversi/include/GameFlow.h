@@ -47,6 +47,7 @@ public:
 
 private:
 	TurnBase turn_base;
+	string name;
 	/*
 	 * checks the winner of the game.
 	 * @return - the sign of the win player.

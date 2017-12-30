@@ -8,6 +8,7 @@
 #ifndef INCLUDE_COMMANDMANEGER_H_
 #define INCLUDE_COMMANDMANEGER_H_
 
+#include <include/Play.h>
 #include <string.h>
 #include <vector>
 #include <iostream>
@@ -20,7 +21,6 @@
 #include "StartCommand.h"
 #include "ListGamesCommand.h"
 #include "JoinCommand.h"
-#include "PlayCommand.h"
 
 using namespace std;
 

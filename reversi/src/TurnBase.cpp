@@ -36,12 +36,12 @@ void TurnBase::play_game() {
 	int j = 1;
 
 	cout << "this is the initial board:" << endl;
-	this->console.printBoard(board);
+	this->console.printBoard(this->board);
 	while(!board.isFull() && (!(players[0]->get_no_moves() && players[1]->get_no_moves()))) {
 		this->console.printNowTurn( players[i]->get_sign());
 		Point chosen_point = players[i]->play_one_turn(board, fliper, this->console); //needed any changes here?? after adding remote...
 		if (remote_game) {
-			if (board.getCounter().getBlackCount() == 0 || board.getCounter().getWhiteCount() == 0){
+			if (board.getCounter().getBlackCount() == 0 || board.getCounter().getWhiteCount() == 0|| players[i]->get_no_moves() || players[j]->get_no_moves()){
 				this->connecter.sendPoint(Point(-1,-1,' ')); //send no point
 				this->connecter.sendNoMoves(1);
 				return;
@@ -61,8 +61,17 @@ void TurnBase::play_game() {
 		j = j > 0 ? 0 : 1;
 	}
 	if (this->remote_game){
-		this->connecter.sendPoint(Point(-1,-1,' '));
-		this->connecter.sendNoMoves(true);
+		if (players[i]->get_no_moves() || players[j]->get_no_moves()){
+			this->connecter.sendPoint(Point(-1,-1,' '));
+			this->connecter.sendNoMoves(true);
+		}
+		else{
+			Point lastMove = players[i]->getOpponentLastMove();
+//			this->connecter.sendPoint(Point(-1,-1,' '));
+			this->connecter.sendPoint(lastMove);
+			this->connecter.sendNoMoves(true);
+		}
+
 	}
 }
 TurnBase::~TurnBase() {

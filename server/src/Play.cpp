@@ -5,25 +5,33 @@
  *      Author: efrat
  */
 
-#include <PlayCommand.h>
-#include <iostream>
-PlayCommand::PlayCommand() {
+#include "Play.h"
+#include <pthread.h>
+Play::Play() {
 	// TODO Auto-generated constructor stub
 
 }
 
-void PlayCommand::execute(int clientSocket, vector<string> args, vector<Game>& games_list) {
+//void Play::execute(int clientSocket, vector<string> args, vector<Game>& games_list) {
+//	int client_socket1, client_socket2;
+//	//find the game in the list, take the sockets and start play!
+//	for (unsigned int i = 0; i < games_list.size(); i++) {
+////		const char* this_game = args[2].c_str();
+////		const char* game_in_list = games_list[i].getName().c_str();
+//		if (clientSocket == games_list[i].getClientSocket1()) {
+//			client_socket1 = games_list[i].getClientSocket1();
+//			client_socket2 = games_list[i].getClientSocket2();
+//		}
+//	}
+//	play(client_socket1, client_socket2);
+//}
 
-
-
-}
-
-PlayCommand::~PlayCommand() {
+Play::~Play() {
 	// TODO Auto-generated destructor stub
-}
+	}
 
-void PlayCommand::play(int clientSocket1, int clientSocket2) {
-
+void Play::play(int clientSocket1, int clientSocket2) {
+	cout <<"im playinggggggg";
 	vector <int> clientsSockets;
 	clientsSockets.push_back(clientSocket1);
 	clientsSockets.push_back(clientSocket2);
@@ -41,6 +49,7 @@ void PlayCommand::play(int clientSocket1, int clientSocket2) {
 
 	if (n == 0) {
 		cout << "Client disconnected" << endl;
+		pthread_exit(NULL);
 		close(clientsSockets[j]);
 		return;
 	}
@@ -75,6 +84,9 @@ void PlayCommand::play(int clientSocket1, int clientSocket2) {
 			cout << "Error writing no_moves" << endl;
 			return;
 		}
+		if(no_moves){
+			return; //maybe close sockets????
+		}
 		//change "turns" of writing and reading
 		i = i > 0 ? 0 : 1;
 		j = j > 0 ? 0 : 1;
@@ -89,6 +101,7 @@ void PlayCommand::play(int clientSocket1, int clientSocket2) {
 	if (n == 0) {
 		cout << "Client disconnected" << endl;
 		close(clientsSockets[j]);
+		pthread_exit(NULL);
 		return;
 	}
 

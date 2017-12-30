@@ -27,7 +27,7 @@ if (thread) {
 	return;
 }
 	//pthread_exit(NULL);
-
+	return;
 }
 
 void ClientHandler::setArgs(int client_socket, char commandsAndArgs[50]) {
@@ -56,7 +56,8 @@ void* ClientHandler::goToCommands(void* args) {
 	cout<< "im in threadddddddddd" << endl;
 	vector<string> args_and_command = *((vector<string>*)args);
 	//CALL COMMAND MANAGER TO MAP FROM HERE
-	command_m.executeCommand(args_and_command, static_games_list);	//finishes and STUCK here.
+	command_m.executeCommand(args_and_command, static_games_list);
+	return NULL; //finishes and STUCK here.
 
 }
 ClientHandler::~ClientHandler() {

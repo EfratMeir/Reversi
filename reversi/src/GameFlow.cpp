@@ -15,10 +15,11 @@
 #define MAX_COMMAND_SIZE 50
 
 GameFlow::GameFlow() {
-	int board_size = 6;
+	int board_size = 4;
 	Board b = Board(board_size);
 	Console console = Console();
 	this->initialize(b, console);
+//	this->name = "no name";
 }
 
 void GameFlow::initialize(Board& b, Console& console) {
@@ -33,6 +34,8 @@ void GameFlow::initialize(Board& b, Console& console) {
 	Player* players[2];
 
 	char chosen_player = choose_players();
+	cin.ignore();
+
 	if (chosen_player == 'r' || chosen_player == 'R'){
 		startRemoteGame(players, b , console);
 	}
@@ -55,7 +58,6 @@ void GameFlow::startRemoteGame(Player* players[2], Board& b, Console& console){
 	int port = convertStringToInt(readFromFile("port"));
 	const char* IP = convertStringToChar(readFromFile("IP"));
 	Connecter connecter = Connecter((char*)IP, port);
-	initializeConnecter(connecter);
 	char remote_sign;
 	char* command_name = "default";
 	bool start_game = false;
@@ -85,7 +87,15 @@ void GameFlow::startRemoteGame(Player* players[2], Board& b, Console& console){
 		if (strcmp(command_name, "list_games") == 0){
 		}
 		start_game = connecter.receieveStartGame();
-
+//		if(remote_sign == 'O'){
+//			initializeConnecter(connecter);
+		//	string play_name = this->name;
+//			play_name.insert(0, "play ");
+//			char* play_command;
+//			const char* play_name_command = play_name.c_str();
+//			strcpy(play_command, play_name_command);
+//			connecter.sendCommand("play");
+//		}
 	}
 
 	this->turn_base.getConsole().canStart();
@@ -99,15 +109,18 @@ void GameFlow::startRemoteGame(Player* players[2], Board& b, Console& console){
  * if the ccommand is join the sign is x.
  */
 char* GameFlow::enterCommand(Console& console, Connecter& connecter){
+	initializeConnecter(connecter);
+
 	console.printEnterCommand();
 	char command[MAX_COMMAND_SIZE];
-	cin.ignore();
+//	cin.ignore();
 	cin.getline(command, MAX_COMMAND_SIZE);
 //	cout << "the command is" << command;
 
 	connecter.sendCommand(command);
 	char* command_name;
 	command_name = strtok (command," ");
+	this->name = strtok(NULL, " ");
 //	char* command_name = strtok (command," ");
 
 	if (strcmp(command_name, "start") == 0){
@@ -115,6 +128,7 @@ char* GameFlow::enterCommand(Console& console, Connecter& connecter){
 		if (game_name == -1){ //the game name is already exist
 			console.nameExist();
 			enterCommand(console, connecter);
+			return command_name;
 		}
 		else{
 			//wait to get a message that the second player is connected and
@@ -125,14 +139,18 @@ char* GameFlow::enterCommand(Console& console, Connecter& connecter){
 	if (strcmp(command_name, "join") == 0){
 //		bool two_players_in_game = connecter.receieveStartGame();
 //		if (two_players_in_game){
-			return command_name; //maybe not????????????
+	//initializeConnecter(connecter);
+		//play_name.insert(0, "play ");
+		//char* play_command;
+		//const char* play_name_command = play_name.c_str();
+		//strcpy(play_command, play_name_command);
+//		connecter.sendCommand(play_command);
+			//return play_command; //maybe not????????????
 		}
 		else {
 //			cout << "you cant join this game" << endl;
 		}
-
 	return command_name;
-
 }
 char GameFlow::choose_players(){
 	this->turn_base.getConsole().print_hello();
@@ -195,8 +213,21 @@ string GameFlow::readFromFile(string word){
 
 void GameFlow::run() {
 	turn_base.play_game();
+	cout << "GAME IS OVER!" << endl << "THE WINNER IS: ";
+//	turn_base.connecter.sendPoint(Point(-1,-1,' ')); //send no point
+//	turn_base.connecter.sendNoMoves(1); //MAYBE TURNBASE NEED TO BE FRIEND CLASS
+	char winner = findWinner(turn_base);
+	if (winner == 'T') {
+		cout << "Tie! X & O have the same number of points";
+	}
+	else {
+		cout << winner << endl;
+	}
 	delete turn_base.get_players()[0];
 	delete turn_base.get_players()[1];
+//	turn_base.play_game();
+//	delete turn_base.get_players()[0];
+//	delete turn_base.get_players()[1];
 }
 
 GameFlow::~GameFlow() {

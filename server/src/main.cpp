@@ -7,7 +7,8 @@
 
 
 #include <stdlib.h>
-#include <Server.h>
+#include "Server.h"
+#include "ServerInitializer.h"
 #include <iostream>
 #include <string>
 
@@ -43,8 +44,11 @@ int main() {
 		cout<< "error reading from file" << endl;
 		return 0;
 	}
+	//ServerInitializer si = ServerInitializer();
+
 	Server server(port_num);
 	try {
+		//si.initialize(port_num);
 		server.start();
 	} catch (const char *msg) {
 		cout << "cannot start server. Reason: " << msg << endl;

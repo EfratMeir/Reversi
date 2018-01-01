@@ -23,13 +23,18 @@ using namespace std;
 
 Server::Server() {
 	cout << "server default constructor called" << endl;
+	this->exit = false;
 }
 
 Server::Server(int port): port(port), serverSocket(0) {
+	this->exit = false;
 	cout << "Server" << endl;
 }
 
 void Server::start() {
+	//create thread for exit command:
+	threadOpening();
+
 	//create a socket point
 	serverSocket = socket(AF_INET, SOCK_STREAM, 0);
 	if (serverSocket == -1) {
@@ -51,8 +56,8 @@ void Server::start() {
 
 	//define the client socket's structures:
 	struct sockaddr_in clientAddress;
-	socklen_t clientAddressLen;
-	while (true)  {
+	socklen_t clientAddressLen = sizeof(clientAddress);
+	while (!exit)  {
 		cout << "Waiting for client connections..." << endl;
 		//accept a new client connection:
 		int clientSocket = accept(serverSocket, (struct sockaddr *)&clientAddress, &clientAddressLen);
@@ -106,12 +111,27 @@ void Server::start() {
 //		/close(clientSocket2);
 
 	}
+	stop();
 //	}close(clientSocket);
 }
 
 void Server::stop() {
+
+	//now add thread closing and what needed.
+	vector<pthread_t> threads = client_handler.getThreads();
+	//close all the threads:
+	for( unsigned int i = 0; i < threads.size(); i++) {
+		pthread_cancel(threads[i]);
+	}
+	//close waitToExit thread:
+	pthread_cancel(server_threads_vec[0]);
+
+	//close clients sockets:
+	closeAllClientsSockets();
 	close(serverSocket);
+	cout << "server is shutting down. bye bye!" << endl;
 }
+
 void Server::handleClient(int clientSocket1, int clientSocket2) {
 	vector <int> clientsSockets;
 	clientsSockets.push_back(clientSocket1);
@@ -213,4 +233,52 @@ void Server::notifyGameStarts(int clientSocket1, int clientSocket2) {
 		return;
 	}
 
+}
+
+void Server::threadOpening() {
+
+	//open thread to listen to exit command:
+	pthread_t new_thread;
+	server_threads_vec.push_back(new_thread);
+	int thread = pthread_create(&server_threads_vec[0], NULL, waitToExitCommand , (void*)this);
+	if (thread) {
+		cout << "ERROR: unable to create thread for waitToExitCommand" << endl;
+		return;
+	}
+		//pthread_exit(NULL);
+
+}
+
+void* Server::waitToExitCommand(void* args) {
+	//Server* server = static_cast<Server*>(args);
+//	Server* server = (Server*)args;
+	cout << "type <exit> to close server" << endl;
+bool exitLoop = false;
+char command[MAX_COMMAND_SIZE];
+while(!exitLoop) {
+	cin.getline(command, MAX_COMMAND_SIZE);
+
+	if(strcmp(command, "exit") == 0) {
+		cout << "i got exit!" << endl;
+		exitLoop = true;
+	}
+	((Server *) args)->stop();
+	//((Server *) args)->setExit();
+	//(Server*)args->setExit();
+//	stop();
+
+}
+
+}
+
+void Server::setExit() {
+	this->exit = true;
+}
+
+void Server::closeAllClientsSockets() {
+	vector<Game> games_list = client_handler.getGamesList();
+	for (unsigned int i = 0; i < games_list.size(); i++) {
+		close(games_list[i].getClientSocket1());
+		close(games_list[i].getClientSocket2());
+	}
 }

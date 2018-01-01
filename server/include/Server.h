@@ -7,8 +7,7 @@
 
 #ifndef SERVER_H_
 #define SERVER_H_
-//#include <vector>
-//#include "Game.h"
+
 
 #include <ClientHandler.h>
 
@@ -21,11 +20,13 @@ public:
 	Server(int port);
 	void start();
 	void stop();
-
+	void setExit();
+	void threadOpening();
 
 
 private:
 	int port;
+	bool exit;
 	ClientHandler client_handler;
 	int serverSocket; //the sockets file descriptor
 	// Handle requests from a specific client
@@ -35,6 +36,10 @@ private:
 			int clientSocket1, int clientSocket2 );
 
 	void notifyGameStarts(int clientSocket1, int clientSocket2);
+	static void* waitToExitCommand(void *);
+	vector<pthread_t> server_threads_vec;
+	void closeAllClientsSockets();
+
 
 };
 

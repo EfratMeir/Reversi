@@ -14,6 +14,7 @@
 StartCommand::StartCommand(){
 	this->game_added = 0;
 }
+
 StartCommand::StartCommand( string name, vector<Game>& games_list) {
 	this->name = name;
 	game_added = 0;

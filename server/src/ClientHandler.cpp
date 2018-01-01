@@ -25,7 +25,7 @@ if (thread) {
 	cout << "ERROR: unable to create thread: "<< threads_vec.size() << endl;
 	return;
 }
-	//pthread_exit(NULL);
+//	pthread_exit(NULL);
 	return;
 }
 
@@ -48,6 +48,12 @@ void ClientHandler::setArgs(int client_socket, char commandsAndArgs[50]) {
 		pch = strtok (NULL, " ");
 	}
 }
+
+vector<pthread_t>& ClientHandler::getThreads() {
+	return this->threads_vec;
+}
+
+
 
 void* ClientHandler::goToCommands(void* args) {
 	CommandManeger command_m = CommandManeger(static_games_list);

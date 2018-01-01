@@ -35,11 +35,10 @@ public:
 		return static_games_list;
 	}
 	virtual ~ClientHandler();
-
+	vector<pthread_t>& getThreads();
 private:
 	vector<string> args_and_command;
 	vector<pthread_t> threads_vec;
-	//pthread_mutex_t games_list_mutex_ch;
 	CommandManeger command_maneger;
 	static void* goToCommands(void *);
 

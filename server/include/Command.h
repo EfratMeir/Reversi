@@ -16,16 +16,17 @@
 
 using namespace std;
 
+
 class Command {
 public:
+	//Command();
 //	virtual void execute(vector<string> args) = 0; //maybe deleete
 	virtual void execute(int clientSocket, vector<string> args, vector<Game>& games_list) = 0;
-
 	virtual ~Command() = 0;
+
 protected:
-//	pthread_mutex_t games_list_mutex;
-//	vector<Game> games_list;
-private:
+	static pthread_mutex_t games_list_mutex;
+
 
 
 };

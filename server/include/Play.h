@@ -18,7 +18,6 @@ using namespace std;
 class Play {
 public:
 	Play();
-//	virtual void execute(int clientSocket ,vector<string> args, vector<Game>& games_list);
 	void play(int clientSocket1, int clientSocket2);
 	 ~Play();
 private:

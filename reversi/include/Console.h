@@ -30,6 +30,7 @@ public:
 	void printChosenMove(char sign, int row, int col);
 	void print_hello();
 	void printInvalidChar();
+	void printInvalidCommand();
 	void printWinner(char winner);
 	void connectionFailed(const char *msg);
 	void printCounter(PointsCounter counter);

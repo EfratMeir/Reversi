@@ -11,6 +11,7 @@ using namespace std;
 
 
 ClientHandler::ClientHandler() {
+
 }
 
 
@@ -18,8 +19,6 @@ ClientHandler::ClientHandler() {
 
 void ClientHandler::handleClient(int client_socket, char commandsAndArgs[50]) {	setArgs(client_socket,commandsAndArgs);
 pthread_t new_thread;
-//	int thread = pthread_create(&new_thread, NULL, goToCommands ,(void*)&this->args_and_command);
-
 threads_vec.push_back(new_thread);
 int thread = pthread_create(&threads_vec[threads_vec.size() - 1], NULL, goToCommands ,(void*)&this->args_and_command);
 if (thread) {
@@ -52,7 +51,6 @@ void ClientHandler::setArgs(int client_socket, char commandsAndArgs[50]) {
 
 void* ClientHandler::goToCommands(void* args) {
 	CommandManeger command_m = CommandManeger(static_games_list);
-
 	cout<< "im in threadddddddddd" << endl;
 	vector<string> args_and_command = *((vector<string>*)args);
 	//CALL COMMAND MANAGER TO MAP FROM HERE

@@ -21,17 +21,15 @@ class StartCommand: public Command {
 public:
 	StartCommand();
 	StartCommand(string name, vector<Game>& games_list);
-//	virtual void execute(vector<string> args);
 	virtual void execute(int clientSocket ,vector<string> args, vector<Game>& games_list);
 	void SendGameStartsCommandMsg(int clientSocket, int msg);
 	void addGame(int client_socket, Game g, vector<Game>& games_list);
 	void setName(const string name);
 	virtual ~StartCommand();
-//	char* name;
+
 
 private:
 	string name;
-
 	bool doesGameExists(string name, vector<Game>& games_list);
 	int game_added;
 

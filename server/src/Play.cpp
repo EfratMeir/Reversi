@@ -31,7 +31,7 @@ Play::~Play() {
 	}
 
 void Play::play(int clientSocket1, int clientSocket2) {
-	cout <<"im playinggggggg";
+	cout <<"im playinggggggg" << endl;
 	vector <int> clientsSockets;
 	clientsSockets.push_back(clientSocket1);
 	clientsSockets.push_back(clientSocket2);

@@ -84,7 +84,6 @@ void GameFlow::startRemoteGame(Player* players[2], Board& b, Console& console){
 			players[1] = remote_player;
 		}
 			this->turn_base.getConsole().printWaitingToOther();
-	//		cout << "Waiting for other player to join..." << endl;
 		//wait until server will send a msg that we can start:
 
 		start_game = connecter.receieveStartGame();
@@ -111,14 +110,25 @@ void GameFlow::startRemoteGame(Player* players[2], Board& b, Console& console){
  */
 void GameFlow::enterCommand(Console& console, Connecter& connecter){
 	initializeConnecter(connecter);
-
 	console.printEnterCommand();
 	char command[MAX_COMMAND_SIZE];
+	bool valid_input = false;
+
+	while(!valid_input) {
+		cin.getline(command, MAX_COMMAND_SIZE);
+		if(strncmp(command, "start", 5) == 0 || strncmp(command, "join", 4) == 0
+				|| strncmp(command, "list_games", 10) == 0) {
+			valid_input = true;
+		}
+		else{
+			console.printInvalidCommand();
+		}
+	}
+	connecter.sendCommand(command);
+
 //	cin.ignore();
-	cin.getline(command, MAX_COMMAND_SIZE);
 //	cout << "the command is" << command;
 
-	connecter.sendCommand(command);
 	char* command_name;
 	command_name = strtok (command," ");
 
@@ -152,10 +162,7 @@ void GameFlow::enterCommand(Console& console, Connecter& connecter){
 		console.printGamesList(games_to_join);
 		enterCommand(console, connecter);
 	}
-	else{
-		cout << "you entered an invalid choice."<<  endl;
-		enterCommand(console, connecter);
-	}
+
 //	return command_name;
 }
 char GameFlow::choose_players(){

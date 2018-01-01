@@ -32,7 +32,6 @@ public:
 
 private:
 	vector<Game> games_list;
-	pthread_mutex_t games_list_mutex;
 };
 
 

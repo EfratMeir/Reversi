@@ -101,6 +101,11 @@ void Console:: printBoard(Board& board){
 		}
 	}
 }
+
+void Console::printInvalidCommand() {
+	cout << "you have entered an invalid choice. please enter a correct command"<<  endl;
+}
+
 Console::~Console() {
 	// TODO Auto-generated destructor stub
 }

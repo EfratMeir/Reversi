@@ -18,11 +18,9 @@
 #include <CommandManeger.h>
 #include <Game.h>
 
-//#include <stddef.h>
 
 using namespace std;
 
-//pthread_mutex_t games_list_mutex;
 static vector<Game> static_games_list;
 
 class ClientHandler {
@@ -41,6 +39,7 @@ public:
 private:
 	vector<string> args_and_command;
 	vector<pthread_t> threads_vec;
+	//pthread_mutex_t games_list_mutex_ch;
 	CommandManeger command_maneger;
 	static void* goToCommands(void *);
 

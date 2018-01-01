@@ -22,7 +22,6 @@ public:
 
 	virtual void execute(int clientSocket, vector<string> args, vector<Game>& games_list);
 	bool doesGameExists(string name);
-//	pthread_mutex_t games_list_mutex;
 	void SendTwoPlayersInGameMsg(int clientSocket, bool msg);
 	void notifyGameStarts(int clientSocket1, int clientSocket2);
 	void sendJoinValid(int client_socket, bool join_valid);

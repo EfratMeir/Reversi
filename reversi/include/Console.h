@@ -35,7 +35,9 @@ public:
 	void connectionFailed(const char *msg);
 	void printCounter(PointsCounter counter);
 	void printGamesList(vector<string> list);
+	void printServerDisconnected();
 	virtual ~Console();
+
 private:
 };
 

@@ -106,6 +106,11 @@ void Console::printInvalidCommand() {
 	cout << "you have entered an invalid choice. please enter a correct command"<<  endl;
 }
 
+void Console::printServerDisconnected() {
+	cout << "sorry! server is disconnected"<<  endl;
+
+}
+
 Console::~Console() {
 	// TODO Auto-generated destructor stub
 }

@@ -10,6 +10,7 @@
 #define MAX_COMMAND_SIZE 50
 
 #include "Point.h"
+#include <stdlib.h>
 #include <vector>
 class Connecter {
 public:

@@ -81,6 +81,8 @@ void JoinCommand::notifyGameStarts(int clientSocket1, int clientSocket2) {
 		return;
 	}
 
+
+
 	this->play.play(clientSocket1,clientSocket2);
 }
 JoinCommand::~JoinCommand() {

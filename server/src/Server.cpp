@@ -23,15 +23,16 @@ using namespace std;
 
 Server::Server() {
 	cout << "server default constructor called" << endl;
-	this->exit = false;
+	this->exitServer = false;
 }
 
 Server::Server(int port): port(port), serverSocket(0) {
-	this->exit = false;
+	this->exitServer = false;
 	cout << "Server" << endl;
 }
 
 void Server::start() {
+
 	//create thread for exit command:
 	threadOpening();
 
@@ -56,9 +57,10 @@ void Server::start() {
 
 	//define the client socket's structures:
 	struct sockaddr_in clientAddress;
-	socklen_t clientAddressLen = sizeof(clientAddress);
-	while (!exit)  {
+	socklen_t clientAddressLen;
+	while (!exitServer)  {
 		cout << "Waiting for client connections..." << endl;
+
 		//accept a new client connection:
 		int clientSocket = accept(serverSocket, (struct sockaddr *)&clientAddress, &clientAddressLen);
 		if (clientSocket == -1)
@@ -80,56 +82,32 @@ void Server::start() {
 		}
 
 		//		convert sockent num int to string ant put it as the first arg.
-		this->client_handler.handleClient(clientSocket, commandAndArgs);  //open thread
-//		this->client_handler.getCommandManeger().executeCommand(command, args);
-
-
-//		//tell the client he is first
-//		int  first = 1, second = 2;
-//		int clientSocket2 = 0;
-
-//		while (clientSocket2 == 0){
-//			//tell the first player that he is first
-//			int n = write(clientSocket, &first, sizeof(first));
-//			if (n == -1)
-//				cout << "Error writing to socket" << endl;
-//			cout << "Waiting for second player connection" << endl;
-//			//wait for the second player
-//			clientSocket2 = accept(serverSocket, (struct sockaddr *)&clientAddress, &clientAddressLen);
-//		}
-//		cout << "Client2 connected" << endl;
-//		if (clientSocket == -1)
-//			throw "Error on accept";
-//		n = write(clientSocket2, &second, sizeof(second));
-//			if (n == -1)
-//				cout << "Error writing to socket" << endl;
-
-//		notifyGameStarts(clientSocket, clientSocket2);
-//		handleClient(clientSocket, clientSocket2);
-		//close communication with the client:
-
-//		/close(clientSocket2);
-
+		this->client_handler.handleClient(clientSocket, commandAndArgs);  //open thread and handle request
 	}
-	stop();
+	//stop();
+
+	return;
 //	}close(clientSocket);
 }
 
 void Server::stop() {
+	this->exitServer = true;
 
-	//now add thread closing and what needed.
-	vector<pthread_t> threads = client_handler.getThreads();
+	//vector<pthread_t> threads = client_handler.getThreads();
 	//close all the threads:
-	for( unsigned int i = 0; i < threads.size(); i++) {
-		pthread_cancel(threads[i]);
-	}
+//	for( unsigned int i = 0; i < threads.size(); i++) {
+//		pthread_cancel(threads[i]);
+//	}
 	//close waitToExit thread:
-	pthread_cancel(server_threads_vec[0]);
+//	pthread_cancel(server_threads_vec[0]);
 
 	//close clients sockets:
-	closeAllClientsSockets();
-	close(serverSocket);
+	//closeAllClientsSockets();
+	client_handler.closeAllClientsSockets();
+
 	cout << "server is shutting down. bye bye!" << endl;
+	close(serverSocket);
+	exit(0);
 }
 
 void Server::handleClient(int clientSocket1, int clientSocket2) {
@@ -246,12 +224,12 @@ void Server::threadOpening() {
 		return;
 	}
 		//pthread_exit(NULL);
+	return;
 
 }
 
 void* Server::waitToExitCommand(void* args) {
-	//Server* server = static_cast<Server*>(args);
-//	Server* server = (Server*)args;
+
 	cout << "type <exit> to close server" << endl;
 bool exitLoop = false;
 char command[MAX_COMMAND_SIZE];
@@ -262,23 +240,26 @@ while(!exitLoop) {
 		cout << "i got exit!" << endl;
 		exitLoop = true;
 	}
-	((Server *) args)->stop();
 	//((Server *) args)->setExit();
-	//(Server*)args->setExit();
-//	stop();
+	((Server *) args)->stop();
+	//pthread_exit(0);
 
 }
 
 }
 
 void Server::setExit() {
-	this->exit = true;
+	this->exitServer = true;
 }
 
 void Server::closeAllClientsSockets() {
 	vector<Game> games_list = client_handler.getGamesList();
 	for (unsigned int i = 0; i < games_list.size(); i++) {
-		close(games_list[i].getClientSocket1());
-		close(games_list[i].getClientSocket2());
+		if(games_list[i]. getClientSocket1() != 0) {
+			close(games_list[i].getClientSocket1());
+		}
+		if(games_list[i]. getClientSocket2() != 0) {
+			close(games_list[i].getClientSocket2());
+		}
 	}
 }

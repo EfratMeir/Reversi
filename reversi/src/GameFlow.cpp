@@ -87,6 +87,7 @@ void GameFlow::startRemoteGame(Player* players[2], Board& b, Console& console){
 		//wait until server will send a msg that we can start:
 
 		start_game = connecter.receieveStartGame();
+
 //		if(remote_sign == 'O'){
 //			initializeConnecter(connecter);
 		//	string play_name = this->name;

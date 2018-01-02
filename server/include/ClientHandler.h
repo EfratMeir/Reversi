@@ -36,6 +36,8 @@ public:
 	}
 	virtual ~ClientHandler();
 	vector<pthread_t>& getThreads();
+	void closeAllClientsSockets();
+
 private:
 	vector<string> args_and_command;
 	vector<pthread_t> threads_vec;

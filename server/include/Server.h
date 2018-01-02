@@ -8,6 +8,7 @@
 #ifndef SERVER_H_
 #define SERVER_H_
 
+#include <stdlib.h>
 
 #include <ClientHandler.h>
 
@@ -26,7 +27,7 @@ public:
 
 private:
 	int port;
-	bool exit;
+	bool exitServer;
 	ClientHandler client_handler;
 	int serverSocket; //the sockets file descriptor
 	// Handle requests from a specific client

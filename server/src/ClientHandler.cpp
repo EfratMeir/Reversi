@@ -15,16 +15,28 @@ ClientHandler::ClientHandler() {
 }
 
 
-
+void ClientHandler::closeAllClientsSockets() {
+	for (unsigned int i = 0; i < static_games_list.size(); i++) {
+		if(static_games_list[i]. getClientSocket1() != 0) {
+			close(static_games_list[i].getClientSocket1());
+		}
+		if(static_games_list[i]. getClientSocket2() != 0) {
+			close(static_games_list[i].getClientSocket2());
+		}
+	}
+}
 
 void ClientHandler::handleClient(int client_socket, char commandsAndArgs[50]) {	setArgs(client_socket,commandsAndArgs);
 pthread_t new_thread;
 threads_vec.push_back(new_thread);
 int thread = pthread_create(&threads_vec[threads_vec.size() - 1], NULL, goToCommands ,(void*)&this->args_and_command);
+//int thread = pthread_create(&new_thread, NULL, goToCommands ,(void*)&this->args_and_command);
 if (thread) {
 	cout << "ERROR: unable to create thread: "<< threads_vec.size() << endl;
 	return;
 }
+//threads_vec.push_back(new_thread);
+
 //	pthread_exit(NULL);
 	return;
 }

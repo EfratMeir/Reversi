@@ -30,12 +30,10 @@ void ClientHandler::handleClient(int client_socket, char commandsAndArgs[50]) {	
 pthread_t new_thread;
 threads_vec.push_back(new_thread);
 int thread = pthread_create(&threads_vec[threads_vec.size() - 1], NULL, goToCommands ,(void*)&this->args_and_command);
-//int thread = pthread_create(&new_thread, NULL, goToCommands ,(void*)&this->args_and_command);
 if (thread) {
 	cout << "ERROR: unable to create thread: "<< threads_vec.size() << endl;
 	return;
 }
-//threads_vec.push_back(new_thread);
 
 //	pthread_exit(NULL);
 	return;
@@ -46,15 +44,10 @@ void ClientHandler::setArgs(int client_socket, char commandsAndArgs[50]) {
 	stringstream ss;
 	ss << client_socket;
 	string str_socket = ss.str();
-
-//	string str_socket = ss.str();
 	this->args_and_command.push_back(str_socket);
 	// split all the args of the command
 	char* pch;
 	pch = strtok (commandsAndArgs," ");
-//	string command = pch;
-//		string command = strtok(NULL, " ");
-//	pch = strtok (NULL, " ");
 	while (pch != 0){
 		this->args_and_command.push_back(pch);
 		pch = strtok (NULL, " ");
@@ -69,11 +62,10 @@ vector<pthread_t>& ClientHandler::getThreads() {
 
 void* ClientHandler::goToCommands(void* args) {
 	CommandManeger command_m = CommandManeger(static_games_list);
-	cout<< "im in threadddddddddd" << endl;
 	vector<string> args_and_command = *((vector<string>*)args);
 	//CALL COMMAND MANAGER TO MAP FROM HERE
 	command_m.executeCommand(args_and_command, static_games_list);
-	return NULL; //finishes and STUCK here.
+	return NULL;
 
 }
 ClientHandler::~ClientHandler() {

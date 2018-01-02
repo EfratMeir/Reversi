@@ -73,8 +73,7 @@ private:
 	bool opponent_has_no_move;
 	bool my_first_move;
 	Connecter connecter;
-//	int port;
-//    const char * IP;
+
 	/**
 	 * puts the chosen point on the board.
 	 * (updating the counter will be from fliper)

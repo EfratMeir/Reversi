@@ -14,13 +14,8 @@ using namespace std;
 RemotePlayer::RemotePlayer(Connecter& connecter, char sign) {
 
 
-//	this->port = convertStringToInt(readFromFile("port"));
-//	this->IP = convertStringToChar(readFromFile("IP"));
-//	this->connecter = Connecter((char*)IP, port);
-//	initializeConnecter();
 	this->connecter = connecter;
 	this->sign = sign; //not initialize
-//	set_sign(); //Remote - not initialized
 	this->moves_calculator = MovesCalculator();
 	this->has_no_moves = false;
 	//this->opponent_last_move = Point(0, 0,' ');
@@ -30,7 +25,6 @@ RemotePlayer::RemotePlayer(Connecter& connecter, char sign) {
 
 }
 
-
 void RemotePlayer::play_next_step(Board& board, Point& chosen_step, Console& console) {
 	int row = chosen_step.get_row();
 	int col = chosen_step.get_col();
@@ -39,7 +33,6 @@ void RemotePlayer::play_next_step(Board& board, Point& chosen_step, Console& con
 	chosen_step.printValuesPlusOne();
 	cout << endl;
 	console.printBoard(board);
-//board.pPrint();
 	cout << endl;
 }
 
@@ -71,17 +64,7 @@ void RemotePlayer::setOpponentHasNoMoves(bool opp_has_no_moves) {
 	this->opponent_has_no_move = opp_has_no_moves;
 }
 
-//int RemotePlayer::initializeConnecter() {
-//
-//	try {
-//		connecter.connectToServer();
-//
-//	} catch (const char *msg) {
-//		cout << "Failed to connect to server. Reason: " << msg << endl;
-//		exit(-1);
-//	}
-//	return 0;
-//}
+
 void RemotePlayer::set_sign(char sign){
 
 }

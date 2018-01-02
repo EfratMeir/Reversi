@@ -19,8 +19,7 @@ using namespace std;
 
 class Command {
 public:
-	//Command();
-//	virtual void execute(vector<string> args) = 0; //maybe deleete
+
 	virtual void execute(int clientSocket, vector<string> args, vector<Game>& games_list) = 0;
 	virtual ~Command() = 0;
 

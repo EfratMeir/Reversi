@@ -30,16 +30,12 @@ private:
 	bool exitServer;
 	ClientHandler client_handler;
 	int serverSocket; //the sockets file descriptor
+
 	// Handle requests from a specific client
 	void handleClient(int clientSocket, int clientSocket2);
-
-	void writeColorNum(int first_player, int second_player,
-			int clientSocket1, int clientSocket2 );
-
 	void notifyGameStarts(int clientSocket1, int clientSocket2);
 	static void* waitToExitCommand(void *);
 	vector<pthread_t> server_threads_vec;
-	void closeAllClientsSockets();
 
 
 };

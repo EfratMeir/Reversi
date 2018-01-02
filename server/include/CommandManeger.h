@@ -8,7 +8,6 @@
 #ifndef INCLUDE_COMMANDMANEGER_H_
 #define INCLUDE_COMMANDMANEGER_H_
 
-#include <include/Play.h>
 #include <string.h>
 #include <vector>
 #include <iostream>
@@ -37,7 +36,6 @@ private:
 	map <string, Command*> commandsMap;
 	vector<Game> static_games_list;
 	static pthread_mutex_t games_list_mutex;
-
 
 };
 

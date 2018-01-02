@@ -8,7 +8,6 @@
 
 #include <stdlib.h>
 #include "Server.h"
-#include "ServerInitializer.h"
 #include <iostream>
 #include <string>
 

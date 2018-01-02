@@ -10,6 +10,7 @@
 #define MAX_COMMAND_SIZE 50
 
 #include "Point.h"
+#include "Player.h"
 #include <stdlib.h>
 #include <vector>
 class Connecter {
@@ -82,8 +83,12 @@ public:
 	 */
 	int receiveStartCommandMsg();
 	bool receiveJoinValid();
+	void setPlayers(Player* players_list[2]);
+	void deletePlayers();
+
 private:
 	//members
+	Player* players[2];
 	char *serverIP; //CHANGE FROM CONST CHAR* TO CHAR*
 	int serverPort;
 	int clientSocket;

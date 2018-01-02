@@ -85,18 +85,10 @@ void GameFlow::startRemoteGame(Player* players[2], Board& b, Console& console){
 		}
 			this->turn_base.getConsole().printWaitingToOther();
 		//wait until server will send a msg that we can start:
-
+		connecter.setPlayers(players);
 		start_game = connecter.receieveStartGame();
 
-//		if(remote_sign == 'O'){
-//			initializeConnecter(connecter);
-		//	string play_name = this->name;
-//			play_name.insert(0, "play ");
-//			char* play_command;
-//			const char* play_name_command = play_name.c_str();
-//			strcpy(play_command, play_name_command);
-//			connecter.sendCommand("play");
-//		}
+
 	}
 
 	this->turn_base.getConsole().canStart();
@@ -187,6 +179,7 @@ int GameFlow::initializeConnecter(Connecter& connecter) {
 
 	} catch (const char *msg) {
 		this->turn_base.getConsole().connectionFailed(msg);
+		cout << "server is disconnected" <<endl;
 //		cout << "Failed to connect to server. Reason: " << msg << endl;
 		exit(-1);
 	}
@@ -237,16 +230,9 @@ void GameFlow::run() {
 	else {
 		cout << winner << endl;
 	}
-	delete turn_base.get_players()[0];
-	delete turn_base.get_players()[1];
-//	turn_base.play_game();
-//	delete turn_base.get_players()[0];
-//	delete turn_base.get_players()[1];
 }
 
-GameFlow::~GameFlow() {
 
-}
 
 char GameFlow::findWinner(TurnBase& turn_base) {
 	if (turn_base.getBoard().getCounter().getBlackCount() > turn_base.getBoard().getCounter().getWhiteCount()) {
@@ -257,4 +243,7 @@ char GameFlow::findWinner(TurnBase& turn_base) {
 	}
 	return 'T';
 }
-
+GameFlow::~GameFlow() {
+	delete turn_base.get_players()[0];
+	delete turn_base.get_players()[1];
+}

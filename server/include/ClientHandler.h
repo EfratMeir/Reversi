@@ -7,7 +7,6 @@
 
 #ifndef INCLUDE_CLIENTHANDLER_H_
 #define INCLUDE_CLIENTHANDLER_H_
-//#define MAX_THREADS 15
 
 
 #include <sstream>

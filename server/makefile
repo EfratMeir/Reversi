@@ -1,6 +1,7 @@
 
 a.out: compileAll
+	g++ *.o -pthread
+	rm -f *.o
 
-compileAll:
-	g++ *.cpp
-
+compileAll: include/*.h src/*.cpp
+	g++ -Iinclude/ -c src/*.cpp -pthread

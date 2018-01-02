@@ -69,7 +69,7 @@ void Server::start() {
 		//read a command
 		char commandAndArgs[MAX_COMMAND_SIZE];
 		int n = read(clientSocket, commandAndArgs, sizeof(commandAndArgs));
-		cout << "command is "<< commandAndArgs <<endl; //deleteeeeeeeeeeeee
+		cout << "Received command from client: "<< commandAndArgs <<endl;
 		if (n == -1) {
 		cout << "Error reading a command" << endl;
 		return;
@@ -84,25 +84,20 @@ void Server::start() {
 		//		convert sockent num int to string ant put it as the first arg.
 		this->client_handler.handleClient(clientSocket, commandAndArgs);  //open thread and handle request
 	}
-	//stop();
 
 	return;
-//	}close(clientSocket);
 }
 
 void Server::stop() {
 	this->exitServer = true;
 
-	//vector<pthread_t> threads = client_handler.getThreads();
+	vector<pthread_t> threads = client_handler.getThreads();
 	//close all the threads:
-//	for( unsigned int i = 0; i < threads.size(); i++) {
-//		pthread_cancel(threads[i]);
-//	}
-	//close waitToExit thread:
-//	pthread_cancel(server_threads_vec[0]);
+	for( unsigned int i = 0; i < threads.size(); i++) {
+		pthread_cancel(threads[i]);
+	}
 
 	//close clients sockets:
-	//closeAllClientsSockets();
 	client_handler.closeAllClientsSockets();
 
 	cout << "server is shutting down. bye bye!" << endl;
@@ -242,7 +237,7 @@ while(!exitLoop) {
 	}
 	//((Server *) args)->setExit();
 	((Server *) args)->stop();
-	//pthread_exit(0);
+	//pthread_exit(NULL);
 
 }
 
@@ -252,14 +247,4 @@ void Server::setExit() {
 	this->exitServer = true;
 }
 
-void Server::closeAllClientsSockets() {
-	vector<Game> games_list = client_handler.getGamesList();
-	for (unsigned int i = 0; i < games_list.size(); i++) {
-		if(games_list[i]. getClientSocket1() != 0) {
-			close(games_list[i].getClientSocket1());
-		}
-		if(games_list[i]. getClientSocket2() != 0) {
-			close(games_list[i].getClientSocket2());
-		}
-	}
-}
+

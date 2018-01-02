@@ -39,7 +39,7 @@ vector<Point> HumenPlayer::get_possible_moves(Board& board,
 		return options;
 	}
 	cout << sign <<", your possible moves are:" << endl;
-	for (unsigned int i = 0; i < options.size(); i++) { //might cause a problem! change later to itertor
+	for (unsigned int i = 0; i < options.size(); i++) {
 		options[i].printValuesPlusOne();
 		cout <<"  ";
 	}

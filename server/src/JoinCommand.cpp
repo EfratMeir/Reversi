@@ -27,10 +27,11 @@ void JoinCommand::execute(int clientSocket, vector<string> args, vector<Game>& g
 		//critical section
 		pthread_mutex_lock(&games_list_mutex);
 		const char* game_in_list = games_list[i].getName().c_str();
+		bool started = games_list[i].getStartedPlaying();
 		pthread_mutex_unlock(&games_list_mutex);
 
-		if (strcmp(this_game_to_join, game_in_list) == 0) {
-			sendJoinValid(clientSocket,true);
+		if (strcmp(this_game_to_join, game_in_list) == 0 && !started) {
+				sendJoinValid(clientSocket,true);
 
 			//critical section
 			pthread_mutex_lock(&games_list_mutex);
@@ -41,12 +42,6 @@ void JoinCommand::execute(int clientSocket, vector<string> args, vector<Game>& g
 
 			client_socket1 = games_list[i].getClientSocket1();
 			client_socket2 = games_list[i].getClientSocket2();
-
-			//critical section
-			pthread_mutex_lock(&games_list_mutex);
-			//now that the game began, remove the game's name from list.
-			games_list.erase(games_list.begin() + i);
-			pthread_mutex_unlock(&games_list_mutex);
 
 			notifyGameStarts(client_socket1, client_socket2);
 		}

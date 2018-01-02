@@ -11,13 +11,7 @@ using namespace std;
 #include <vector>
 
 Board::Board() {
-//	this->board_size = SIZE;
-//	this->counter = PointsCounter();
-//	for (int i = 0; i < this->board_size; i++) {
-//		for (int j = 0; j < this->board_size; j++) {
-//			this->all_players_list[i][j] = Point(i, j, blank);
-//		}
-//	}
+
 }
 Board::Board(int board_size) {
 	this-> board_size = board_size;

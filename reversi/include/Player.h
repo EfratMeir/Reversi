@@ -50,7 +50,6 @@ public:
 
 private:
 
-//	bool no_moves;
 	/**
 	 * checks for all the possible moves.
 	 * @param board - board reference

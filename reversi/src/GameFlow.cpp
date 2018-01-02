@@ -73,7 +73,6 @@ void GameFlow::startRemoteGame(Player* players[2], Board& b, Console& console){
 		}
 
 		Player* remote_player = new RemotePlayer(connecter, remote_sign);
-	//	char remote_sign = remote_player->get_sign();
 		is_remote_game = true;
 		if (remote_sign == 'X'){
 			players[0] = remote_player;
@@ -84,19 +83,10 @@ void GameFlow::startRemoteGame(Player* players[2], Board& b, Console& console){
 			players[1] = remote_player;
 		}
 			this->turn_base.getConsole().printWaitingToOther();
-		//wait until server will send a msg that we can start:
 
+		//wait until server will send a msg that we can start:
 		start_game = connecter.receieveStartGame();
 
-//		if(remote_sign == 'O'){
-//			initializeConnecter(connecter);
-		//	string play_name = this->name;
-//			play_name.insert(0, "play ");
-//			char* play_command;
-//			const char* play_name_command = play_name.c_str();
-//			strcpy(play_command, play_name_command);
-//			connecter.sendCommand("play");
-//		}
 	}
 
 	this->turn_base.getConsole().canStart();
@@ -127,9 +117,6 @@ void GameFlow::enterCommand(Console& console, Connecter& connecter){
 	}
 	connecter.sendCommand(command);
 
-//	cin.ignore();
-//	cout << "the command is" << command;
-
 	char* command_name;
 	command_name = strtok (command," ");
 
@@ -143,7 +130,6 @@ void GameFlow::enterCommand(Console& console, Connecter& connecter){
 			this->start_or_join = "start";
 			//wait to get a message that the second player is connected and
 			//we can start the game
-			//cout << "you opened a new game "<< endl;
 		}
 	}
 	else if (strcmp(command_name, "join") == 0){
@@ -164,7 +150,6 @@ void GameFlow::enterCommand(Console& console, Connecter& connecter){
 		enterCommand(console, connecter);
 	}
 
-//	return command_name;
 }
 char GameFlow::choose_players(){
 	this->turn_base.getConsole().print_hello();
@@ -239,9 +224,7 @@ void GameFlow::run() {
 	}
 	delete turn_base.get_players()[0];
 	delete turn_base.get_players()[1];
-//	turn_base.play_game();
-//	delete turn_base.get_players()[0];
-//	delete turn_base.get_players()[1];
+
 }
 
 GameFlow::~GameFlow() {

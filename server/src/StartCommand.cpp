@@ -33,7 +33,7 @@ void StartCommand::execute(int clientSocket, vector<string> args, vector<Game>& 
 	}
 	SendGameStartsCommandMsg(clientSocket ,game_added);
 
-	if(game_added == -1){ //maybe mistake. if there is already a game name like this,
+	if(game_added == -1){ //if there is already a game name like this,
 		//the client will insert a new command with a new socket. so close this socket,!
 		close(clientSocket);
 	}
@@ -68,6 +68,15 @@ bool StartCommand::doesGameExists(string name, vector<Game>& games_list) {
 
 		if (strcmp(this_game_name, game_in_list) == 0) {
 			the_same = true;
+			if (the_same) {
+				pthread_mutex_lock(&games_list_mutex);
+				bool started = games_list[i].getStartedPlaying();
+				pthread_mutex_unlock(&games_list_mutex);
+
+				if (started) {
+					return false;
+				}
+			}
 			return the_same;
 		}
 	}
@@ -84,3 +93,5 @@ void StartCommand::SendGameStartsCommandMsg(int clientSocket, int msg) {
 		return;
 	}
 }
+
+

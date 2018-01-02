@@ -12,26 +12,12 @@ Play::Play() {
 
 }
 
-//void Play::execute(int clientSocket, vector<string> args, vector<Game>& games_list) {
-//	int client_socket1, client_socket2;
-//	//find the game in the list, take the sockets and start play!
-//	for (unsigned int i = 0; i < games_list.size(); i++) {
-////		const char* this_game = args[2].c_str();
-////		const char* game_in_list = games_list[i].getName().c_str();
-//		if (clientSocket == games_list[i].getClientSocket1()) {
-//			client_socket1 = games_list[i].getClientSocket1();
-//			client_socket2 = games_list[i].getClientSocket2();
-//		}
-//	}
-//	play(client_socket1, client_socket2);
-//}
 
 Play::~Play() {
 	// TODO Auto-generated destructor stub
-	}
+}
 
 void Play::play(int clientSocket1, int clientSocket2) {
-	cout <<"im playinggggggg" << endl;
 	vector <int> clientsSockets;
 	clientsSockets.push_back(clientSocket1);
 	clientsSockets.push_back(clientSocket2);
@@ -85,7 +71,7 @@ void Play::play(int clientSocket1, int clientSocket2) {
 			return;
 		}
 		if(no_moves){
-			return; //maybe close sockets????
+			return;
 		}
 		//change "turns" of writing and reading
 		i = i > 0 ? 0 : 1;

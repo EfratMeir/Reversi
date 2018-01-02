@@ -35,6 +35,7 @@ void Connecter::connectToServer() {
 	if (this->clientSocket == -1) {
 		//throw "Error opening socket";
 		cout << "server is disconnected." << endl;
+		close(this->clientSocket);
 		exit(0);
 	}
 
@@ -43,6 +44,7 @@ void Connecter::connectToServer() {
 	if (!inet_aton(serverIP, &address)) {
 		//throw "Can't parse IP address";
 		cout << "server is disconnected." << endl;
+		close(this->clientSocket);
 		exit(0);
 	}
 
@@ -53,6 +55,7 @@ void Connecter::connectToServer() {
 	if (server == NULL) {
 		//throw "Host is unreachable";
 		cout << "server is disconnected." << endl;
+		close(this->clientSocket);
 		exit(0);
 	}
 
@@ -73,6 +76,7 @@ void Connecter::connectToServer() {
 			sizeof(serverAddress)) == -1) {
 		//throw "Error connecting to server";
 		cout << "server is disconnected." << endl;
+		close(this->clientSocket);
 		exit(0);
 	}
 
@@ -89,15 +93,17 @@ int Connecter::sendPoint(Point p) {
 	int row = p.get_row();
 	int col = p.get_col();
 	int n = write(clientSocket, &row, sizeof(row));
-	if (n == -1) {
+	if (n == -1 || n == 0) {
 		//throw "Error writing row to socket";
 		cout << "server is disconnected." << endl;
+		close(this->clientSocket);
 		exit(0);
 	}
 	n = write(clientSocket, &col, sizeof(col));
-	if (n == -1) {
+	if (n == -1 || n == 0) {
 		//throw "Error writing col to socket";
 		cout << "server is disconnected." << endl;
+		close(this->clientSocket);
 		exit(0);
 	}
 	return 0;
@@ -105,9 +111,10 @@ int Connecter::sendPoint(Point p) {
 
 int Connecter::sendNoMoves(bool player_has_no_moves) {
 	int n = write(clientSocket, &player_has_no_moves, sizeof(player_has_no_moves));
-	if (n == -1) {
+	if (n == -1 || n == 0) {
 		//throw "Error writing player_has_no_moves to socket";
 		cout << "server is disconnected." << endl;
+		close(this->clientSocket);
 		exit(0);
 	}
 	return 0;
@@ -117,9 +124,10 @@ int Connecter::receiveNumPlayer(){
 	//read the number that say if you are black player or white player.
 	int color;
 	int n = read(clientSocket, &color, sizeof(color));
-	if (n == -1) {
+	if (n == -1 || n == 0) {
 		//throw "Error reading point from socket";
 		cout << "server is disconnected." << endl;
+		close(this->clientSocket);
 		exit(0);
 	}
 
@@ -129,20 +137,22 @@ Point Connecter::receivePoint() {
 	// Read the point sent from the server
 	int row, col;
 	int n = read(clientSocket, &row, sizeof(row));
-	if (n == -1) {
+	if (n == -1 || n == 0) {
 		//throw "Error reading row from sockcet";
 		cout << "server is disconnected." << endl;
+		close(this->clientSocket);
 		exit(0);
 	}
+
 
 	//check if the other client disconnect, if so - now the server will know,
 	//cause the read command will return 0.
 
-
 	n = read(clientSocket, &col, sizeof(col));
-	if (n == -1) {
+	if (n == -1 || n == 0) {
 		//throw "Error reading col from socket";
 		cout << "server is disconnected." << endl;
+		close(this->clientSocket);
 		exit(0);
 	}
 	Point p(row,col,'L'); //the remotePlayer setSign accordingly right after he gets the step.
@@ -155,9 +165,10 @@ bool Connecter::receiveNoMoves() {
 	bool player_has_no_moves;
 	int n = read(clientSocket, &player_has_no_moves, sizeof(player_has_no_moves));
 
-	if (n == -1) {
+	if (n == -1 || n == 0) {
 		//throw "Error reading boolean has_no_moves from socket";
 		cout << "server is disconnected." << endl;
+		close(this->clientSocket);
 		exit(0);
 	}
 	return player_has_no_moves;
@@ -170,9 +181,10 @@ bool Connecter::receieveStartGame() {
 	bool start_the_game;
 
 	int n = read(clientSocket, &start_the_game, sizeof(start_the_game));
-	if (n == -1) {
+	if (n == -1 || n == 0) {
 		//throw "Error reading boolean start_the_game from socket";
 		cout << "server is disconnected." << endl;
+		close(this->clientSocket);
 		exit(0);
 	}
 
@@ -184,9 +196,10 @@ void Connecter::receieveGamesTojoinList(vector<string>& games_to_join_list) {
 	int num;
 
 	int n = read(clientSocket, &num, sizeof(num));
-	if (n == -1) {
+	if (n == -1 || n == 0) {
 		//throw "Error reading num of games to join from socket";
 		cout << "server is disconnected." << endl;
+		close(this->clientSocket);
 		exit(0);
 	}
 	cout << "num of games in list: " << num << endl;
@@ -194,9 +207,10 @@ void Connecter::receieveGamesTojoinList(vector<string>& games_to_join_list) {
 
 	for (int i = 0; i < num; i++) {
 		int n = read(clientSocket, &name, sizeof(name)); //WORKS THIS WAY? OR ITS GO OVER THE PREVIOUS NAME? CHECK.
-		if (n == -1) {
+		if (n == -1 || n == 0) {
 			//throw "Error reading a game to join name from socket";
 			cout << "server is disconnected." << endl;
+			close(this->clientSocket);
 			exit(0);
 		}
 		string stringName = string(name);
@@ -207,9 +221,10 @@ void Connecter::receieveGamesTojoinList(vector<string>& games_to_join_list) {
 bool Connecter::receiveJoinValid(){
 	bool join_valid;
 	int n = read(clientSocket, &join_valid, sizeof(join_valid));
-	if (n == -1) {
+	if (n == -1 || n == 0) {
 		//throw "Error reading the start command msg from socket";
 		cout << "server is disconnected." << endl;
+		close(this->clientSocket);
 		exit(0);
 	}
 	return join_valid;
@@ -218,9 +233,10 @@ int Connecter::receiveStartCommandMsg() {
 	int game_started;
 
 	int n = read(clientSocket, &game_started, sizeof(game_started));
-	if (n == -1) {
+	if (n == -1 || n == 0) {
 		//throw "Error reading the start command msg from socket";
 		cout << "server is disconnected." << endl;
+		close(this->clientSocket);
 		exit(0);
 	}
 	return game_started;
@@ -229,9 +245,10 @@ int Connecter::receiveStartCommandMsg() {
 //send the command to the server
 int Connecter::sendCommand(char command[MAX_COMMAND_SIZE]){
 	int n = write(clientSocket, command, MAX_COMMAND_SIZE);
-	if (n == -1) {
+	if (n == -1 || n == 0) {
 		//throw "Error writing command to socket";
 		cout << "server is disconnected." << endl;
+		close(this->clientSocket);
 		exit(0);
 	}
 	return 0;

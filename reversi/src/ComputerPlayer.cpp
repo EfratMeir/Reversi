@@ -12,7 +12,6 @@ ComputerPlayer::ComputerPlayer() {
 	this->no_moves = false;
 	this->computer_sign = this->sign;
 	this->rival_sign = get_opp_sign();
-	//this->rival = new HumenPlayer('X');
 	this->rival_turn = false;
 
 }
@@ -22,7 +21,6 @@ ComputerPlayer::ComputerPlayer(char sign) {
 	this->moves_calculator = MovesCalculator();
 	this->no_moves = false;
 	this->computer_sign = this->sign;
-	//this->rival = new HumenPlayer('X');
 	this->rival_sign = get_opp_sign();
 	this->rival_turn = false;
 
@@ -74,7 +72,6 @@ void ComputerPlayer::setOpponentLastMove(Point& opponent_last_move) {
 
 Point ComputerPlayer::choose_best_move(vector<Point> options_list, Fliper& fliper, Board& board, Console& console) {
 	vector<Point>::iterator it;
-//	cout << "its O's turn"<< endl;
 	//the best score the rival(human) can get is 64
 	int low_score_human = 64;
 	Point best_move_comp = Point(0, 0, this->sign);

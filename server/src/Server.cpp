@@ -158,6 +158,9 @@ void* Server::waitToExitCommand(void* args) {
 	}
 	((Server *) args)->stop();
 }
+
+
+
 void Server::setExit() {
 	this->exitServer = true;
 }

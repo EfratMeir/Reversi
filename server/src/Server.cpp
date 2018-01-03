@@ -235,11 +235,9 @@ while(!exitLoop) {
 		cout << "i got exit!" << endl;
 		exitLoop = true;
 	}
-	//((Server *) args)->setExit();
-	((Server *) args)->stop();
-	//pthread_exit(NULL);
 
 }
+((Server *) args)->stop();
 
 }
 

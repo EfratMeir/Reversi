@@ -32,7 +32,7 @@ private:
 	int serverSocket; //the sockets file descriptor
 
 	// Handle requests from a specific client
-	void handleClient(int clientSocket, int clientSocket2);
+//	void handleClient(int clientSocket, int clientSocket2);
 	void notifyGameStarts(int clientSocket1, int clientSocket2);
 	static void* waitToExitCommand(void *);
 	vector<pthread_t> server_threads_vec;

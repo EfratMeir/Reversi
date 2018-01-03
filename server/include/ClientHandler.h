@@ -25,6 +25,7 @@ static vector<Game> static_games_list;
 class ClientHandler {
 public:
 	ClientHandler();
+	static ClientHandler* getInstance();
 	void handleClient(int client_socket, char commandsAndArgs[50]);
 	void setArgs(int client_socket, char commandsAndArgs[50]);
 	CommandManeger& getCommandManeger(){ //deleteeeeee
@@ -38,6 +39,11 @@ public:
 	void closeAllClientsSockets();
 
 private:
+	// singleton
+
+	ClientHandler(const ClientHandler &);
+	static ClientHandler* instance;
+	static pthread_mutex_t lock;
 	vector<string> args_and_command;
 	vector<pthread_t> threads_vec;
 	CommandManeger command_maneger;

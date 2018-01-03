@@ -8,12 +8,22 @@
 #include "ClientHandler.h"
 using namespace std;
 
-
+ClientHandler* ClientHandler::instance = 0;
+pthread_mutex_t ClientHandler::lock;
 
 ClientHandler::ClientHandler() {
 
 }
-
+ClientHandler* ClientHandler::getInstance(){
+	if(instance == 0){
+		pthread_mutex_lock(&lock);
+		if(instance == 0){
+			instance = new ClientHandler();
+		}
+		pthread_mutex_unlock(&lock);
+	}
+	return instance;
+}
 
 void ClientHandler::closeAllClientsSockets() {
 	for (unsigned int i = 0; i < static_games_list.size(); i++) {

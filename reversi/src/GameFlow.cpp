@@ -19,7 +19,7 @@ GameFlow::GameFlow() {
 	Board b = Board(board_size);
 	Console console = Console();
 	this->initialize(b, console);
-	this->start_or_join = "Default";
+	this->start_or_join = 0;
 //	this->name = "no name";
 }
 
@@ -60,7 +60,7 @@ void GameFlow::startRemoteGame(Player* players[2], Board& b, Console& console){
 	const char* IP = convertStringToChar(readFromFile("IP"));
 	Connecter connecter = Connecter((char*)IP, port);
 	char remote_sign;
-	char* command_name = "default";
+	char* command_name = 0;
 	bool start_game = false;
 	while (!start_game) {
 		enterCommand(console, connecter); //start or join or see all possible games

@@ -92,7 +92,7 @@ private:
 	char *serverIP; //CHANGE FROM CONST CHAR* TO CHAR*
 	int serverPort;
 	int clientSocket;
-
+	bool players_exist;
 
 
 };

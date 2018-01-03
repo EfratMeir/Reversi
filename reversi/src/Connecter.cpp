@@ -21,15 +21,18 @@ Connecter::Connecter() {
 	this->serverIP = 0;//not initialize
 	this->serverPort = 0; //not initialize
 	this->clientSocket = 0;
+	this->players_exist = false;
 
 }
 Connecter::Connecter(char *serverIP, int serverPort): //CHANGE FROM CONST CHAR* TO CHAR*
 		serverIP(serverIP), serverPort(serverPort), clientSocket(0) {
+	this->players_exist = false;
 	cout << "Client" << endl;
 }
 void Connecter::setPlayers(Player* players_list[2]){
 	this->players[0] = players_list[0];
 	this->players[1] = players_list[1];
+	this->players_exist = true;
 }
 void Connecter::connectToServer() {
 
@@ -273,6 +276,9 @@ int Connecter::sendCommand(char command[MAX_COMMAND_SIZE]){
 	return 0;
 }
 void Connecter::deletePlayers(){
-	delete this->players[0];
-	delete this->players[1];
+	if (players_exist){
+		delete this->players[0];
+		delete this->players[1];
+	}
+
 }
